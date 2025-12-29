@@ -1,116 +1,107 @@
-:root {
-  --color-bg: #ffffff;
-  --color-text: #000000;
-  --color-accent: #64748b; /* Muted blue */
-  --border-width: 3px;
-  --shadow-offset: 4px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  --bg-color: #fafafa;
+  --text-color: #0a0a0a;
+  --border-color: #e5e5e5;
+  --input-bg: #fff;
+  --contrast-text: #fff;
+  --btn-primary-bg: #0a0a0a;
+  --btn-primary-text: #fff;
+  --btn-hover-bg: #1a1a1a;
+  --shadow-color: #0a0a0a;
+}
+
+body.dark-mode {
+  --bg-color: #0a0a0a;
+  --text-color: #fafafa;
+  --border-color: #333333;
+  --input-bg: #1a1a1a;
+  --contrast-text: #0a0a0a;
+  --btn-primary-bg: #fafafa;
+  --btn-primary-text: #0a0a0a;
+  --btn-hover-bg: #e0e0e0;
+  --shadow-color: #fafafa;
+}
+
 body {
-  margin: 0;
-  font-family: 'Courier New', Courier, monospace; /* Brutalist mono font */
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  background: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  font-weight: 900;
+/* --- Common Components Classes based on user snippet --- */
+
+.btn-base {
+  border: 2px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: -0.05em;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
   cursor: pointer;
-}
-
-.brutalist-border {
-  border: var(--border-width) solid var(--color-text);
-}
-
-.brutalist-shadow {
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-text);
-}
-
-.brutalist-card {
-  border: var(--border-width) solid var(--color-text);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-text);
-  background-color: var(--color-bg);
-  padding: 1rem;
-  transition: all 0.1s ease-in-out;
-}
-
-.brutalist-card:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0 var(--color-text);
-}
-
-.brutalist-input {
-  border: var(--border-width) solid var(--color-text);
-  padding: 0.75rem;
-  font-family: inherit;
-  font-size: 1rem;
-  width: 100%;
-  outline: none;
-  background: var(--color-bg);
-  border-radius: 0; /* No rounded corners */
-}
-
-.brutalist-input:focus {
-  background-color: #f0f0f0;
-}
-
-.brutalist-button {
-  border: var(--border-width) solid var(--color-text);
-  background: var(--color-text);
-  color: var(--color-bg);
-  padding: 0.75rem 1.5rem;
-  font-family: inherit;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 1rem;
+  transition: all 0.15s ease;
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  transition: all 0.1s;
+  background: transparent;
+  color: var(--text-color);
 }
 
-.brutalist-button:hover {
-  background: var(--color-accent);
-  border-color: var(--color-text);
-  color: var(--color-text);
-  transform: translate(-1px, -1px);
-  box-shadow: 2px 2px 0 var(--color-text);
+.btn-base:hover {
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0 var(--shadow-color);
 }
 
-.brutalist-button:active {
-  transform: translate(0, 0);
-  box-shadow: none;
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--border-color);
+  /* Usually matches text in this theme */
 }
 
-.brutalist-button.secondary {
-  background: var(--color-bg);
-  color: var(--color-text);
+.btn-primary:hover {
+  background: var(--btn-hover-bg);
+  color: var(--btn-primary-text);
+  /* Keep same text color */
 }
 
-.brutalist-button.secondary:hover {
-  background: #f0f0f0;
+/* Action Button (Larger) */
+.action-btn {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  padding: 1.25rem 2.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  font-family: inherit;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+.action-btn:hover {
+  background: var(--btn-hover-bg);
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+/* Utility to hide/show elements */
+.hidden {
+  display: none;
 }

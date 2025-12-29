@@ -46,32 +46,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const register = async (email, password) => {
-        setIsLoading(true);
-        try {
-            const response = await api.post('/auth/register', {
-                emailAddress: email,
-                password: password,
-            });
 
-            // API returns { user: {...}, jwtToken: "..." }
-            const { user: newUser, jwtToken } = response.data;
-
-            setToken(jwtToken);
-            setUser(newUser);
-            localStorage.setItem('jwtToken', jwtToken);
-            localStorage.setItem('user', JSON.stringify(newUser));
-            return { success: true };
-        } catch (error) {
-            console.error('Registration failed', error);
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Registration failed'
-            };
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     const logout = () => {
         setUser(null);
@@ -80,9 +55,31 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('user');
     };
 
-    const updateUser = async (updateData) => {
-        // Implement user update logic using /api/v1/auth/update
-        // Note: The API requirement for update is simple, we might need more complex handling later.
+    const updateUser = async (userId, newPassword) => {
+        setIsLoading(true);
+        try {
+            const response = await api.post('/auth/update', {
+                userId: userId,
+                newPassword: newPassword
+            });
+
+            // Expected response: { secureUserResponse: {...} }
+            const { secureUserResponse } = response.data;
+
+            // Update local user state
+            setUser(secureUserResponse);
+            localStorage.setItem('user', JSON.stringify(secureUserResponse));
+
+            return { success: true };
+        } catch (error) {
+            console.error('Update failed', error);
+            return {
+                success: false,
+                message: error.response?.data?.message || 'Update failed'
+            };
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -92,7 +89,7 @@ export const AuthProvider = ({ children }) => {
             isAuthenticated: !!token,
             isLoading,
             login,
-            register,
+            updateUser,
             logout
         }}>
             {children}

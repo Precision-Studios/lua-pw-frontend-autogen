@@ -16,17 +16,18 @@ const Button = ({
             type={type}
             disabled={isLoading || disabled}
             className={clsx(
-                'brutalist-button',
-                variant === 'secondary' && 'secondary',
+                'btn-base',
+                variant === 'primary' && 'btn-primary',
                 (isLoading || disabled) && 'opacity-50 cursor-not-allowed',
                 className
             )}
             {...props}
         >
-            {isLoading && <Loader2 className="animate-spin" size={18} />}
+            {isLoading && <Loader2 className="animate-spin mr-2" size={18} />}
             {children}
         </button>
     );
 };
 
 export default Button;
+
