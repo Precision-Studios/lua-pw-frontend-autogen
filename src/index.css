@@ -1,68 +1,116 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-accent: #64748b; /* Muted blue */
+  --border-width: 3px;
+  --shadow-offset: 4px;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Courier New', Courier, monospace; /* Brutalist mono font */
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.brutalist-border {
+  border: var(--border-width) solid var(--color-text);
+}
+
+.brutalist-shadow {
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-text);
+}
+
+.brutalist-card {
+  border: var(--border-width) solid var(--color-text);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-text);
+  background-color: var(--color-bg);
+  padding: 1rem;
+  transition: all 0.1s ease-in-out;
+}
+
+.brutalist-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0 var(--color-text);
+}
+
+.brutalist-input {
+  border: var(--border-width) solid var(--color-text);
+  padding: 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  width: 100%;
+  outline: none;
+  background: var(--color-bg);
+  border-radius: 0; /* No rounded corners */
+}
+
+.brutalist-input:focus {
+  background-color: #f0f0f0;
+}
+
+.brutalist-button {
+  border: var(--border-width) solid var(--color-text);
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 0.75rem 1.5rem;
+  font-family: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.1s;
+}
+
+.brutalist-button:hover {
+  background: var(--color-accent);
+  border-color: var(--color-text);
+  color: var(--color-text);
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 var(--color-text);
+}
+
+.brutalist-button:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+.brutalist-button.secondary {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.brutalist-button.secondary:hover {
+  background: #f0f0f0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
