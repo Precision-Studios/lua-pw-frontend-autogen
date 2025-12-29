@@ -66,6 +66,7 @@ const Home = () => {
                 flex: 1,
                 display: 'flex',
                 alignItems: 'center',
+                marginTop: '10rem',
                 justifyContent: 'center',
                 padding: '20px'
             }}>
@@ -85,7 +86,9 @@ const Home = () => {
                         color: 'var(--text-color)',
                         opacity: 0.6,
                         fontWeight: 400,
+                        marginLeft: '0.25rem',
                         letterSpacing: '0.3em',
+                        marginTop: '-0.25rem',
                         marginBottom: '3rem',
                         textTransform: 'uppercase',
                         transition: 'color 0.3s ease'
@@ -96,13 +99,18 @@ const Home = () => {
                     </p>
 
 
-
                     <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
                         <div className="input-wrapper" style={{
                             display: 'flex',
-                            gap: 0,
-                            border: '2px solid var(--border-color)',
-                            transition: 'transform 0.15s ease, border-color 0.3s ease, box-shadow 0.15s ease'
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            borderRadius: '9999px',
+                            border: '1px solid var(--border-color)',
+                            background: 'var(--input-bg)',
+                            padding: '0.4rem',
+                            paddingLeft: '1.5rem',
+                            transition: 'transform 0.15s ease, border-color 0.3s ease, box-shadow 0.15s ease',
+                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
                         }}>
                             <input
                                 type="url"
@@ -114,18 +122,22 @@ const Home = () => {
                                 autoComplete="off"
                                 style={{
                                     flex: 1,
-                                    background: 'var(--input-bg)',
+                                    background: 'transparent',
                                     border: 'none',
                                     color: 'var(--text-color)',
-                                    padding: '1.25rem 1.5rem',
+                                    padding: '0.8rem 0',
                                     fontSize: '1rem',
                                     fontWeight: 400,
                                     outline: 'none',
                                     fontFamily: 'inherit',
-                                    transition: 'background-color 0.3s ease, color 0.3s ease'
+                                    transition: 'color 0.3s ease'
                                 }}
                             />
-                            <Button type="submit" className="action-btn" isLoading={isLoading} style={{ borderRadius: 0 }}>
+                            <Button type="submit" className="action-btn" isLoading={isLoading} style={{
+                                borderRadius: '9999px',
+                                padding: '0.8rem 2rem',
+                                fontSize: '0.9rem'
+                            }}>
                                 Shorten
                             </Button>
                         </div>
