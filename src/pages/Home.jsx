@@ -106,7 +106,7 @@ const Home = () => {
                             gap: '0.5rem',
                             borderRadius: '9999px',
                             border: '1px solid var(--border-color)',
-                            background: 'var(--input-bg)',
+                            background: 'var(--input-bg) ',
                             padding: '0.4rem',
                             paddingLeft: '1.5rem',
                             transition: 'transform 0.15s ease, border-color 0.3s ease, box-shadow 0.15s ease',
