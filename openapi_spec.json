@@ -1,0 +1,403 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/api/v1/generate_short_url": {
+            "post": {
+                "tags": [
+                    "url-controller"
+                ],
+                "operationId": "shortenUrl",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ShortenRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ShortenResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/generate_qr_code": {
+            "post": {
+                "tags": [
+                    "url-controller"
+                ],
+                "operationId": "generateQRCode",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/QRCodeGenerationRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QRCodeGenerationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/update": {
+            "post": {
+                "tags": [
+                    "auth-controller"
+                ],
+                "operationId": "updateUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdateRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserUpdateResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/register": {
+            "post": {
+                "tags": [
+                    "auth-controller"
+                ],
+                "operationId": "registerUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRegistrationRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserRegistrationResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "auth-controller"
+                ],
+                "operationId": "loginUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLoginRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserLoginResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/api/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "auth-controller"
+                ],
+                "operationId": "logoutUser",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/{shortCode}": {
+            "get": {
+                "tags": [
+                    "redirect-controller"
+                ],
+                "operationId": "redirectShortUrl",
+                "parameters": [
+                    {
+                        "name": "shortCode",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "qr",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RedirectView"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ShortenRequest": {
+                "type": "object",
+                "properties": {
+                    "longUrl": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ShortenResponse": {
+                "type": "object",
+                "properties": {
+                    "shortUrl": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "expireAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "isQRActivated": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "QRCodeGenerationRequest": {
+                "type": "object",
+                "properties": {
+                    "urlForQR": {
+                        "type": "string"
+                    }
+                }
+            },
+            "QRCodeGenerationResponse": {
+                "type": "object",
+                "properties": {
+                    "shortUrl": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "expireAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "isQRActivated": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "UserUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "newPassword": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "newPassword",
+                    "userId"
+                ]
+            },
+            "SecureUserResponse": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "joinedOn": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "userTier": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "emailAddress": {
+                        "type": "string"
+                    },
+                    "totalShortUrls": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalQRCodes": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "setupComplete": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "UserUpdateResponse": {
+                "type": "object",
+                "properties": {
+                    "secureUserResponse": {
+                        "$ref": "#/components/schemas/SecureUserResponse"
+                    }
+                }
+            },
+            "UserRegistrationRequest": {
+                "type": "object",
+                "properties": {
+                    "emailAddress": {
+                        "type": "string",
+                        "format": "email",
+                        "minLength": 1
+                    },
+                    "password": {
+                        "type": "string",
+                        "maxLength": 16,
+                        "minLength": 12
+                    }
+                },
+                "required": [
+                    "emailAddress",
+                    "password"
+                ]
+            },
+            "UserRegistrationResponse": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/SecureUserResponse"
+                    },
+                    "jwtToken": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "jwtToken"
+                ]
+            },
+            "UserLoginRequest": {
+                "type": "object",
+                "properties": {
+                    "idOrEmailIdentifier": {
+                        "type": "string"
+                    },
+                    "userPassword": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "idOrEmailIdentifier",
+                    "userPassword"
+                ]
+            },
+            "UserLoginResponse": {
+                "type": "object",
+                "properties": {
+                    "secureUserResponse": {
+                        "$ref": "#/components/schemas/SecureUserResponse"
+                    },
+                    "jwtKey": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "jwtKey"
+                ]
+            }
+        }
+    }
+}
