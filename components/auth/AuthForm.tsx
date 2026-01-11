@@ -100,6 +100,8 @@ export default function AuthForm() {
                 <div className="text-center py-10 px-6 border border-white/10 rounded-2xl bg-white/5">
                     <p className="text-white/60 text-sm font-normal leading-relaxed">
                         Please sign up using Google or GitHub OAuth.
+                        <br />
+                        We don't support manual email registrations.
                     </p>
                 </div>
             )}
