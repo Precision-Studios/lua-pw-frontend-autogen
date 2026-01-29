@@ -6,9 +6,9 @@ export default function LogoSection() {
             {/* Hero Content */}
             <div className="relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
 
-                <div className="relative w-48 h-48 lg:w-64 lg:h-64 mb-2 lg:-ml-7">
+                <div className="relative w-48 h-48 lg:w-64 lg:h-64 mb-3 lg:-ml-1">
                     <Image
-                        src="/logo_full.jpg"
+                        src="/logo_full.png"
                         alt="LUA PW Logo"
                         fill
                         className="object-contain rounded-2xl"
