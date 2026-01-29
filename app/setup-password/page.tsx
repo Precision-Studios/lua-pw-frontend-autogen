@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import { authApi, userApi } from '@/lib/api';
 import LogoSection from '@/components/layout/LogoSection';
 import { Lock, ArrowRight, ShieldCheck } from 'lucide-react';
 import './SetupPassword.css';
@@ -18,7 +18,8 @@ export default function SetupPassword() {
         // Check if user has already completed setup
         const checkStatus = async () => {
             try {
-                const response = await axios.get('/api/v1/user/details');
+                // Use userApi.details() which uses the configured baseURL
+                const response = await userApi.details();
                 if (response.data && response.data.setupComplete) {
                     router.push('/dashboard');
                 }
@@ -49,7 +50,9 @@ export default function SetupPassword() {
         setLoading(true);
 
         try {
-            await axios.post('/api/v1/user/update', {
+            // Use authApi.updateUser (which we should double check exists in lib/api or add it)
+            // Checking lib/api.ts - we added updateUser in step 55
+            await authApi.updateUser({
                 newPassword: password
             });
             // On success, redirect to dashboard
