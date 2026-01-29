@@ -12,6 +12,7 @@ export default function LogoSection() {
                         src="/logo_full.png"
                         alt="LUA PW Logo"
                         fill
+                        sizes="(max-width: 1024px) 128px, 192px"
                         className="object-contain rounded-2xl"
                         priority
                     />

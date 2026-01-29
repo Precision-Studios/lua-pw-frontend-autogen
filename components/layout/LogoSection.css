@@ -16,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 2rem;
+    gap: -1rem;
 }
 
 @media (min-width: 1024px) {
@@ -32,25 +32,23 @@
 
 .logo-image-wrapper {
     position: relative;
-    width: 12rem;
-    /* w-48 */
-    height: 12rem;
-    margin-bottom: 0.75rem;
+    width: 8rem;
+    /* 128px */
+    height: 8rem;
 }
 
 @media (min-width: 1024px) {
     .logo-image-wrapper {
-        width: 16rem;
-        /* w-64 */
-        height: 16rem;
-        margin-left: -0.25rem;
+        width: 12rem;
+        /* 192px */
+        height: 12rem;
     }
 }
 
 .hero-text-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: -1rem;
 }
 
 .hero-title {
@@ -91,8 +89,8 @@
 
 .stats-container {
     display: flex;
-    gap: 2.5rem;
-    padding-top: 2.5rem;
+    gap: 2rem;
+    padding-top: 2rem;
     border-top: 1px solid var(--foreground-subtle);
     width: 100%;
     justify-content: center;
