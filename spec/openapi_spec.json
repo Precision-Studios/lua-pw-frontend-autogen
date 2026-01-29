@@ -87,6 +87,16 @@
                     "url-controller"
                 ],
                 "operationId": "shortenUrl",
+                "parameters": [
+                    {
+                        "name": "jwt_token",
+                        "in": "cookie",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -117,6 +127,16 @@
                     "url-controller"
                 ],
                 "operationId": "generateQRCode",
+                "parameters": [
+                    {
+                        "name": "jwt_token",
+                        "in": "cookie",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -307,6 +327,39 @@
                     }
                 }
             }
+        },
+        "/api/v1/user/all": {
+            "get": {
+                "tags": [
+                    "user-controller"
+                ],
+                "operationId": "getGeneratedUrlsByUser",
+                "parameters": [
+                    {
+                        "name": "jwt_token",
+                        "in": "cookie",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ShortenResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -404,6 +457,9 @@
                     "shortUrl": {
                         "type": "string"
                     },
+                    "longUrl": {
+                        "type": "string"
+                    },
                     "createdAt": {
                         "type": "string",
                         "format": "date-time"
@@ -455,9 +511,6 @@
                     "displayName": {
                         "type": "string"
                     },
-                    "autowireCapableBeanFactory": {
-                        "$ref": "#/components/schemas/AutowireCapableBeanFactory"
-                    },
                     "applicationName": {
                         "type": "string"
                     },
@@ -465,18 +518,21 @@
                         "type": "integer",
                         "format": "int64"
                     },
+                    "autowireCapableBeanFactory": {
+                        "$ref": "#/components/schemas/AutowireCapableBeanFactory"
+                    },
                     "environment": {
                         "$ref": "#/components/schemas/Environment"
+                    },
+                    "beanDefinitionCount": {
+                        "type": "integer",
+                        "format": "int32"
                     },
                     "beanDefinitionNames": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
-                    },
-                    "beanDefinitionCount": {
-                        "type": "integer",
-                        "format": "int32"
                     },
                     "parentBeanFactory": {
                         "$ref": "#/components/schemas/BeanFactory"
@@ -687,13 +743,13 @@
             "Environment": {
                 "type": "object",
                 "properties": {
-                    "activeProfiles": {
+                    "defaultProfiles": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
                     },
-                    "defaultProfiles": {
+                    "activeProfiles": {
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -704,13 +760,13 @@
             "FilterRegistration": {
                 "type": "object",
                 "properties": {
-                    "urlPatternMappings": {
+                    "servletNameMappings": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
                     },
-                    "servletNameMappings": {
+                    "urlPatternMappings": {
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -814,16 +870,16 @@
                     "error": {
                         "type": "boolean"
                     },
-                    "is4xxClientError": {
-                        "type": "boolean"
-                    },
-                    "is5xxServerError": {
-                        "type": "boolean"
-                    },
                     "is1xxInformational": {
                         "type": "boolean"
                     },
                     "is2xxSuccessful": {
+                        "type": "boolean"
+                    },
+                    "is4xxClientError": {
+                        "type": "boolean"
+                    },
+                    "is5xxServerError": {
                         "type": "boolean"
                     },
                     "is3xxRedirection": {
@@ -834,16 +890,16 @@
             "JspConfigDescriptor": {
                 "type": "object",
                 "properties": {
-                    "jspPropertyGroups": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/JspPropertyGroupDescriptor"
-                        }
-                    },
                     "taglibs": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/TaglibDescriptor"
+                        }
+                    },
+                    "jspPropertyGroups": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/JspPropertyGroupDescriptor"
                         }
                     }
                 }
@@ -863,22 +919,25 @@
                             "type": "string"
                         }
                     },
-                    "isXml": {
+                    "errorOnUndeclaredNamespace": {
                         "type": "string"
                     },
                     "trimDirectiveWhitespaces": {
                         "type": "string"
                     },
-                    "errorOnUndeclaredNamespace": {
-                        "type": "string"
-                    },
                     "deferredSyntaxAllowedAsLiteral": {
                         "type": "string"
                     },
-                    "elIgnored": {
-                        "type": "string"
+                    "includeCodas": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     },
                     "errorOnELNotFound": {
+                        "type": "string"
+                    },
+                    "elIgnored": {
                         "type": "string"
                     },
                     "pageEncoding": {
@@ -893,11 +952,8 @@
                             "type": "string"
                         }
                     },
-                    "includeCodas": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
+                    "isXml": {
+                        "type": "string"
                     }
                 }
             },
@@ -982,25 +1038,25 @@
                             "type": "string"
                         }
                     },
-                    "redirectView": {
-                        "type": "boolean"
-                    },
                     "propagateQueryProperties": {
                         "type": "boolean"
                     },
-                    "attributes": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string"
-                        },
+                    "redirectView": {
+                        "type": "boolean"
+                    },
+                    "attributesCSV": {
+                        "type": "string",
                         "writeOnly": true
                     },
                     "attributesMap": {
                         "type": "object",
                         "additionalProperties": {}
                     },
-                    "attributesCSV": {
-                        "type": "string",
+                    "attributes": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
                         "writeOnly": true
                     }
                 }
@@ -1117,7 +1173,33 @@
                         "type": "string"
                     },
                     "initParameterNames": {},
-                    "defaultSessionTrackingModes": {
+                    "sessionCookieConfig": {
+                        "$ref": "#/components/schemas/SessionCookieConfig"
+                    },
+                    "virtualServerName": {
+                        "type": "string"
+                    },
+                    "sessionTrackingModes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "COOKIE",
+                                "URL",
+                                "SSL"
+                            ]
+                        },
+                        "uniqueItems": true,
+                        "writeOnly": true
+                    },
+                    "sessionTimeout": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "responseCharacterEncoding": {
+                        "type": "string"
+                    },
+                    "effectiveSessionTrackingModes": {
                         "type": "array",
                         "items": {
                             "type": "string",
@@ -1129,7 +1211,7 @@
                         },
                         "uniqueItems": true
                     },
-                    "effectiveSessionTrackingModes": {
+                    "defaultSessionTrackingModes": {
                         "type": "array",
                         "items": {
                             "type": "string",
@@ -1144,22 +1226,7 @@
                     "requestCharacterEncoding": {
                         "type": "string"
                     },
-                    "responseCharacterEncoding": {
-                        "type": "string"
-                    },
-                    "sessionCookieConfig": {
-                        "$ref": "#/components/schemas/SessionCookieConfig"
-                    },
-                    "virtualServerName": {
-                        "type": "string"
-                    },
-                    "servletContextName": {
-                        "type": "string"
-                    },
-                    "serverInfo": {
-                        "type": "string"
-                    },
-                    "sessionTimeout": {
+                    "effectiveMinorVersion": {
                         "type": "integer",
                         "format": "int32"
                     },
@@ -1173,25 +1240,14 @@
                             "$ref": "#/components/schemas/FilterRegistration"
                         }
                     },
+                    "serverInfo": {
+                        "type": "string"
+                    },
                     "jspConfigDescriptor": {
                         "$ref": "#/components/schemas/JspConfigDescriptor"
                     },
-                    "effectiveMinorVersion": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "sessionTrackingModes": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "COOKIE",
-                                "URL",
-                                "SSL"
-                            ]
-                        },
-                        "uniqueItems": true,
-                        "writeOnly": true
+                    "servletContextName": {
+                        "type": "string"
                     },
                     "servletRegistrations": {
                         "type": "object",
@@ -1246,18 +1302,18 @@
                         "type": "string",
                         "deprecated": true
                     },
-                    "domain": {
-                        "type": "string"
-                    },
                     "secure": {
+                        "type": "boolean"
+                    },
+                    "httpOnly": {
                         "type": "boolean"
                     },
                     "maxAge": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "httpOnly": {
-                        "type": "boolean"
+                    "domain": {
+                        "type": "string"
                     }
                 }
             },
