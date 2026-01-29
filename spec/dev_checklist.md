@@ -1,0 +1,3 @@
+- Basic Setup ✔
+- Home page ✔
+- Oauth login ✔
