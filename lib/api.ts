@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 console.log('API_BASE_URL:', API_BASE_URL);
@@ -10,6 +10,34 @@ export const apiClient = axios.create({
         'Content-Type': 'application/json',
     },
 });
+
+apiClient.interceptors.response.use(
+    (response) => response,
+    async (error: AxiosError) => {
+        const originalRequest = error.config;
+
+        // Check if error is 401 and we haven't tried to refresh yet
+        // @ts-ignore - _retry is a custom property we use to prevent infinite loops
+        if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
+            // @ts-ignore
+            originalRequest._retry = true;
+
+            try {
+                // Attempt to refresh the token
+                await authApi.refresh();
+
+                // If refresh succeeds, retry the original request
+                return apiClient(originalRequest);
+            } catch (refreshError) {
+                // If refresh fails, redirect to login
+                window.location.href = '/login';
+                return Promise.reject(refreshError);
+            }
+        }
+
+        return Promise.reject(error);
+    }
+);
 
 export const authApi = {
     login: (data: {
