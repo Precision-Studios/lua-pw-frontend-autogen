@@ -5,7 +5,7 @@ import './Home.css';
 export default function Home() {
   return (
     <main className="main-container">
-      {/* Left Section - Hero/Logo (Visible on desktop) */}
+      {/* Left Section - Hero/Logo  (Visible on desktop) */}
       <section className="hero-section">
         <LogoSection />
       </section>
