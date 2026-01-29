@@ -8,7 +8,7 @@ export default function AuthFailurePage() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            router.push('/login');
+            router.push('/');
         }, 1000); // Small delay to show the message
         return () => clearTimeout(timer);
     }, [router]);

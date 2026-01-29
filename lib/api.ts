@@ -18,7 +18,14 @@ apiClient.interceptors.response.use(
 
         // Check if error is 401 and we haven't tried to refresh yet
         // @ts-ignore - _retry is a custom property we use to prevent infinite loops
-        if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
+        if (
+            error.response?.status === 401 &&
+            originalRequest &&
+            !originalRequest._retry &&
+            originalRequest.url !== '/api/v1/auth/refresh' &&
+            originalRequest.url !== '/api/v1/auth/login' &&
+            originalRequest.url !== '/api/v1/auth/logout'
+        ) {
             // @ts-ignore
             originalRequest._retry = true;
 
@@ -29,8 +36,10 @@ apiClient.interceptors.response.use(
                 // If refresh succeeds, retry the original request
                 return apiClient(originalRequest);
             } catch (refreshError) {
-                // If refresh fails, redirect to login
-                window.location.href = '/login';
+                // If refresh fails, redirect to home (login)
+                if (typeof window !== 'undefined') {
+                    window.location.href = '/';
+                }
                 return Promise.reject(refreshError);
             }
         }

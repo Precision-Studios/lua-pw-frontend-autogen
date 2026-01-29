@@ -45,7 +45,7 @@ export default function AuthSuccessPage() {
 
                 setStatus(errorMessage);
                 // Increase timeout to allow reading the error
-                setTimeout(() => router.push('/login'), 25000);
+                setTimeout(() => router.push('/'), 25000);
             }
         };
 
