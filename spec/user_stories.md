@@ -12,6 +12,7 @@ This epic handles the Oauth handshake, session management, and access states (Ba
 
 **Implementation Flow:**
 *   **Route:** `/auth/success` (Standard callback page).
+*   **RouteL** `/auth/failure` (Standard callback page). redirect to `/login`.
 *   **Action:** On mount, immediately trigger `POST /api/v1/auth/refresh` to exchange the refresh cookie for the `jwt_token`.
 *   **Validation:**
     *   If the refresh fails, redirect to `/login`.
