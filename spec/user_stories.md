@@ -114,3 +114,19 @@ Technical stories for routing and state maintenance.
 *   **Configuration:** Update `next.config.js`.
 *   **Rule:** Add a rewrite or proxy rule that forwards any path matching the shortcode pattern (e.g., `/[a-zA-Z0-9]{8}`) directly to the Backend API URL.
 *   **Exclusion:** Ensure standard frontend routes (`/dashboard`, `/login`, `/auth/*`) are NOT forwarded.
+
+### 9. User Password Management
+**As a** fully active user,
+**I want to** change my password from my profile settings,
+**So that** I can maintain the security of my account or rotate my credentials.
+
+**Implementation Flow:**
+*   **Location:** accessible via a "Settings" or "Profile" tab in the Dashboard.
+*   **UI:** A form accepting a `newPassword`.
+    *   *Enhancement:* Ideally, include a "Confirm Password" field on the frontend for validation, though only `newPassword` is sent to the API.
+*   **Validation:**
+    *   Frontend must enforce the schema constraints (Min 12, Max 16 characters) before submission.
+*   **Action:** Submit the payload to `POST /api/v1/user/update`.
+*   **Feedback:**
+    *   **Success:** Show a toast notification ("Password updated successfully") and clear the form. Do **not** log the user out; the session remains valid.
+    *   **Error:** Handle potential 400 Bad Request if the password doesn't meet backend criteria.
