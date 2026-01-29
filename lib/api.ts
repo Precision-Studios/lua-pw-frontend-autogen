@@ -64,12 +64,42 @@ export const userApi = {
     allUrls: () => apiClient.get('/api/v1/user/all'),
 };
 
+export const normalizeUrl = (url: string): string => {
+    let normalized = url.trim();
+    if (!normalized) return normalized;
+
+    // Check if it has a protocol-like structure (something followed by ://)
+    const protocolIndex = normalized.indexOf('://');
+
+    if (protocolIndex !== -1) {
+        const rest = normalized.substring(protocolIndex + 3);
+        // Special case for localhost in development
+        if (rest.startsWith('localhost') || rest.startsWith('127.0.0.1')) {
+            const protocol = normalized.substring(0, protocolIndex);
+            if (protocol === 'http' || protocol === 'https') return normalized;
+            return 'http://' + rest;
+        }
+        // Replace whatever protocol was there with https://
+        // to satisfy "should all transform same" and handle typos like "htttp"
+        normalized = 'https://' + rest;
+    } else {
+        // No protocol found
+        if (normalized.startsWith('localhost') || normalized.startsWith('127.0.0.1')) {
+            normalized = 'http://' + normalized;
+        } else {
+            normalized = 'https://' + normalized;
+        }
+    }
+
+    return normalized;
+};
+
 export const urlApi = {
     shorten: (longUrl: string) =>
-        apiClient.post('/api/v1/urls/shorten', { longUrl }),
+        apiClient.post('/api/v1/urls/shorten', { longUrl: normalizeUrl(longUrl) }),
 
     generateQR: (urlForQR: string) =>
-        apiClient.post('/api/v1/urls/add_qr', { urlForQR }),
+        apiClient.post('/api/v1/urls/add_qr', { urlForQR: normalizeUrl(urlForQR) }),
 };
 
 export const redirectApi = {

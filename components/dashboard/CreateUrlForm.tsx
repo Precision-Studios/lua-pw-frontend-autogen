@@ -42,7 +42,7 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
                         <Link size={20} />
                     </div>
                     <input
-                        type="url"
+                        type="text"
                         value={longUrl}
                         onChange={(e) => setLongUrl(e.target.value)}
                         placeholder="Paste your long URL here"

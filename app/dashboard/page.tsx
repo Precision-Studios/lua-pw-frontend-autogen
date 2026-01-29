@@ -33,7 +33,14 @@ export default function DashboardPage() {
     }, []);
 
     const handleUrlCreated = (newUrl: any) => {
-        setUrls(prev => [newUrl, ...prev]);
+        setUrls(prev => {
+            const exists = prev.some(u => u.shortUrl === newUrl.shortUrl);
+            if (exists) {
+                // Move existing to top
+                return [newUrl, ...prev.filter(u => u.shortUrl !== newUrl.shortUrl)];
+            }
+            return [newUrl, ...prev];
+        });
     };
 
     return (
