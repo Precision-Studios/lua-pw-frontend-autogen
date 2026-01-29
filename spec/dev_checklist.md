@@ -1,4 +1,4 @@
 - Basic Setup ✔
 - Home page ✔
 - Oauth login ✔
-- US#2
+- US#2 ✔
