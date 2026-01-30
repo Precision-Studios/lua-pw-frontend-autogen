@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { LogOut } from 'lucide-react';
 import { authApi } from '@/lib/api';
 import { useRouter } from 'next/navigation';

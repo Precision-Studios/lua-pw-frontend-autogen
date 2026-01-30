@@ -61,7 +61,7 @@
   --white-trace: rgba(255, 255, 255, 0.3);
   --white-faint: rgba(255, 255, 255, 0.05);
   --black-subtle: rgba(0, 0, 0, 0.2);
-  --black-muted: rgba(65, 65, 65, 0.4);
+  --black-muted: rgba(24, 24, 24, 0.61);
 
   --card: var(--black-muted);
   --card-border: var(--white-subtle);
@@ -84,12 +84,11 @@ body {
 }
 
 .glass {
-  background: var(--card);
-  backdrop-filter: blur(5px);
-  /* Subtle blur for real glass effect */
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid var(--card-border);
-  box-shadow: 0 8px 32px 0 rgba(27, 27, 27, 0.3);
+  background: rgba(14, 121, 112, 0);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .animate-in {
