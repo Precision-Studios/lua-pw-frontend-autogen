@@ -9,7 +9,7 @@ export default function LogoSection() {
 
                 <div className="logo-image-wrapper">
                     <Image
-                        src="/logo_full.png"
+                        src="/logo_full_compressed.png"
                         alt="LUA PW Logo"
                         fill
                         sizes="(max-width: 1024px) 128px, 192px"
