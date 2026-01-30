@@ -78,9 +78,9 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             )}
 
             <aside
-                className={`fixed left-0 top-0 h-screen transition-all duration-500 ease-in-out z-50 flex flex-col glass border-y-0 border-l-0
-                    ${isCollapsed ? 'w-20' : 'w-72'}
-                    ${isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+                className={`fixed left-6 top-6 bottom-6 transition-all duration-500 ease-in-out z-50 flex flex-col glass rounded-[2.5rem] border border-white/10 shadow-2xl shadow-black/40
+                    ${isCollapsed ? 'w-24' : 'w-72'}
+                    ${isMobileOpen ? 'translate-x-0' : '-translate-x-[calc(100%+3rem)] md:translate-x-0'}
                 `}
             >
                 {/* Logo/Header */}
