@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import Sidebar from '@/components/layout/Sidebar';
 
+import TopNav from '@/components/layout/TopNav';
+
 export default function DashboardLayout({
     children,
 }: {
@@ -15,8 +17,9 @@ export default function DashboardLayout({
             <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
             <div
                 className={`flex-1 transition-all duration-500 ease-in-out ${isCollapsed ? 'md:pl-20' : 'md:pl-72'
-                    } w-full`}
+                    } w-full flex flex-col`}
             >
+                <TopNav />
                 {children}
             </div>
         </div>

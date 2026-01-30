@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { userApi } from '@/lib/api';
-import Navbar from '@/components/layout/Navbar';
 import CreateUrlForm from '@/components/dashboard/CreateUrlForm';
 import UrlTable from '@/components/dashboard/UrlTable';
 import { Loader2 } from 'lucide-react';
@@ -45,8 +44,6 @@ export default function DashboardPage() {
 
     return (
         <div className="flex flex-col">
-            <Navbar />
-
             <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
                 {/* Header Section - Matching Homepage Hero Title Style */}
                 <div className="flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
