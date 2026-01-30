@@ -47,7 +47,7 @@
 }
 
 .oauth-button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--white-subtle);
 }
 
 .oauth-button-text {
@@ -85,7 +85,7 @@
 }
 
 .divider-text {
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--black-subtle);
     padding: 0 1rem;
     color: var(--foreground-dim);
 }
@@ -137,12 +137,12 @@
 }
 
 .auth-input::placeholder {
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--white-dim);
 }
 
 .auth-input:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--white-trace);
 }
 
 .submit-button {
@@ -164,8 +164,7 @@
 }
 
 .submit-button:hover {
-    background: #f4f4f5;
-    /* bg-zinc-100 equivalent */
+    background: var(--btn-hover-light);
 }
 
 .oauth-signup-notice {

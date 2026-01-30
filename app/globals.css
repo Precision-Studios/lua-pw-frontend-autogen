@@ -2,28 +2,70 @@
 @import "tailwindcss";
 
 @theme {
+  --color-brand-1: var(--brand-1);
+  --color-brand-2: var(--brand-2);
+  --color-brand-3: var(--brand-3);
+  --color-brand-4: var(--brand-4);
+  --color-brand-5: var(--brand-5);
+  --color-brand-6: var(--brand-6);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
-  --color-brand-purple: var(--background);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-accent: var(--accent);
 }
 
 :root {
-  --background: #2c02ac;
-  --foreground: #ffffff;
-  --foreground-muted: rgba(255, 255, 255, 0.6);
-  --foreground-dim: rgba(255, 255, 255, 0.3);
-  --foreground-subtle: rgba(255, 255, 255, 0.1);
+  --brand-1: #2c02ac;
+  --brand-2: #0051e5;
+  --brand-3: #007dff;
+  --brand-4: #00a2fb;
+  --brand-5: #00c4e0;
+  --brand-6: #00e3bb;
 
-  --primary: #2c02ac;
+  --background: var(--brand-1);
+  --foreground: #ffffff;
+  --foreground-muted: var(--white-muted);
+  --foreground-dim: var(--white-trace);
+  --foreground-subtle: var(--white-subtle);
+
+  --primary: var(--brand-1);
   --primary-foreground: #ffffff;
 
   --secondary: #ffffff;
-  --secondary-foreground: #2c02ac;
+  --secondary-foreground: var(--brand-1);
 
-  --card: rgba(0, 0, 0, 0.4);
-  --card-border: rgba(255, 255, 255, 0.15);
-  --input: rgba(255, 255, 255, 0.05);
-  --input-border: rgba(255, 255, 255, 0.1);
+  /* Semantic Colors */
+  --success: #10b981;
+  --error: #ef4444;
+
+  /* UI Surfaces & Accents */
+  --glass-bg: var(--white-faint);
+  /* Adjusted to match rgba(255, 255, 255, 0.03) roughly or keep consistent */
+  --glass-border: var(--white-faint);
+  --input-bg: var(--black-subtle);
+  --glow: rgba(255, 255, 255, 0.5);
+  --btn-hover-light: #f4f4f5;
+
+  /* Subtle Overlays & Highlights */
+  --white-muted: rgba(255, 255, 255, 0.6);
+  --white-subtle: rgba(255, 255, 255, 0.1);
+  --white-dim: rgba(255, 255, 255, 0.2);
+  --white-trace: rgba(255, 255, 255, 0.3);
+  --white-faint: rgba(255, 255, 255, 0.05);
+  --black-subtle: rgba(0, 0, 0, 0.2);
+  --black-muted: rgba(0, 0, 0, 0.4);
+
+  --card: var(--black-muted);
+  --card-border: var(--white-subtle);
+  --input: var(--white-faint);
+  --input-border: var(--white-subtle);
+
+  /* Accent colors mapped to brand palette */
+  --accent: var(--brand-3);
+  --accent-hover: var(--brand-4);
+  --accent-rgb: 0, 125, 255;
+  /* RGB for #007dff */
 }
 
 body {

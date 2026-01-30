@@ -26,13 +26,13 @@ const Toast: React.FC<ToastProps> = ({ message, type, onClose, duration = 3000 }
             <div
                 className="flex items-center gap-3 px-4 py-3 rounded-lg glass min-w-[300px] max-w-md"
                 style={{
-                    borderLeft: `3px solid ${type === 'success' ? '#10b981' : '#ef4444'}`,
+                    borderLeft: `3px solid var(${type === 'success' ? '--success' : '--error'})`,
                 }}
             >
                 {type === 'success' ? (
-                    <CheckCircle size={20} className="text-green-400 flex-shrink-0" />
+                    <CheckCircle size={20} className="text-success flex-shrink-0" />
                 ) : (
-                    <XCircle size={20} className="text-red-400 flex-shrink-0" />
+                    <XCircle size={20} className="text-error flex-shrink-0" />
                 )}
                 <p className="text-sm text-white flex-1">{message}</p>
                 <button

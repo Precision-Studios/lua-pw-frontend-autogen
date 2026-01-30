@@ -27,7 +27,7 @@ const SidebarItem = ({ href, icon, label, isCollapsed, isActive }: SidebarItemPr
             href={href}
             className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group
                 ${isActive
-                    ? 'bg-white text-[#2c02ac]'
+                    ? 'bg-white text-primary'
                     : 'text-white/60 hover:text-white hover:bg-white/10'}`}
         >
             <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>

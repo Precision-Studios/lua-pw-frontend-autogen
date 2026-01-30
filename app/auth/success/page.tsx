@@ -45,7 +45,7 @@ export default function AuthSuccessPage() {
 
                 setStatus(errorMessage);
                 // Increase timeout to allow reading the error
-                setTimeout(() => router.push('/'), 25000);
+                setTimeout(() => router.push('/'), 5000);
             }
         };
 
@@ -57,7 +57,7 @@ export default function AuthSuccessPage() {
             {/* Background is handled by globals.css on body, but we can enforce or add overlay if needed. 
                 Using the glass effect for the status card. */}
             <div className="glass flex flex-col items-center space-y-6 rounded-2xl p-8 backdrop-blur-xl">
-                <div className="h-12 w-12 animate-spin rounded-full border-4 border-[var(--secondary)] border-t-transparent shadow-[0_0_15px_rgba(255,255,255,0.5)]"></div>
+                <div className="h-12 w-12 animate-spin rounded-full border-4 border-[var(--secondary)] border-t-transparent shadow-[0_0_15px_var(--glow)]"></div>
                 <p className="text-[var(--foreground)] text-lg font-medium tracking-wide animate-pulse">{status}</p>
             </div>
         </div>
