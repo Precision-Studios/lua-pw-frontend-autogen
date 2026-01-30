@@ -4,21 +4,18 @@ import React, { useEffect, useState } from 'react';
 import { userApi } from '@/lib/api';
 import { Loader2, Link as LinkIcon, BarChart3, QrCode, PlusCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useUser } from '@/lib/UserContext';
 import '@/app/Home.css'; // Import standard styles
 
 export default function DashboardPage() {
     const [urls, setUrls] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState<any>(null);
+    const { user, loading: userLoading } = useUser();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [userRes, urlsRes] = await Promise.all([
-                    userApi.details(),
-                    userApi.allUrls()
-                ]);
-                setUser(userRes.data);
+                const urlsRes = await userApi.allUrls();
                 setUrls(urlsRes.data);
             } catch (error) {
                 console.error("Failed to load dashboard data", error);
@@ -65,7 +62,7 @@ export default function DashboardPage() {
                     </p>
                 </div>
 
-                {loading ? (
+                {loading || userLoading ? (
                     <div className="flex flex-col items-center justify-center py-20 animate-pulse">
                         <Loader2 size={48} className="text-white/20 animate-spin mb-4" />
                         <p className="text-white/40 uppercase tracking-widest text-sm">Loading...</p>

@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { User, LogOut, KeyRound, Eye, EyeOff, Loader2 } from 'lucide-react';
-import { authApi, userApi } from '@/lib/api';
+import { User, LogOut, KeyRound, Eye, EyeOff, Loader2, Shield, Calendar, Mail, Hash } from 'lucide-react';
+import { authApi } from '@/lib/api';
+import { useUser } from '@/lib/UserContext';
 import Toast, { ToastType } from '@/components/common/Toast';
 
 interface ToastState {
@@ -13,8 +14,7 @@ interface ToastState {
 
 export default function SettingsPage() {
     const router = useRouter();
-    const [user, setUser] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
+    const { user, loading } = useUser();
     const [toast, setToast] = useState<ToastState | null>(null);
 
     // Password Update State
@@ -24,20 +24,6 @@ export default function SettingsPage() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const res = await userApi.details();
-                setUser(res.data);
-            } catch (err) {
-                console.error("Failed to load user details", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchUser();
-    }, []);
 
     const handleLogout = async () => {
         try {
@@ -95,146 +81,239 @@ export default function SettingsPage() {
         }
     };
 
-    if (loading) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-[60vh] animate-pulse">
-                <Loader2 size={48} className="text-white/20 animate-spin mb-4" />
-                <p className="text-white/40 uppercase tracking-widest text-sm">Loading Settings...</p>
-            </div>
-        );
-    }
+    const formatDate = (dateString: string) => {
+        try {
+            return new Date(dateString).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        } catch {
+            return dateString;
+        }
+    };
+
+    const getTierName = (tier: number) => {
+        const tiers: { [key: number]: string } = {
+            0: 'Free',
+            1: 'Basic',
+            2: 'Pro',
+            3: 'Enterprise'
+        };
+        return tiers[tier] || `Tier ${tier}`;
+    };
 
     return (
-        <main className="w-full max-w-4xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
-            {/* Header Section */}
-            <div className="flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none">
-                    Sett<span>ings</span>
-                </h1>
-                <p className="text-xl text-white/60 max-w-2xl font-light">
-                    Manage your account preferences and security.
-                </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
-                {/* Profile Section */}
-                <div className="md:col-span-5 space-y-8">
-                    <div className="glass rounded-2xl p-8 border border-white/10">
-                        <div className="flex items-center gap-6 mb-8">
-                            <div className="w-20 h-20 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white shadow-xl">
-                                <User size={40} />
-                            </div>
-                            <div className="flex flex-col">
-                                <h2 className="text-2xl font-bold text-white truncate max-w-[200px]">
-                                    {user?.emailAddress?.split('@')[0]}
-                                </h2>
-                                <p className="text-white/40 text-sm font-mono truncate">{user?.emailAddress}</p>
-                            </div>
-                        </div>
-
-                        <button
-                            onClick={handleLogout}
-                            className="w-full group flex items-center justify-center gap-3 py-4 rounded-xl bg-white/5 hover:bg-white/10 text-white transition-all duration-300 border border-white/10 uppercase tracking-[0.2em] text-xs font-bold"
-                        >
-                            <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
-                            <span>Sign Out</span>
-                        </button>
-                    </div>
+        <div className="flex flex-col">
+            <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
+                {/* Header Section */}
+                <div className="flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none">
+                        Sett<span>ings</span>
+                    </h1>
+                    <p className="text-xl text-white/60 max-w-2xl font-light">
+                        Manage your account preferences and security.
+                    </p>
                 </div>
 
-                {/* Password Update Section */}
-                <div className="md:col-span-7">
-                    <div className="glass rounded-2xl p-8 border border-white/10 bg-white/[0.02]">
-                        <div className="flex items-center gap-3 mb-6">
-                            <KeyRound size={20} className="text-white/60" />
-                            <h2 className="text-xl font-bold text-white uppercase tracking-tight">Update Password</h2>
-                        </div>
-
-                        <form onSubmit={handlePasswordUpdate} className="space-y-6">
-                            <div className="space-y-4">
-                                <div>
-                                    <label htmlFor="newPassword" className="block text-sm font-medium text-white/60 mb-2 uppercase tracking-wider">
-                                        New Password
-                                    </label>
-                                    <div className="relative">
-                                        <input
-                                            id="newPassword"
-                                            type={showNewPassword ? 'text' : 'password'}
-                                            value={newPassword}
-                                            onChange={(e) => setNewPassword(e.target.value)}
-                                            className="w-full px-4 py-3.5 rounded-xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/10 bg-white/5 border border-white/10"
-                                            placeholder="Enter new password"
-                                            minLength={12}
-                                            maxLength={16}
-                                            required
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowNewPassword(!showNewPassword)}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                                        >
-                                            {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                        </button>
-                                    </div>
-                                    <p className="text-[10px] text-white/30 mt-2 uppercase tracking-widest">12-16 characters required</p>
+                {loading ? (
+                    <div className="flex flex-col items-center justify-center py-20 animate-pulse">
+                        <Loader2 size={48} className="text-white/20 animate-spin mb-4" />
+                        <p className="text-white/40 uppercase tracking-widest text-sm">Loading Settings...</p>
+                    </div>
+                ) : (
+                    <div className="flex flex-col gap-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+                        {/* Account Information Section */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {/* Account Overview */}
+                            <div className="glass rounded-2xl p-8 border border-white/10">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <User size={20} className="text-white/60" />
+                                    <h2 className="text-xl font-bold text-white uppercase tracking-tight">Account Overview</h2>
                                 </div>
-
-                                <div>
-                                    <label htmlFor="confirmPassword" className="block text-sm font-medium text-white/60 mb-2 uppercase tracking-wider">
-                                        Confirm Password
-                                    </label>
-                                    <div className="relative">
-                                        <input
-                                            id="confirmPassword"
-                                            type={showConfirmPassword ? 'text' : 'password'}
-                                            value={confirmPassword}
-                                            onChange={(e) => setConfirmPassword(e.target.value)}
-                                            className="w-full px-4 py-3.5 rounded-xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/10 bg-white/5 border border-white/10"
-                                            placeholder="Confirm new password"
-                                            minLength={12}
-                                            maxLength={16}
-                                            required
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                                        >
-                                            {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                        </button>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">User ID</label>
+                                        <div className="flex items-center gap-2 p-3 bg-white/5 rounded-lg border border-white/5">
+                                            <Hash size={16} className="text-white/40" />
+                                            <p className="text-sm text-white font-mono truncate">{user?.userId}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Email Address</label>
+                                        <div className="flex items-center gap-2 p-3 bg-white/5 rounded-lg border border-white/5">
+                                            <Mail size={16} className="text-white/40" />
+                                            <p className="text-sm text-white truncate">{user?.emailAddress}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Member Since</label>
+                                        <div className="flex items-center gap-2 p-3 bg-white/5 rounded-lg border border-white/5">
+                                            <Calendar size={16} className="text-white/40" />
+                                            <p className="text-sm text-white">{user?.joinedOn ? formatDate(user.joinedOn) : 'N/A'}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            {error && (
-                                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 animate-in fade-in slide-in-from-top-2">
-                                    <p className="text-sm text-red-400 font-medium">{error}</p>
+                            {/* Account Status */}
+                            <div className="glass rounded-2xl p-8 border border-white/10">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <Shield size={20} className="text-white/60" />
+                                    <h2 className="text-xl font-bold text-white uppercase tracking-tight">Account Status</h2>
                                 </div>
-                            )}
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Account Tier</label>
+                                        <div className="p-3 bg-white/5 rounded-lg border border-white/5">
+                                            <p className="text-sm text-white font-bold">{user?.userTier !== undefined ? getTierName(user.userTier) : 'N/A'}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Account Active</label>
+                                        <div className="p-3 bg-white/5 rounded-lg border border-white/5">
+                                            <div className="flex items-center gap-2">
+                                                <div className={`w-2 h-2 rounded-full ${user?.active ? 'bg-green-400' : 'bg-red-400'}`}></div>
+                                                <p className="text-sm text-white">{user?.active ? 'Active' : 'Inactive'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Setup Complete</label>
+                                        <div className="p-3 bg-white/5 rounded-lg border border-white/5">
+                                            <div className="flex items-center gap-2">
+                                                <div className={`w-2 h-2 rounded-full ${user?.setupComplete ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
+                                                <p className="text-sm text-white">{user?.setupComplete ? 'Complete' : 'Pending'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 uppercase tracking-[0.2em] text-xs"
-                                style={{
-                                    background: 'var(--secondary)',
-                                    color: 'var(--secondary-foreground)',
-                                }}
-                            >
-                                {isSubmitting ? 'Updating...' : 'Save New Password'}
-                            </button>
-                        </form>
+                        {/* Password Update and Profile Actions */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            {/* Password Update Section */}
+                            <div className="lg:col-span-8">
+                                <div className="glass rounded-2xl p-8 border border-white/10 bg-white/[0.02]">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <KeyRound size={20} className="text-white/60" />
+                                        <h2 className="text-xl font-bold text-white uppercase tracking-tight">Update Password</h2>
+                                    </div>
+
+                                    <form onSubmit={handlePasswordUpdate} className="space-y-6">
+                                        <div className="space-y-4">
+                                            <div>
+                                                <label htmlFor="newPassword" className="block text-sm font-medium text-white/60 mb-2 uppercase tracking-wider">
+                                                    New Password
+                                                </label>
+                                                <div className="relative">
+                                                    <input
+                                                        id="newPassword"
+                                                        type={showNewPassword ? 'text' : 'password'}
+                                                        value={newPassword}
+                                                        onChange={(e) => setNewPassword(e.target.value)}
+                                                        className="w-full px-4 py-3.5 rounded-xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/10 bg-white/5 border border-white/10"
+                                                        placeholder="Enter new password"
+                                                        minLength={12}
+                                                        maxLength={16}
+                                                        required
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setShowNewPassword(!showNewPassword)}
+                                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                                                    >
+                                                        {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                    </button>
+                                                </div>
+                                                <p className="text-[10px] text-white/30 mt-2 uppercase tracking-widest">12-16 characters required</p>
+                                            </div>
+
+                                            <div>
+                                                <label htmlFor="confirmPassword" className="block text-sm font-medium text-white/60 mb-2 uppercase tracking-wider">
+                                                    Confirm Password
+                                                </label>
+                                                <div className="relative">
+                                                    <input
+                                                        id="confirmPassword"
+                                                        type={showConfirmPassword ? 'text' : 'password'}
+                                                        value={confirmPassword}
+                                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                                        className="w-full px-4 py-3.5 rounded-xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/10 bg-white/5 border border-white/10"
+                                                        placeholder="Confirm new password"
+                                                        minLength={12}
+                                                        maxLength={16}
+                                                        required
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                                                    >
+                                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {error && (
+                                            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 animate-in fade-in slide-in-from-top-2">
+                                                <p className="text-sm text-red-400 font-medium">{error}</p>
+                                            </div>
+                                        )}
+
+                                        <button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            className="w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 uppercase tracking-[0.2em] text-xs"
+                                            style={{
+                                                background: 'var(--secondary)',
+                                                color: 'var(--secondary-foreground)',
+                                            }}
+                                        >
+                                            {isSubmitting ? 'Updating...' : 'Save New Password'}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            {/* Profile Actions */}
+                            <div className="lg:col-span-4">
+                                <div className="glass rounded-2xl p-8 border border-white/10 h-full flex flex-col">
+                                    <div className="flex items-center justify-center mb-6">
+                                        <div className="w-20 h-20 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white shadow-xl">
+                                            <User size={40} />
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col items-center mb-6">
+                                        <h2 className="text-xl font-bold text-white truncate max-w-full text-center">
+                                            {user?.emailAddress?.split('@')[0]}
+                                        </h2>
+                                        <p className="text-white/40 text-sm font-mono truncate max-w-full text-center">{user?.emailAddress}</p>
+                                    </div>
+
+                                    <button
+                                        onClick={handleLogout}
+                                        className="w-full group flex items-center justify-center gap-3 py-4 rounded-xl bg-white/5 hover:bg-white/10 text-white transition-all duration-300 border border-white/10 uppercase tracking-[0.2em] text-xs font-bold mt-auto"
+                                    >
+                                        <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
+                                        <span>Sign Out</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                )}
 
-            {toast && (
-                <Toast
-                    message={toast.message}
-                    type={toast.type}
-                    onClose={() => setToast(null)}
-                />
-            )}
-        </main>
+                {toast && (
+                    <Toast
+                        message={toast.message}
+                        type={toast.type}
+                        onClose={() => setToast(null)}
+                    />
+                )}
+            </main>
+        </div>
     );
 }
