@@ -1,7 +1,3 @@
-Based on your updated specification and clarifications, here are the finalized **Next.js Frontend User Stories**.
-
-These stories specifically address the **Oauth-first** flow, **Client-side QR generation**, and the **New List URLs** endpoint.
-
 ## Epic: Authentication & Access Control
 This epic handles the Oauth handshake, session management, and access states (Banned/Incomplete).
 

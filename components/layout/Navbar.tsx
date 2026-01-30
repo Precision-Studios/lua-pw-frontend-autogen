@@ -38,11 +38,8 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="w-full py-6 px-4 md:px-8 flex items-center justify-between z-40">
-                {/* Logo - Matching Homepage Title */}
-                <Link href="/dashboard" className="text-2xl font-black text-white uppercase tracking-tight hover:opacity-80 transition-opacity">
-                    LUA<span className="opacity-70">.PW</span>
-                </Link>
+            <nav className="w-full py-6 px-4 md:px-8 flex items-center justify-end z-40">
+                {/* Logo removed - now in Sidebar */}
 
                 <div className="flex items-center gap-4">
                     {/* User Avatar with Dropdown */}

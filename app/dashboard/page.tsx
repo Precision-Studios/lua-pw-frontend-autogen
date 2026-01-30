@@ -44,10 +44,10 @@ export default function DashboardPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[var(--background)] flex flex-col items-center">
+        <div className="flex flex-col">
             <Navbar />
 
-            <main className="w-full max-w-7xl px-4 py-8 md:py-16 flex flex-col gap-12">
+            <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
                 {/* Header Section - Matching Homepage Hero Title Style */}
                 <div className="flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none">
