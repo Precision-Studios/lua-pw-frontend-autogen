@@ -170,7 +170,7 @@ export default function SettingsPage() {
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Account Active</label>
+                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Account Status</label>
                                         <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                                             <div className="flex items-center gap-2">
                                                 <div className={`w-2 h-2 rounded-full ${user?.active ? 'bg-green-400' : 'bg-red-400'}`}></div>
@@ -179,7 +179,7 @@ export default function SettingsPage() {
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Setup Complete</label>
+                                        <label className="block text-xs font-medium text-white/40 mb-1 uppercase tracking-wider">Initial Setup</label>
                                         <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                                             <div className="flex items-center gap-2">
                                                 <div className={`w-2 h-2 rounded-full ${user?.setupComplete ? 'bg-green-400' : 'bg-yellow-400'}`}></div>

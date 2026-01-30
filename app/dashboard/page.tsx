@@ -57,7 +57,7 @@ export default function DashboardPage() {
                         Dash<span>board</span>
                     </h1>
                     <p className="text-xl text-white/60 max-w-2xl font-light">
-                        Welcome back, <span className="text-white font-medium">{user?.emailAddress?.split('@')[0]}</span>.
+                        Welcome back, <Link href="/dashboard/settings" className="text-white font-medium hover:text-blue-400 transition-colors">{user?.emailAddress?.split('@')[0]}</Link>.
                         Here is an overview of your activity.
                     </p>
                 </div>
