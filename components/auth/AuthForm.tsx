@@ -10,26 +10,27 @@ export default function AuthForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    //todo fix hardcoded value from api.ts
     const handleOAuth = (provider: 'google' | 'github') => {
         window.location.href = `http://localhost:5000/oauth2/authorization/${provider}`;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        window.location.href = '/create';
+        window.location.href = '/dashboard';
     };
 
     return (
         <div className="auth-container animate-in" style={{ padding: 0 }}>
             <LiquidGlass
-                borderRadius={24}
-                blur={16}              // Increased significantly (from 2) for real frosting
-                contrast={1.15}        // Slight pop
-                brightness={1.1}       // Brightens background (classic glass look)
-                saturation={1.2}       // Boosts colors behind the glass
-                displacementScale={60} // High value makes the "liquid" distortion visible
-                elasticity={0.2}       // Adds the "jelly" feel on mouse movement
-                shadowIntensity={0.2}
+                borderRadius={16}
+                blur={1}              // Increased significantly (from 2) for real frosting
+                contrast={1.2}        // Slight pop
+                brightness={1.05}       // Brightens background (classic glass look)
+                saturation={1.1}       // Boosts colors behind the glass
+                displacementScale={1.0} // High value makes the "liquid" distortion visible
+                elasticity={0.6}       // Adds the "jelly" feel on mouse movement
+                shadowIntensity={0.25}
             >
                 <div style={{ padding: '2.5rem' }}>
                     <div className="auth-header space-y-3">

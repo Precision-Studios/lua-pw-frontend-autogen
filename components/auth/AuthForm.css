@@ -1,29 +1,36 @@
 :root {
-    --brand-1: #000000;
-    --foreground: #000000;
+    --brand-1: #ffffff;
+    --foreground: #ffffff;
     --foreground-muted: rgba(255, 255, 255, 0.6);
     --foreground-dim: rgba(255, 255, 255, 0.3);
+
     --secondary: #ffffff;
-    --secondary-foreground: var(--brand-1);
+    --secondary-foreground: #000000;
     --btn-hover-light: #f4f4f5;
+    /* Light hover for white button */
+
+    /* Dark Glass Styling */
     --white-subtle: rgba(255, 255, 255, 0.1);
     --white-dim: rgba(255, 255, 255, 0.2);
     --white-trace: rgba(255, 255, 255, 0.3);
     --white-faint: rgba(255, 255, 255, 0.05);
+
     --black-subtle: rgba(0, 0, 0, 0.2);
-    --black-muted: rgba(24, 24, 24, 0.61);
-    --card: var(--black-muted);
+    --black-muted: rgba(0, 0, 0, 0.4);
+    /* Darker base for legibility */
+
+    --card: rgba(0, 0, 0, 0.6);
     --card-border: var(--white-subtle);
-    --input: var(--white-faint);
-    --input-border: var(--white-subtle);
+    --input: rgba(0, 0, 0, 0.4);
+    --input-border: rgba(255, 255, 255, 0.1);
 }
 
 .auth-container {
     width: 100%;
     max-width: 28rem;
-    /* max-w-md */
     padding: 2.5rem;
-    /* p-10 */
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
 }
 
 .auth-header {
@@ -33,7 +40,6 @@
 
 .auth-title {
     font-size: 1.5rem;
-    /* text-2xl */
     font-weight: 700;
     letter-spacing: -0.025em;
     color: var(--foreground);
@@ -41,10 +47,10 @@
 }
 
 .auth-subtitle {
-    color: var(--foreground-muted);
+    color: rgba(255, 255, 255, 0.85);
     font-size: 0.875rem;
-    /* text-sm */
     font-weight: 400;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .oauth-grid {
@@ -64,15 +70,18 @@
     border: 1px solid var(--input-border);
     transition: all 0.2s;
     color: var(--foreground);
+    backdrop-filter: blur(4px);
 }
 
 .oauth-button:hover {
     background: var(--white-subtle);
+    transform: translateY(-1px);
+    border-color: var(--white-trace);
 }
 
 .oauth-button-text {
     font-size: 0.75rem;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
@@ -101,19 +110,21 @@
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.3em;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .divider-text {
-    background: var(--black-subtle);
+    background: transparent;
     padding: 0 1rem;
-    color: var(--foreground-dim);
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
 }
 
 .input-group {
@@ -123,8 +134,8 @@
 }
 
 .input-label {
-    font-size: 10px;
-    font-weight: 400;
+    font-size: 11px;
+    font-weight: 600;
     color: var(--foreground-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -143,6 +154,11 @@
     width: 1.25rem;
     height: 1.25rem;
     color: var(--foreground-dim);
+    transition: color 0.2s;
+}
+
+.auth-input:focus~.input-icon {
+    color: var(--foreground);
 }
 
 .auth-input {
@@ -152,7 +168,7 @@
     border: 1px solid var(--input-border);
     border-radius: 0.75rem;
     color: var(--foreground);
-    font-weight: 400;
+    font-weight: 500;
     transition: all 0.2s;
 }
 
@@ -162,7 +178,9 @@
 
 .auth-input:focus {
     outline: none;
-    border-color: var(--white-trace);
+    border-color: var(--foreground-dim);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .submit-button {
@@ -181,35 +199,35 @@
     gap: 0.5rem;
     margin-top: 1rem;
     font-size: 0.875rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .submit-button:hover {
     background: var(--btn-hover-light);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
 .oauth-signup-notice {
     text-align: center;
     padding: 2.5rem 1.5rem;
-    border: 1px solid var(--input-border);
+    border: 1px dashed var(--input-border);
     border-radius: 1rem;
     background: var(--input);
 }
 
 .toggle-auth-button {
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--foreground-dim);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--foreground-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    transition: color 0.2s;
+    transition: all 0.2s;
+    margin-top: 1rem;
 }
 
 .toggle-auth-button:hover {
     color: var(--foreground);
     text-decoration: underline;
     text-underline-offset: 4px;
-}
-
-.animate-in {
-    animation: fadeIn 0.5s ease-out forwards;
 }
