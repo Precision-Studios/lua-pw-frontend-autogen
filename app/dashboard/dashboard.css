@@ -1,0 +1,142 @@
+/* Dashboard Independent Styling */
+
+.dashboard-wrapper {
+    /* 
+     * THEME CONFIGURATION
+     * All colors and aesthetic properties for the dashboard are defined here.
+     * No external dependencies should be needed for styling. 
+     */
+
+    /* Base Colors */
+    --dash-h: 222;
+    --dash-s: 47%;
+    --dash-l: 11%;
+
+    --dash-primary-color: #3b82f6;
+    /* Blue-500 equivalent */
+    --dash-secondary-color: #8b5cf6;
+    /* Violet-500 equivalent */
+    --dash-accent-color: #06b6d4;
+    /* Cyan-500 equivalent */
+
+    --dash-bg-main: #000000;
+    --dash-bg-subtle: #0a0a0a;
+
+    --dash-text-main: #ffffff;
+    --dash-text-muted: rgba(255, 255, 255, 0.6);
+    --dash-text-dark: #000000;
+
+    --dash-border-light: rgba(255, 255, 255, 0.1);
+    --dash-border-hover: rgba(255, 255, 255, 0.2);
+
+    /* Sidebar Specifics */
+    --dash-sidebar-bg: rgba(0, 0, 0, 0.6);
+    --dash-sidebar-border: var(--dash-border-light);
+    --dash-sidebar-item-active-bg: var(--dash-text-main);
+    --dash-sidebar-item-active-text: var(--dash-primary-color);
+    --dash-sidebar-item-hover-bg: rgba(255, 255, 255, 0.1);
+
+    /* Form Elements */
+    --dash-input-bg: rgba(0, 0, 0, 0.3);
+    --dash-input-border: var(--dash-border-light);
+    --dash-input-placeholder: rgba(255, 255, 255, 0.2);
+    --dash-button-bg: #ffffff;
+    --dash-button-text: #000000;
+    --dash-button-hover-bg: #f8fafc;
+
+    --dash-success: #22c55e;
+    --dash-error: #ef4444;
+
+    /* Modal */
+    --dash-modal-overlay: rgba(0, 0, 0, 0.9);
+    --dash-modal-bg: #ffffff;
+    --dash-modal-text: #000000;
+    --dash-modal-text-muted: rgba(0, 0, 0, 0.4);
+    --dash-modal-close: rgba(0, 0, 0, 0.2);
+    --dash-modal-close-hover: #000000;
+
+    /* Glass Effects */
+    --dash-glass-bg: rgba(255, 255, 255, 0.03);
+    --dash-glass-border: var(--dash-border-light);
+    --dash-glass-blur: 16px;
+
+    /* Layout */
+    background-color: var(--dash-bg-main);
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+    color: var(--dash-text-main);
+
+    /* Local Scoped Overrides for Global Variables */
+    --success: var(--dash-success);
+    --error: var(--dash-error);
+    --foreground: var(--dash-text-main);
+}
+
+/* Reusable Dashboard Classes that use the variables above */
+
+.dash-text-main {
+    color: var(--dash-text-main);
+}
+
+.dash-text-muted {
+    color: var(--dash-text-muted);
+}
+
+.dash-text-primary {
+    color: var(--dash-primary-color);
+}
+
+.dash-text-secondary {
+    color: var(--dash-secondary-color);
+}
+
+.dash-text-accent {
+    color: var(--dash-accent-color);
+}
+
+.dash-bg-subtle {
+    background-color: var(--dash-bg-subtle);
+}
+
+.dash-border {
+    border-color: var(--dash-border-light);
+}
+
+/* Custom Scrollbar for Dashboard */
+.dashboard-wrapper ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.dashboard-wrapper ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dashboard-wrapper ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.dashboard-wrapper ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Glass Component */
+.dash-glass,
+.dashboard-wrapper .glass {
+    background: var(--dash-glass-bg);
+    backdrop-filter: blur(var(--dash-glass-blur));
+    -webkit-backdrop-filter: blur(var(--dash-glass-blur));
+    border: 1px solid var(--dash-glass-border);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+}
+
+.dash-glass:hover,
+.dashboard-wrapper .glass:hover {
+    border-color: var(--dash-border-hover);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Sidebar Custom Overrides if needed, though we will try to use utility classes in the component */

@@ -24,7 +24,7 @@ const Toast: React.FC<ToastProps> = ({ message, type, onClose, duration = 3000 }
     return (
         <div className="fixed top-4 right-4 z-[100] animate-in">
             <div
-                className="flex items-center gap-3 px-4 py-3 rounded-lg glass min-w-[300px] max-w-md"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg dash-glass min-w-[300px] max-w-md"
                 style={{
                     borderLeft: `3px solid var(${type === 'success' ? '--success' : '--error'})`,
                 }}
@@ -34,10 +34,10 @@ const Toast: React.FC<ToastProps> = ({ message, type, onClose, duration = 3000 }
                 ) : (
                     <XCircle size={20} className="text-error flex-shrink-0" />
                 )}
-                <p className="text-sm text-white flex-1">{message}</p>
+                <p className="text-sm text-[var(--dash-text-main)] flex-1">{message}</p>
                 <button
                     onClick={onClose}
-                    className="text-white/50 hover:text-white transition-colors flex-shrink-0"
+                    className="text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] transition-colors flex-shrink-0"
                     aria-label="Close notification"
                 >
                     <X size={16} />

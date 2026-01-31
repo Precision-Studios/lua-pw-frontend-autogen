@@ -51,21 +51,21 @@ const QrCodeModal: React.FC<QrCodeModalProps> = ({ isOpen, onClose, shortUrl, is
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--background)]/90 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
-            <div className="relative bg-white p-8 md:p-12 rounded-3xl w-full max-w-sm flex flex-col items-center gap-8 shadow-2xl scale-95 animate-in zoom-in-95 duration-200" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--dash-modal-overlay)] backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
+            <div className="relative bg-[var(--dash-modal-bg)] p-8 md:p-12 rounded-3xl w-full max-w-sm flex flex-col items-center gap-8 shadow-2xl scale-95 animate-in zoom-in-95 duration-200" onClick={(e) => e.stopPropagation()}>
                 <button
                     onClick={onClose}
-                    className="absolute top-6 right-6 text-black/20 hover:text-black transition-colors"
+                    className="absolute top-6 right-6 text-[var(--dash-modal-close)] hover:text-[var(--dash-modal-close-hover)] transition-colors"
                 >
                     <X size={24} />
                 </button>
 
                 <div className="text-center space-y-1">
-                    <h3 className="text-lg font-bold text-black uppercase tracking-widest">QR Code</h3>
-                    <p className="text-xs text-black/40 break-all max-w-[200px] mx-auto">{shortUrl}</p>
+                    <h3 className="text-lg font-bold text-[var(--dash-modal-text)] uppercase tracking-widest">QR Code</h3>
+                    <p className="text-xs text-[var(--dash-modal-text-muted)] break-all max-w-[200px] mx-auto">{shortUrl}</p>
                 </div>
 
-                <div className="p-4 bg-white" ref={svgRef}>
+                <div className="p-4 bg-[var(--dash-modal-bg)]" ref={svgRef}>
                     <QRCode
                         value={shortUrl}
                         size={200}
@@ -76,7 +76,7 @@ const QrCodeModal: React.FC<QrCodeModalProps> = ({ isOpen, onClose, shortUrl, is
 
                 <button
                     onClick={downloadQRCode}
-                    className="w-full py-4 bg-black text-white font-bold rounded-xl hover:opacity-80 transition-opacity uppercase tracking-widest text-xs flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-[var(--dash-modal-text)] text-[var(--dash-modal-bg)] font-bold rounded-xl hover:opacity-80 transition-opacity uppercase tracking-widest text-xs flex items-center justify-center gap-2"
                 >
                     <Download size={14} />
                     Download PNG

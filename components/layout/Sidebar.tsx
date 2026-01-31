@@ -27,8 +27,8 @@ const SidebarItem = ({ href, icon, label, isCollapsed, isActive }: SidebarItemPr
             href={href}
             className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group
                 ${isActive
-                    ? 'bg-white text-primary'
-                    : 'text-white/60 hover:text-white hover:bg-white/10'}`}
+                    ? 'bg-[var(--dash-sidebar-item-active-bg)] text-[var(--dash-sidebar-item-active-text)]'
+                    : 'text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] hover:bg-[var(--dash-sidebar-item-hover-bg)]'}`}
         >
             <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
                 {icon}
@@ -64,7 +64,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
-                className="md:hidden fixed top-6 left-4 z-[60] p-2 rounded-lg bg-white/10 text-white border border-white/20"
+                className="md:hidden fixed top-6 left-4 z-[60] p-2 rounded-lg bg-[var(--dash-glass-bg)] text-[var(--dash-text-main)] border border-[var(--dash-border-light)]"
             >
                 {isMobileOpen ? <ChevronLeft size={20} /> : <div className="flex flex-col gap-1 w-5"><div className="h-0.5 w-full bg-white"></div><div className="h-0.5 w-full bg-white"></div><div className="h-0.5 w-full bg-white"></div></div>}
             </button>
@@ -78,21 +78,21 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             )}
 
             <aside
-                className={`fixed left-6 top-6 bottom-6 transition-all duration-500 ease-in-out z-50 flex flex-col rounded-[2.5rem] border border-white/10 shadow-2xl shadow-black/40
+                className={`fixed left-6 top-6 bottom-6 transition-all duration-500 ease-in-out z-50 flex flex-col rounded-[2.5rem] border border-[var(--dash-sidebar-border)] bg-[var(--dash-sidebar-bg)] backdrop-blur-xl shadow-2xl shadow-black/40
                     ${isCollapsed ? 'w-24' : 'w-72'}
                     ${isMobileOpen ? 'translate-x-0' : '-translate-x-[calc(100%+3rem)] md:translate-x-0'}
                 `}
             >
                 {/* Logo/Header */}
-                <div className="p-6 h-24 flex items-center justify-between border-b border-white/10">
+                <div className="p-6 h-24 flex items-center justify-between border-b border-[var(--dash-border-light)]">
                     {!isCollapsed && (
-                        <Link href="/dashboard" className="text-2xl font-black text-white uppercase tracking-tight">
+                        <Link href="/dashboard" className="text-2xl font-black text-[var(--dash-text-main)] uppercase tracking-tight">
                             LUA<span className="opacity-70">.PW</span>
                         </Link>
                     )}
                     <button
                         onClick={() => setIsCollapsed(!isCollapsed)}
-                        className="p-2 rounded-lg hover:bg-white/10 text-white transition-colors ml-auto"
+                        className="p-2 rounded-lg hover:bg-[var(--dash-sidebar-item-hover-bg)] text-[var(--dash-text-main)] transition-colors ml-auto"
                     >
                         {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
                     </button>
@@ -113,7 +113,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                 {/* Footer / User Info could go here */}
                 <div className="p-6 border-t border-white/10">
                     {!isCollapsed && (
-                        <div className="text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">
+                        <div className="text-[10px] text-[var(--dash-text-muted)] uppercase tracking-[0.2em] font-bold">
                             V 1.0.0
                         </div>
                     )}

@@ -32,13 +32,13 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
 
     return (
         <div className="w-full">
-            <h2 className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-medium mb-4 ml-1">
+            <h2 className="text-[10px] text-[var(--dash-text-muted)] uppercase tracking-[0.2em] font-medium mb-4 ml-1">
                 Create New Link
             </h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="relative group">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-white transition-colors">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--dash-text-muted)] group-focus-within:text-[var(--dash-text-main)] transition-colors">
                         <Link size={20} />
                     </div>
                     <input
@@ -46,7 +46,7 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
                         value={longUrl}
                         onChange={(e) => setLongUrl(e.target.value)}
                         placeholder="Paste your long URL here"
-                        className="w-full p-4 pl-12 bg-[var(--input)] border border-[var(--input-border)] text-white placeholder-white/20 rounded-xl focus:outline-none focus:border-white/30 transition-all font-light"
+                        className="w-full p-4 pl-12 bg-[var(--dash-input-bg)] border border-[var(--dash-input-border)] text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] rounded-xl focus:outline-none focus:border-[var(--dash-border-hover)] transition-all font-light"
                         required
                     />
                 </div>
@@ -54,7 +54,7 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full p-4 bg-white text-[var(--background)] font-bold rounded-xl hover:bg-gray-100 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full p-4 bg-[var(--dash-button-bg)] text-[var(--dash-button-text)] font-bold rounded-xl hover:bg-[var(--dash-button-hover-bg)] transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                     {loading ? (
                         <>
