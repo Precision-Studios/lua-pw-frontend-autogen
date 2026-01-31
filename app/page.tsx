@@ -63,6 +63,11 @@ export default function Home() {
       <section className="auth-section">
         <AuthForm />
       </section>
+
+      {/* Photo Attribution */}
+      <div className="attribution-container">
+        Photo by <a href="https://unsplash.com/@samferrara?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer">Samuel Ferrara</a> on <a href="https://unsplash.com/photos/aerial-photo-of-foggy-mountains-1527pjeb6jg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" target="_blank" rel="noopener noreferrer">Unsplash</a>
+      </div>
     </main>
   );
 }
