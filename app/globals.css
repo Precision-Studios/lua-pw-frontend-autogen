@@ -16,12 +16,12 @@
 }
 
 :root {
-  --brand-1: #000000;
-  --brand-2: #14B8A6;
-  --brand-3: #3B82F6;
-  --brand-4: #22C55E;
-  --brand-5: #0B1220;
-  --brand-6: #daf7f0;
+  --brand-1: #1e2caf;
+  --brand-2: #005bd7;
+  --brand-3: #007ee5;
+  --brand-4: #009cdc;
+  --brand-5: #00b7c3;
+  --brand-6: #00cfa5;
 
   --background: var(--brand-1);
   --foreground: #ffffff;
