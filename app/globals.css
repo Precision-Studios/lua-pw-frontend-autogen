@@ -16,19 +16,12 @@
 }
 
 :root {
-  --brand-1: #0e7970;
-  /* deep teal — primary brand */
+  --brand-1: #000000;
   --brand-2: #14B8A6;
-  /* teal — active / highlights */
   --brand-3: #3B82F6;
-  /* muted blue — primary actions */
   --brand-4: #22C55E;
-  /* fresh green — success */
   --brand-5: #0B1220;
-  /* deep blue-slate — dark base */
   --brand-6: #daf7f0;
-  /* soft mint-gray — surfaces */
-
 
   --background: var(--brand-1);
   --foreground: #ffffff;
@@ -84,12 +77,37 @@ body {
 }
 
 .glass {
-  background: rgba(0, 0, 0, 0.24);
+  /* 1. Base: Darker tint for better contrast, low opacity */
+  background: linear-gradient(160deg,
+      rgba(255, 255, 255, 0.08),
+      /* White "shine" on top */
+      rgba(255, 255, 255, 0.01) 50%,
+      rgba(0, 0, 0, 0.3)
+      /* Deep shadow at bottom */
+    );
+
+  /* 2. Shape: Standard rounded corners (not blob) */
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+
+  /* 3. The "Wet" Look: Heavy blur + High Saturation */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  /* 4. Depth: Multi-layer border to simulate thick glass edges */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  /* Catch top light */
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  /* Catch left light */
+
+  /* 5. Volume: Inset shadows make it look like a physical object, not a flat plane */
+  box-shadow:
+    0 8px 16px 0 rgba(0, 0, 0, 0.3),
+    /* Deep drop shadow */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  /* Inner rim light */
 }
+
 
 .animate-in {
   animation: fadeIn 0.5s ease-out forwards;
