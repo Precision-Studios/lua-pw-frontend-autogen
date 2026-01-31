@@ -64,7 +64,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
-                className="md:hidden fixed top-6 left-4 z-[60] p-2 rounded-lg bg-white/10 text-white backdrop-blur-md border border-white/20"
+                className="md:hidden fixed top-6 left-4 z-[60] p-2 rounded-lg bg-white/10 text-white border border-white/20"
             >
                 {isMobileOpen ? <ChevronLeft size={20} /> : <div className="flex flex-col gap-1 w-5"><div className="h-0.5 w-full bg-white"></div><div className="h-0.5 w-full bg-white"></div><div className="h-0.5 w-full bg-white"></div></div>}
             </button>
@@ -72,13 +72,13 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             {/* Mobile Overlay */}
             {isMobileOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+                    className="fixed inset-0 bg-black/50 z-40 md:hidden"
                     onClick={() => setIsMobileOpen(false)}
                 />
             )}
 
             <aside
-                className={`fixed left-6 top-6 bottom-6 transition-all duration-500 ease-in-out z-50 flex flex-col glass rounded-[2.5rem] border border-white/10 shadow-2xl shadow-black/40
+                className={`fixed left-6 top-6 bottom-6 transition-all duration-500 ease-in-out z-50 flex flex-col rounded-[2.5rem] border border-white/10 shadow-2xl shadow-black/40
                     ${isCollapsed ? 'w-24' : 'w-72'}
                     ${isMobileOpen ? 'translate-x-0' : '-translate-x-[calc(100%+3rem)] md:translate-x-0'}
                 `}

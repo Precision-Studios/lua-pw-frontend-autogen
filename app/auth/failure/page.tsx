@@ -15,7 +15,7 @@ export default function AuthFailurePage() {
 
     return (
         <div className="flex min-h-screen items-center justify-center">
-            <div className="glass rounded-2xl p-8 text-center backdrop-blur-xl max-w-md w-full mx-4">
+            <div className="rounded-2xl p-8 text-center max-w-md w-full mx-4">
                 <h1 className="text-2xl font-bold text-red-400 mb-4 drop-shadow-md">Authentication Failed</h1>
                 <p className="text-[var(--foreground-muted)]">Redirecting you to login...</p>
             </div>

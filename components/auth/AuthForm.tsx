@@ -19,7 +19,7 @@ export default function AuthForm() {
     };
 
     return (
-        <div className="auth-container glass rounded-[2rem] animate-in">
+        <div className="auth-container rounded-[2rem] animate-in">
             <div className="auth-header space-y-3">
                 <h2 className="auth-title">
                     {isLogin ? 'Welcome Back' : 'Join LUA.PW'}
