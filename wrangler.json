@@ -1,16 +1,24 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
-    "name": "lua-pw-frontend-autogen",
     "main": ".open-next/worker.js",
-    "compatibility_date": "2024-09-23",
+    "name": "lua-pw-frontend-autogen",
+    "compatibility_date": "2024-12-30",
     "compatibility_flags": [
-        "nodejs_compat"
+        "nodejs_compat",
+        "global_fetch_strictly_public",
     ],
     "assets": {
+        "directory": ".open-next/assets",
         "binding": "ASSETS",
-        "directory": ".open-next/assets"
     },
-    "observability": {
-        "enabled": true
-    }
+    "services": [
+        {
+            "binding": "WORKER_SELF_REFERENCE",
+            "service": "my-app",
+        },
+    ],
+    "r2_buckets": [],
+    "images": {
+        "binding": "IMAGES",
+    },
 }

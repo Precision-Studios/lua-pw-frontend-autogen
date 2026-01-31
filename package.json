@@ -8,8 +8,7 @@
     "lint": "eslint",
     "clean": "rmdir /s /q .next && npm cache clean --force",
     "build": "next build",
-    "build:worker": "opennextjs-cloudflare",
-    "deploy": "opennextjs-cloudflare && wrangler deploy"
+    "deploy": "opennextjs-cloudflare build && wrangler deploy"
   },
   "dependencies": {
     "@liquidglass/react": "^0.1.3",
