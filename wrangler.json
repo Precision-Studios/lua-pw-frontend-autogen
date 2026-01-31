@@ -14,7 +14,7 @@
     "services": [
         {
             "binding": "WORKER_SELF_REFERENCE",
-            "service": "my-app",
+            "service": "lua-pw-frontend-autogen",
         },
     ],
     "r2_buckets": [],
