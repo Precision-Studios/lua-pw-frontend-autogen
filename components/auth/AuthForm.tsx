@@ -25,10 +25,10 @@ export default function AuthForm() {
             <LiquidGlass
                 borderRadius={16}
                 blur={1}              // Increased significantly (from 2) for real frosting
-                contrast={1.2}        // Slight pop
+                contrast={1.3}        // Slight pop
                 brightness={1.05}       // Brightens background (classic glass look)
                 saturation={1.1}       // Boosts colors behind the glass
-                displacementScale={1.0} // High value makes the "liquid" distortion visible
+                displacementScale={2} // High value makes the "liquid" distortion visible
                 elasticity={0.6}       // Adds the "jelly" feel on mouse movement
                 shadowIntensity={0.25}
             >
@@ -40,34 +40,8 @@ export default function AuthForm() {
                         <p className="auth-subtitle">
                             {isLogin
                                 ? 'Enter your credentials to access your account'
-                                : 'Sign up via OAuth to get started'}
+                                : 'Sign up via Google/GitHub to get started'}
                         </p>
-                    </div>
-
-                    <div className="oauth-grid">
-                        <button
-                            onClick={() => handleOAuth('google')}
-                            className="oauth-button"
-                        >
-                            <Chrome className="w-5 h-5" />
-                            <span className="oauth-button-text">Google</span>
-                        </button>
-                        <button
-                            onClick={() => handleOAuth('github')}
-                            className="oauth-button"
-                        >
-                            <Github className="w-5 h-5" />
-                            <span className="oauth-button-text">GitHub</span>
-                        </button>
-                    </div>
-
-                    <div className="divider">
-                        <div className="divider-line">
-                            <div className="divider-line-inner"></div>
-                        </div>
-                        <div className="divider-text-container">
-                            <span className="divider-text">Or continue with</span>
-                        </div>
                     </div>
 
                     {isLogin ? (
@@ -113,12 +87,38 @@ export default function AuthForm() {
                     ) : (
                         <div className="oauth-signup-notice">
                             <p className="auth-subtitle leading-relaxed">
-                                Please sign up using Google or GitHub OAuth.
+                                Please sign up using Google or GitHub SSO.
                                 <br />
                                 We don't support manual email registrations.
                             </p>
                         </div>
                     )}
+
+                    <div className="divider">
+                        <div className="divider-line">
+                            <div className="divider-line-inner"></div>
+                        </div>
+                        <div className="divider-text-container">
+                            <span className="divider-text">Or continue with</span>
+                        </div>
+                    </div>
+
+                    <div className="oauth-grid">
+                        <button
+                            onClick={() => handleOAuth('google')}
+                            className="oauth-button"
+                        >
+                            <Chrome className="w-5 h-5" />
+                            <span className="oauth-button-text">Google</span>
+                        </button>
+                        <button
+                            onClick={() => handleOAuth('github')}
+                            className="oauth-button"
+                        >
+                            <Github className="w-5 h-5" />
+                            <span className="oauth-button-text">GitHub</span>
+                        </button>
+                    </div>
 
                     <div className="text-center">
                         <button

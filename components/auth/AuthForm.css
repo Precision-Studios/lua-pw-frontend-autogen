@@ -66,7 +66,7 @@
     gap: 0.5rem;
     padding: 1rem;
     border-radius: 0.75rem;
-    background: var(--input);
+    background: var(--white-subtle);
     border: 1px solid var(--input-border);
     transition: all 0.2s;
     color: var(--foreground);
@@ -100,7 +100,7 @@
 
 .divider-line-inner {
     width: 100%;
-    border-top: 1px solid var(--input-border);
+    border-top: 1px solid var(--white-subtle);
 }
 
 .divider-text-container {
@@ -136,7 +136,7 @@
 .input-label {
     font-size: 11px;
     font-weight: 600;
-    color: var(--foreground-muted);
+    color: #b9b9b9;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-left: 0.25rem;
