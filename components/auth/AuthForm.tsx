@@ -1,14 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { Github, Chrome, Lock, User, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Github, Chrome, Lock, User, ArrowRight, AlertCircle } from 'lucide-react';
 import { LiquidGlass } from '@liquidglass/react';
+import { authApi } from '@/lib/api';
 import './AuthForm.css';
 
 export default function AuthForm() {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     //todo fix hardcoded value from api.ts
     const handleOAuth = (provider: 'google' | 'github') => {
@@ -17,7 +22,21 @@ export default function AuthForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        window.location.href = '/dashboard';
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            await authApi.login({
+                idOrEmailIdentifier: email,
+                userPassword: password,
+            });
+            router.push('/dashboard');
+        } catch (err: any) {
+            console.error('Login failed:', err);
+            setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -46,6 +65,12 @@ export default function AuthForm() {
 
                     {isLogin ? (
                         <form onSubmit={handleSubmit} className="auth-form">
+                            {error && (
+                                <div className="error-message flex items-center gap-2 p-3 rounded-lg bg-red-500/10 text-red-500 text-sm mb-4">
+                                    <AlertCircle className="w-4 h-4" />
+                                    {error}
+                                </div>
+                            )}
                             <div className="input-group">
                                 <label className="input-label">UserId or Email</label>
                                 <div className="input-wrapper">
@@ -57,6 +82,7 @@ export default function AuthForm() {
                                         onChange={(e) => setEmail(e.target.value)}
                                         className="auth-input"
                                         required
+                                        disabled={isLoading}
                                     />
                                 </div>
                             </div>
@@ -72,6 +98,7 @@ export default function AuthForm() {
                                         onChange={(e) => setPassword(e.target.value)}
                                         className="auth-input"
                                         required
+                                        disabled={isLoading}
                                     />
                                 </div>
                             </div>
@@ -79,8 +106,9 @@ export default function AuthForm() {
                             <button
                                 type="submit"
                                 className="submit-button"
+                                disabled={isLoading}
                             >
-                                Sign In
+                                {isLoading ? 'Signing In...' : 'Sign In'}
                                 <ArrowRight className="w-5 h-5" />
                             </button>
                         </form>
