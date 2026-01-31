@@ -8,10 +8,8 @@
     "lint": "eslint",
     "clean": "rmdir /s /q .next && npm cache clean --force",
     "build": "next build",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "build:worker": "opennextjs-cloudflare",
+    "deploy": "opennextjs-cloudflare && wrangler deploy"
   },
   "dependencies": {
     "@liquidglass/react": "^0.1.3",
