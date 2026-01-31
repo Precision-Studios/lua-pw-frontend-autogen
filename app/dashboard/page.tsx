@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { useUser } from '@/lib/UserContext';
 
 
+import LoadingAtom from '@/components/common/LoadingAtom';
+
 export default function DashboardPage() {
     const [urls, setUrls] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
@@ -14,6 +16,7 @@ export default function DashboardPage() {
 
     useEffect(() => {
         const fetchData = async () => {
+
             try {
                 const urlsRes = await userApi.allUrls();
                 setUrls(urlsRes.data);
@@ -63,9 +66,8 @@ export default function DashboardPage() {
                 </div>
 
                 {loading || userLoading ? (
-                    <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                        <Loader2 size={48} className="text-[var(--dash-text-muted)] animate-spin mb-4" />
-                        <p className="text-[var(--dash-text-muted)] uppercase tracking-widest text-sm">Loading...</p>
+                    <div className="flex flex-col items-center justify-center py-20">
+                        <LoadingAtom />
                     </div>
                 ) : (
                     <div className="flex flex-col gap-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">

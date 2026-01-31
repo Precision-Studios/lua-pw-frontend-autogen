@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { userApi } from '@/lib/api';
 import CreateUrlForm from '@/components/dashboard/CreateUrlForm';
 import UrlTable from '@/components/dashboard/UrlTable';
-import { Loader2 } from 'lucide-react';
-
+import LoadingAtom from '@/components/common/LoadingAtom';
 
 export default function LinksPage() {
     const [urls, setUrls] = useState<any[]>([]);
@@ -13,6 +12,7 @@ export default function LinksPage() {
 
     useEffect(() => {
         const fetchData = async () => {
+
             try {
                 const urlsRes = await userApi.allUrls();
                 setUrls(urlsRes.data);
@@ -51,9 +51,8 @@ export default function LinksPage() {
                 </div>
 
                 {loading ? (
-                    <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                        <Loader2 size={48} className="text-[var(--dash-text-muted)] animate-spin mb-4" />
-                        <p className="text-[var(--dash-text-muted)] uppercase tracking-widest text-sm">Loading...</p>
+                    <div className="flex flex-col items-center justify-center py-20">
+                        <LoadingAtom />
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">

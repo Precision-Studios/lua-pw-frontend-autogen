@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import AuthForm from '@/components/auth/AuthForm';
 import LogoSection from '@/components/layout/LogoSection';
 import { authApi, userApi } from '@/lib/api';
+import LoadingAtom from '@/components/common/LoadingAtom';
 import './Home.css';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
 
   useEffect(() => {
     const checkAuth = async () => {
+
       try {
         // Try to refresh the session
         await authApi.refresh();
@@ -39,8 +41,8 @@ export default function Home() {
 
   if (loading) {
     return (
-      <main className="main-container flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+      <main className="main-container flex items-center justify-center bg-[#070b24]">
+        <LoadingAtom />
       </main>
     );
   }
