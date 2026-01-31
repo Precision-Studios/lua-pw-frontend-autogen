@@ -2,11 +2,7 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/samuel-ferrara-1527pjeb6jg-unsplash.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: transparent;
     position: relative;
 }
 

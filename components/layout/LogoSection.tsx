@@ -38,7 +38,7 @@ export default function LogoSection() {
                     </div>
                     <div className="stat-item">
                         <div className="stat-value">99.9%</div>
-                        <div className="stat-label">Uptime</div>
+                        <div className="stat-label">Observed Uptime</div>
                     </div>
                 </div>
             </div>
