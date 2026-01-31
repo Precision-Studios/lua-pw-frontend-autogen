@@ -1,3 +1,23 @@
+:root {
+    --brand-1: #000000;
+    --foreground: #000000;
+    --foreground-muted: rgba(255, 255, 255, 0.6);
+    --foreground-dim: rgba(255, 255, 255, 0.3);
+    --secondary: #ffffff;
+    --secondary-foreground: var(--brand-1);
+    --btn-hover-light: #f4f4f5;
+    --white-subtle: rgba(255, 255, 255, 0.1);
+    --white-dim: rgba(255, 255, 255, 0.2);
+    --white-trace: rgba(255, 255, 255, 0.3);
+    --white-faint: rgba(255, 255, 255, 0.05);
+    --black-subtle: rgba(0, 0, 0, 0.2);
+    --black-muted: rgba(24, 24, 24, 0.61);
+    --card: var(--black-muted);
+    --card-border: var(--white-subtle);
+    --input: var(--white-faint);
+    --input-border: var(--white-subtle);
+}
+
 .auth-container {
     width: 100%;
     max-width: 28rem;
@@ -188,4 +208,8 @@
     color: var(--foreground);
     text-decoration: underline;
     text-underline-offset: 4px;
+}
+
+.animate-in {
+    animation: fadeIn 0.5s ease-out forwards;
 }
