@@ -1,6 +1,10 @@
 import axios, { AxiosError } from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+if (!API_BASE_URL && typeof window !== 'undefined') {
+    console.error('NEXT_PUBLIC_API_BASE_URL is not defined! API calls will fail.');
+}
 console.log('API_BASE_URL:', API_BASE_URL);
 
 export const apiClient = axios.create({

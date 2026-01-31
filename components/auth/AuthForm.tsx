@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Github, Chrome, Lock, User, ArrowRight, AlertCircle } from 'lucide-react';
 import { LiquidGlass } from '@liquidglass/react';
-import { authApi } from '@/lib/api';
+import { authApi, API_BASE_URL } from '@/lib/api';
 import './AuthForm.css';
 
 export default function AuthForm() {
@@ -15,9 +15,8 @@ export default function AuthForm() {
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
 
-    //todo fix hardcoded value from api.ts
     const handleOAuth = (provider: 'google' | 'github') => {
-        window.location.href = `http://localhost:5000/oauth2/authorization/${provider}`;
+        window.location.href = `${API_BASE_URL}/oauth2/authorization/${provider}`;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
