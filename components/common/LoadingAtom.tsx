@@ -2,7 +2,15 @@
 
 import React from 'react';
 
-const LoadingAtom = () => {
+interface LoadingAtomProps {
+    title?: string;
+    subtitle?: string;
+}
+
+const LoadingAtom = ({
+    title = "Initializing",
+    subtitle = "Connecting to LUA Core"
+}: LoadingAtomProps) => {
     return (
         <div className="flex flex-col items-center justify-center gap-10">
             <div className="relative w-40 h-40">
@@ -89,12 +97,12 @@ const LoadingAtom = () => {
                 <div className="flex items-center gap-2">
                     <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
                     <h2 className="text-white text-base font-black uppercase tracking-[0.5em] ml-[0.5em]">
-                        Initializing
+                        {title}
                     </h2>
                     <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-white/30" />
                 </div>
                 <p className="text-white/30 text-[9px] uppercase tracking-[0.4em] font-medium animate-pulse">
-                    Connecting to LUA Core
+                    {subtitle}
                 </p>
             </div>
         </div>

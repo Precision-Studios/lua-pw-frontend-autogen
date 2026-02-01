@@ -18,8 +18,17 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
     const [selectedUrl, setSelectedUrl] = useState<UrlData | null>(null);
     const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
 
+    const getFullUrl = (shortUrl: string) => {
+        if (shortUrl.startsWith('http')) return shortUrl;
+        if (typeof window !== 'undefined') {
+            return `${window.location.origin}/${shortUrl}`;
+        }
+        return `/${shortUrl}`;
+    };
+
     const handleCopy = (shortUrl: string) => {
-        navigator.clipboard.writeText(shortUrl);
+        const fullUrl = getFullUrl(shortUrl);
+        navigator.clipboard.writeText(fullUrl);
         setCopiedUrl(shortUrl);
         setTimeout(() => setCopiedUrl(null), 2000);
     };
@@ -54,12 +63,12 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                             </td>
                             <td className="py-6 pr-8">
                                 <a
-                                    href={url.shortUrl}
+                                    href={getFullUrl(url.shortUrl)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="font-medium text-[var(--dash-text-main)] hover:underline decoration-[var(--dash-text-muted)] underline-offset-4 transition-all flex items-center gap-2"
                                 >
-                                    {url.shortUrl.replace(/^https?:\/\//, '')}
+                                    {getFullUrl(url.shortUrl).replace(/^https?:\/\//, '')}
                                     <ExternalLink size={10} className="opacity-30" />
                                 </a>
                             </td>
@@ -94,7 +103,7 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                 <QrCodeModal
                     isOpen={!!selectedUrl}
                     onClose={() => setSelectedUrl(null)}
-                    shortUrl={selectedUrl.shortUrl}
+                    shortUrl={getFullUrl(selectedUrl.shortUrl)}
                     isQRActivated={selectedUrl.isQRActivated}
                 />
             )}

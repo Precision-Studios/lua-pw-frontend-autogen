@@ -66,17 +66,24 @@ export default function SetupPassword() {
     };
 
     return (
-        <main className="setup-container">
+        <main className="main-container">
             {/* Left Section - Hero/Logo (Visible on desktop) */}
-            <section className="setup-hero-section">
+            <section className="hero-section">
                 <LogoSection />
             </section>
 
+            {/* Mobile Header (Visible on mobile only) */}
+            <div className="mobile-header">
+                <h1 className="mobile-title">
+                    LUA<span>.PW</span>
+                </h1>
+            </div>
+
             {/* Right Section - Form */}
             <section className="setup-form-section">
-                <div className="setup-card animate-in">
+                <div className="setup-card">
                     <div className="setup-header">
-                        <h2 className="setup-title">Secure Your Account</h2>
+                        <h1 className="setup-title">Secure Your Account</h1>
                         <p className="setup-subtitle">
                             Please set a password to complete your registration.
                         </p>
@@ -84,10 +91,11 @@ export default function SetupPassword() {
 
                     <form onSubmit={handleSubmit} className="setup-form">
                         <div className="setup-input-group">
-                            <label className="setup-input-label">New Password</label>
+                            <label htmlFor="new-password" title="Set a new password" className="setup-input-label">New Password</label>
                             <div className="setup-input-wrapper">
-                                <Lock className="setup-input-icon" />
+                                <Lock aria-hidden="true" className="setup-input-icon" />
                                 <input
+                                    id="new-password"
                                     type="password"
                                     placeholder="Minimum 12 characters"
                                     value={password}
@@ -95,38 +103,66 @@ export default function SetupPassword() {
                                     className="setup-input"
                                     required
                                     minLength={12}
+                                    aria-required="true"
+                                    aria-invalid={error?.includes('match') || error?.includes('12') ? 'true' : 'false'}
+                                    aria-describedby={error ? "setup-error" : undefined}
                                 />
                             </div>
                         </div>
 
                         <div className="setup-input-group">
-                            <label className="setup-input-label">Confirm Password</label>
+                            <label htmlFor="confirm-password" title="Confirm your new password" className="setup-input-label">Confirm Password</label>
                             <div className="setup-input-wrapper">
-                                <ShieldCheck className="setup-input-icon" />
+                                <ShieldCheck aria-hidden="true" className="setup-input-icon" />
                                 <input
+                                    id="confirm-password"
                                     type="password"
                                     placeholder="Re-enter your password"
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     className="setup-input"
                                     required
+                                    aria-required="true"
+                                    aria-invalid={error?.includes('match') ? 'true' : 'false'}
+                                    aria-describedby={error ? "setup-error" : undefined}
                                 />
                             </div>
                         </div>
 
-                        {error && <div className="error-message">{error}</div>}
+                        {error && (
+                            <div
+                                id="setup-error"
+                                className="error-message"
+                                role="alert"
+                                aria-live="polite"
+                            >
+                                {error}
+                            </div>
+                        )}
 
                         <button
                             type="submit"
                             className="setup-submit-button"
                             disabled={loading}
+                            aria-busy={loading}
                         >
-                            {loading ? 'Updating...' : 'Set Password'}
-                            {!loading && <ArrowRight className="w-5 h-5" />}
+                            {loading ? (
+                                <span aria-label="Updating password...">Updating...</span>
+                            ) : (
+                                <>
+                                    <span>Set Password</span>
+                                    <ArrowRight aria-hidden="true" className="w-5 h-5" />
+                                </>
+                            )}
                         </button>
                     </form>
                 </div>
             </section>
+
+            {/* Photo Attribution */}
+            <div className="attribution-container">
+                Photo by <a href="https://unsplash.com/@asoggetti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alessio Soggetti</a> on <a href="https://unsplash.com/photos/snow-covered-mountain-17_tB-oI0ao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+            </div>
         </main>
     );
 }

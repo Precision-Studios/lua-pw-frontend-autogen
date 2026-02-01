@@ -2,6 +2,7 @@
     --brand-1: #1e2caf;
     --background: var(--brand-1);
     --foreground: #ffffff;
+    --foreground-muted: rgba(255, 255, 255, 0.6);
     --foreground-subtle: rgba(255, 255, 255, 0.1);
 }
 

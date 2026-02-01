@@ -6,6 +6,7 @@ import { User, LogOut, KeyRound, Eye, EyeOff, Loader2, Shield, Calendar, Mail, H
 import { authApi } from '@/lib/api';
 import { useUser } from '@/lib/UserContext';
 import Toast, { ToastType } from '@/components/common/Toast';
+import LoadingAtom from '@/components/common/LoadingAtom';
 
 interface ToastState {
     message: string;
@@ -16,6 +17,7 @@ export default function SettingsPage() {
     const router = useRouter();
     const { user, loading } = useUser();
     const [toast, setToast] = useState<ToastState | null>(null);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     // Password Update State
     const [newPassword, setNewPassword] = useState('');
@@ -26,6 +28,7 @@ export default function SettingsPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleLogout = async () => {
+        setIsLoggingOut(true);
         try {
             await authApi.logout();
             router.push('/');
@@ -105,6 +108,11 @@ export default function SettingsPage() {
 
     return (
         <div className="flex flex-col">
+            {isLoggingOut && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070b24]">
+                    <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
+                </div>
+            )}
             <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
                 {/* Header Section */}
                 <div className="flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
