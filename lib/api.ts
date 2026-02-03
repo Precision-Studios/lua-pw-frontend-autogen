@@ -8,7 +8,7 @@ if (!API_BASE_URL && typeof window !== 'undefined') {
 console.log('API_BASE_URL:', API_BASE_URL);
 
 export const apiClient = axios.create({
-    baseURL: '', // Defaults to current origin (https://lua.pw)
+    baseURL: API_BASE_URL, // Defaults to current origin (https://lua.pw)
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
