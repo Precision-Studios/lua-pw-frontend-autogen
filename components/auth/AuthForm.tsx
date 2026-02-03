@@ -17,10 +17,7 @@ export default function AuthForm() {
 
     const handleOAuth = (provider: 'google' | 'github') => {
         const url = `${API_BASE_URL}/oauth2/authorization/${provider}`;
-        console.log('OAuth URL:', url);
-        setTimeout(() => {
-            window.location.href = url;
-        }, 5000);
+        window.location.href = url;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
