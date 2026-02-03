@@ -10,10 +10,6 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/:path*",
-        destination: `${API_BASE_URL}/api/:path*`,
-      },
-      {
         source: "/:shortCode((?!setup-password|dashboard|api)[a-zA-Z0-9]{1,8})",
         destination: `${API_BASE_URL}/:shortCode`,
       },
