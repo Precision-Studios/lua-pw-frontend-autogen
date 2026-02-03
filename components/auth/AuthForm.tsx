@@ -16,7 +16,11 @@ export default function AuthForm() {
     const router = useRouter();
 
     const handleOAuth = (provider: 'google' | 'github') => {
-        window.location.href = `${API_BASE_URL}/oauth2/authorization/${provider}`;
+        const url = `${API_BASE_URL}/oauth2/authorization/${provider}`;
+        console.log('OAuth URL:', url);
+        setTimeout(() => {
+            window.location.href = url;
+        }, 5000);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
