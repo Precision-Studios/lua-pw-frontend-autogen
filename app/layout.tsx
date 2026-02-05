@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
+import MobileWarning from "@/components/common/MobileWarning";
 
 export const metadata: Metadata = {
   title: "LUA.PW | Modern URL Management",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         {children}
+        <MobileWarning />
         <Analytics />
       </body>
     </html>

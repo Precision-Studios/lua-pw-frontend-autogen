@@ -107,12 +107,25 @@ export const normalizeUrl = (url: string): string => {
     return normalized;
 };
 
+export interface ExpansionRequest {
+    shortCode: string;
+    fromQr?: boolean;
+    recordAnalytics?: boolean;
+}
+
+export interface ExpansionResponse {
+    longUrl: string;
+}
+
 export const urlApi = {
     shorten: (longUrl: string) =>
         apiClient.post('/api/v1/urls/shorten', { longUrl: normalizeUrl(longUrl) }),
 
     generateQR: (urlForQR: string) =>
         apiClient.post('/api/v1/urls/add_qr', { urlForQR: normalizeUrl(urlForQR) }),
+
+    getLongUrl: (data: ExpansionRequest) =>
+        apiClient.get<ExpansionResponse>('/api/v1/urls/get_long_url', { params: data }),
 };
 
 export const redirectApi = {
