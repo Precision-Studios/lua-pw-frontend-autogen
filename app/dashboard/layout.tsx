@@ -19,7 +19,7 @@ export default function DashboardLayout({
             <div className="flex min-h-screen dashboard-wrapper">
                 <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
                 <div
-                    className={`flex-1 transition-all duration-500 ease-in-out ${isCollapsed ? 'md:pl-20' : 'md:pl-72'
+                    className={`flex-1 transition-all duration-500 ease-in-out ${isCollapsed ? 'md:pl-32' : 'md:pl-80'
                         } w-full flex flex-col`}
                 >
                     <TopNav />
