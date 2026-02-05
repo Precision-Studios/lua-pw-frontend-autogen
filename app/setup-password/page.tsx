@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { authApi, userApi } from '@/lib/api';
 import LogoSection from '@/components/layout/LogoSection';
-import { Lock, ArrowRight, ShieldCheck } from 'lucide-react';
+import LoadingAtom from '@/components/common/LoadingAtom';
+import { Lock, ArrowRight, ShieldCheck, LogOut } from 'lucide-react';
 import './SetupPassword.css';
 
 export default function SetupPassword() {
@@ -12,6 +13,7 @@ export default function SetupPassword() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -62,6 +64,17 @@ export default function SetupPassword() {
             setError(err.response?.data?.message || 'Failed to update password. Please try again.');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleLogout = async () => {
+        setIsLoggingOut(true);
+        try {
+            await authApi.logout();
+            router.push('/');
+        } catch (error) {
+            console.error("Logout failed", error);
+            router.push('/');
         }
     };
 
@@ -157,7 +170,23 @@ export default function SetupPassword() {
                         </button>
                     </form>
                 </div>
+
+                <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="setup-logout-button"
+                    disabled={isLoggingOut}
+                >
+                    <LogOut size={16} />
+                    <span>Sign Out</span>
+                </button>
             </section>
+
+            {isLoggingOut && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070b24]">
+                    <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
+                </div>
+            )}
 
             {/* Project & Photo Attribution */}
             <div className="attribution-container">
