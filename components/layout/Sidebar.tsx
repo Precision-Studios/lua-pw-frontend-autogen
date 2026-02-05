@@ -25,12 +25,13 @@ const SidebarItem = ({ href, icon, label, isCollapsed, isActive }: SidebarItemPr
     return (
         <Link
             href={href}
-            className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group
+            className={`flex items-center rounded-[1.25rem] transition-all duration-300 group
+                ${isCollapsed ? 'justify-center w-12 h-12 p-0 mx-auto' : 'gap-4 px-4 py-3'}
                 ${isActive
                     ? 'bg-[var(--dash-sidebar-item-active-bg)] text-[var(--dash-sidebar-item-active-text)]'
                     : 'text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] hover:bg-[var(--dash-sidebar-item-hover-bg)]'}`}
         >
-            <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
+            <div className={`flex items-center justify-center transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
                 {icon}
             </div>
             {!isCollapsed && (
@@ -78,13 +79,13 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             )}
 
             <aside
-                className={`fixed left-6 top-6 bottom-6 transition-all duration-500 ease-in-out z-50 flex flex-col rounded-[2.5rem] border border-[var(--dash-sidebar-border)] bg-[var(--dash-sidebar-bg)] backdrop-blur-xl shadow-2xl shadow-black/40
+                className={`fixed left-6 top-1/2 -translate-y-1/2 h-fit max-h-[calc(100vh-3rem)] transition-all duration-500 ease-in-out z-50 flex flex-col rounded-[2.5rem] border border-[var(--dash-sidebar-border)] bg-[var(--dash-sidebar-bg)] backdrop-blur-xl shadow-2xl shadow-black/40 overflow-y-auto no-scrollbar
                     ${isCollapsed ? 'w-24' : 'w-72'}
-                    ${isMobileOpen ? 'translate-x-0' : '-translate-x-[calc(100%+3rem)] md:translate-x-0'}
+                    ${isMobileOpen ? 'translate-x-0' : '-translate-x-[calc(100%+6rem)] md:translate-x-0'}
                 `}
             >
                 {/* Logo/Header */}
-                <div className="p-6 h-24 flex items-center justify-between border-b border-[var(--dash-border-light)]">
+                <div className={`p-6 h-24 flex items-center border-b border-[var(--dash-border-light)] ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
                     {!isCollapsed && (
                         <Link href="/dashboard" className="text-2xl font-black text-[var(--dash-text-main)] uppercase tracking-tight">
                             LUA<span className="opacity-70">.PW</span>
@@ -92,7 +93,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                     )}
                     <button
                         onClick={() => setIsCollapsed(!isCollapsed)}
-                        className="p-2 rounded-lg hover:bg-[var(--dash-sidebar-item-hover-bg)] text-[var(--dash-text-main)] transition-colors ml-auto"
+                        className={`w-10 h-10 flex items-center justify-center rounded-[1rem] hover:bg-[var(--dash-sidebar-item-hover-bg)] text-[var(--dash-text-main)] transition-colors ${isCollapsed ? '' : 'ml-auto'}`}
                     >
                         {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
                     </button>
