@@ -58,7 +58,7 @@ export default function LinksPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
                         {/* Left Column: Create Form */}
                         <div className="lg:col-span-12 space-y-8">
-                            <div className="dash-glass p-8 rounded-3xl border border-[var(--dash-glass-border)]">
+                            <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
                                 <h2 className="text-2xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight mb-6">Create New Link</h2>
                                 <CreateUrlForm onUrlCreated={handleUrlCreated} />
                             </div>

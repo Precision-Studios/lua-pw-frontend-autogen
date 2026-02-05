@@ -77,7 +77,7 @@ export default function DashboardPage() {
                                 <Link
                                     key={idx}
                                     href={stat.href}
-                                    className="dash-glass p-8 rounded-3xl transition-all group"
+                                    className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 transition-all group hover:bg-black/40 hover:border-[var(--dash-border-hover)]"
                                 >
                                     <div className="flex items-start justify-between mb-4">
                                         <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-2xl group-hover:scale-110 transition-transform">
@@ -91,7 +91,7 @@ export default function DashboardPage() {
                         </div>
 
                         {/* Quick Actions */}
-                        <div className="dash-glass p-8 rounded-3xl">
+                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
                             <h2 className="text-2xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight mb-8">Quick Actions</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 <Link

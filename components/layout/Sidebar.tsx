@@ -64,7 +64,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
-                className="md:hidden fixed top-6 left-4 z-[60] p-2 rounded-lg bg-[var(--dash-glass-bg)] text-[var(--dash-text-main)] border border-[var(--dash-border-light)]"
+                className="md:hidden fixed top-6 left-4 z-[60] p-2 rounded-lg bg-[var(--dash-sidebar-bg)] backdrop-blur-md text-[var(--dash-text-main)] border border-[var(--dash-border-light)] shadow-xl"
             >
                 {isMobileOpen ? <ChevronLeft size={20} /> : <div className="flex flex-col gap-1 w-5"><div className="h-0.5 w-full bg-white"></div><div className="h-0.5 w-full bg-white"></div><div className="h-0.5 w-full bg-white"></div></div>}
             </button>

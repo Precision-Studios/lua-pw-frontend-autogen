@@ -134,7 +134,7 @@ export default function SettingsPage() {
                         {/* Account Information Section */}
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {/* Account Overview */}
-                            <div className="dash-glass rounded-2xl p-8 border border-[var(--dash-border-light)]">
+                            <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <User size={20} className="text-[var(--dash-text-muted)]" />
                                     <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Account Overview</h2>
@@ -165,7 +165,7 @@ export default function SettingsPage() {
                             </div>
 
                             {/* Account Status */}
-                            <div className="dash-glass rounded-2xl p-8 border border-[var(--dash-border-light)]">
+                            <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <Shield size={20} className="text-[var(--dash-text-muted)]" />
                                     <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Account Status</h2>
@@ -203,7 +203,7 @@ export default function SettingsPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                             {/* Password Update Section */}
                             <div className="lg:col-span-8">
-                                <div className="dash-glass rounded-2xl p-8 border border-[var(--dash-border-light)] bg-[var(--dash-bg-subtle)]">
+                                <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
                                     <div className="flex items-center gap-3 mb-6">
                                         <KeyRound size={20} className="text-[var(--dash-text-muted)]" />
                                         <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Update Password</h2>
@@ -288,7 +288,7 @@ export default function SettingsPage() {
 
                             {/* Profile Actions */}
                             <div className="lg:col-span-4">
-                                <div className="dash-glass rounded-2xl p-8 border border-[var(--dash-border-light)] h-full flex flex-col">
+                                <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 h-full flex flex-col">
                                     <div className="flex items-center justify-center mb-6">
                                         <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] shadow-xl">
                                             <User size={40} />
