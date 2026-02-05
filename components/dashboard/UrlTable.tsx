@@ -65,7 +65,7 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                 </thead>
                 <tbody className="divide-y divide-[var(--dash-border-light)]">
                     {urls.map((url) => (
-                        <tr key={url.shortUrl} className="group hover:bg-[var(--dash-bg-subtle)] transition-colors">
+                        <tr key={url.shortUrl} className="group hover:bg-[var(--dash-bg-subtle)]">
                             <td className="py-6 pr-8 max-w-[200px] xl:max-w-[300px]">
                                 <div className="truncate text-[var(--dash-text-muted)] font-light text-sm" title={url.longUrl}>
                                     {url.longUrl}
@@ -76,7 +76,7 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                                     href={getFullUrl(url.shortUrl)}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="font-medium text-[var(--dash-text-main)] hover:underline decoration-[var(--dash-text-muted)] underline-offset-4 transition-all flex items-center gap-2"
+                                    className="font-medium text-[var(--dash-text-main)] hover:underline decoration-[var(--dash-text-muted)] underline-offset-4 flex items-center gap-2"
                                 >
                                     {getFullUrl(url.shortUrl).replace(/^https?:\/\//, '')}
                                     <ExternalLink size={10} className="opacity-30" />
@@ -86,7 +86,7 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                                 <div className="flex items-center justify-end gap-1">
                                     <button
                                         onClick={() => handleCopy(url.shortUrl)}
-                                        className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--dash-bg-subtle)] text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] transition-all"
+                                        className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--dash-bg-subtle)] text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)]"
                                         title="Copy Link"
                                     >
                                         {copiedUrl === url.shortUrl ? (
@@ -97,7 +97,7 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                                     </button>
                                     <button
                                         onClick={() => setSelectedUrl(url)}
-                                        className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--dash-bg-subtle)] text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] transition-all"
+                                        className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--dash-bg-subtle)] text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)]"
                                         title="QR Code"
                                     >
                                         <QrCode size={14} />

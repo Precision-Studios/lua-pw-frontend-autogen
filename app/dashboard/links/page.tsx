@@ -41,7 +41,7 @@ export default function LinksPage() {
         <div className="flex flex-col">
             <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
                 {/* Header Section */}
-                <div className="flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="flex flex-col gap-2">
                     <h1 className="text-5xl md:text-8xl font-black text-[var(--dash-text-main)] uppercase tracking-tighter leading-none">
                         My <span>Links</span>
                     </h1>
@@ -55,7 +55,7 @@ export default function LinksPage() {
                         <LoadingAtom />
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         {/* Left Column: Create Form */}
                         <div className="lg:col-span-12 space-y-8">
                             <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">

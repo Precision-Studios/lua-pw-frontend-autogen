@@ -55,12 +55,12 @@ export default function DashboardPage() {
         <div className="flex flex-col">
             <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
                 {/* Header Section */}
-                <div className="flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="flex flex-col gap-2">
                     <h1 className="text-5xl md:text-8xl font-black text-[var(--dash-text-main)] uppercase tracking-tighter leading-none">
                         Dash<span>board</span>
                     </h1>
                     <p className="text-xl text-[var(--dash-text-muted)] max-w-2xl font-light">
-                        Welcome back, <Link href="/dashboard/settings" className="text-[var(--dash-text-main)] font-medium hover:text-[var(--dash-primary-color)] transition-colors">{user?.emailAddress?.split('@')[0]}</Link>.
+                        Welcome back, <Link href="/dashboard/settings" className="text-[var(--dash-text-main)] font-medium hover:text-[var(--dash-primary-color)]">{user?.emailAddress?.split('@')[0]}</Link>.
                         Here is an overview of your activity.
                     </p>
                 </div>
@@ -70,17 +70,17 @@ export default function DashboardPage() {
                         <LoadingAtom />
                     </div>
                 ) : (
-                    <div className="flex flex-col gap-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+                    <div className="flex flex-col gap-12">
                         {/* Stats Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {stats.map((stat, idx) => (
                                 <Link
                                     key={idx}
                                     href={stat.href}
-                                    className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 transition-all group hover:bg-black/40 hover:border-[var(--dash-border-hover)]"
+                                    className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 group hover:bg-black/40 hover:border-[var(--dash-border-hover)]"
                                 >
                                     <div className="flex items-start justify-between mb-4">
-                                        <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-2xl group-hover:scale-110 transition-transform">
+                                        <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-2xl">
                                             {stat.icon}
                                         </div>
                                     </div>
@@ -96,14 +96,14 @@ export default function DashboardPage() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 <Link
                                     href="/dashboard/links"
-                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] transition-all text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm"
+                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm"
                                 >
                                     <PlusCircle size={24} className="text-[var(--dash-primary-color)]" />
                                     New Link
                                 </Link>
                                 <Link
                                     href="/dashboard/qr-codes"
-                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] transition-all text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm"
+                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm"
                                 >
                                     <QrCode size={24} className="text-[var(--dash-secondary-color)]" />
                                     New QR Code
