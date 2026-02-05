@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import LoadingAtom from '@/components/common/LoadingAtom';
+import '../../Home.css';
 
 export default function AuthFailurePage() {
     const router = useRouter();
@@ -9,16 +11,13 @@ export default function AuthFailurePage() {
     useEffect(() => {
         const timer = setTimeout(() => {
             router.push('/');
-        }, 1000); // Small delay to show the message
+        }, 3000); // 3 seconds to show the error
         return () => clearTimeout(timer);
     }, [router]);
 
     return (
-        <div className="flex min-h-screen items-center justify-center">
-            <div className="rounded-2xl p-8 text-center max-w-md w-full mx-4">
-                <h1 className="text-2xl font-bold text-red-400 mb-4 drop-shadow-md">Authentication Failed</h1>
-                <p className="text-[var(--foreground-muted)]">Redirecting you to login...</p>
-            </div>
-        </div>
+        <main className="main-container flex items-center justify-center bg-[#070b24]">
+            <LoadingAtom title="Auth Failed" subtitle="Redirecting you to login..." />
+        </main>
     );
 }
