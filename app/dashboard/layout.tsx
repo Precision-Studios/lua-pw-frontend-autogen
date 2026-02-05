@@ -23,7 +23,9 @@ export default function DashboardLayout({
                         } w-full flex flex-col`}
                 >
                     <TopNav />
-                    {children}
+                    <main className="flex-1 w-full relative z-10">
+                        {children}
+                    </main>
                     <div className="dash-attribution">
                         <span>Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a></span>
                         <span className="opacity-30">|</span>

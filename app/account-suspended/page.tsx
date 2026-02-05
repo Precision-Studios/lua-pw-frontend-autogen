@@ -6,7 +6,7 @@ import { ShieldAlert } from 'lucide-react';
 export default function AccountSuspended() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-lg max-w-md w-full animate-in fade-in zoom-in duration-300">
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-lg max-w-md w-full animate-in fade-in zoom-in duration-300 relative z-10">
                 <div className="flex justify-center mb-6">
                     <div className="p-4 rounded-full bg-red-500/20 text-red-400">
                         <ShieldAlert className="w-12 h-12" />
@@ -34,7 +34,7 @@ export default function AccountSuspended() {
                 </div>
             </div>
 
-            <div className="mt-8 text-[10px] text-gray-500 uppercase tracking-widest opacity-50">
+            <div className="mt-8 text-[10px] text-gray-500 uppercase tracking-widest opacity-50 z-0">
                 Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Precision Studios</a>
             </div>
         </div>
