@@ -130,186 +130,176 @@ export default function SettingsPage() {
                         <p className="text-[var(--dash-text-muted)] uppercase tracking-widest text-sm">Loading Settings...</p>
                     </div>
                 ) : (
-                    <div className="flex flex-col gap-12 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
-                        {/* Account Information Section */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {/* Account Overview */}
-                            <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <User size={20} className="text-[var(--dash-text-muted)]" />
-                                    <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Account Overview</h2>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+                        {/* Account Overview */}
+                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 flex flex-col">
+                            <div className="flex items-center gap-3 mb-6">
+                                <User size={20} className="text-[var(--dash-text-muted)]" />
+                                <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Account Overview</h2>
+                            </div>
+                            <div className="space-y-4 flex-grow">
+                                <div>
+                                    <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">User ID</label>
+                                    <div className="flex items-center gap-2 p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
+                                        <Hash size={16} className="text-[var(--dash-text-muted)]" />
+                                        <p className="text-sm text-[var(--dash-text-main)] font-mono truncate">{user?.userId}</p>
+                                    </div>
                                 </div>
-                                <div className="space-y-4">
-                                    <div>
-                                        <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">User ID</label>
-                                        <div className="flex items-center gap-2 p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
-                                            <Hash size={16} className="text-[var(--dash-text-muted)]" />
-                                            <p className="text-sm text-[var(--dash-text-main)] font-mono truncate">{user?.userId}</p>
-                                        </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Email Address</label>
+                                    <div className="flex items-center gap-2 p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
+                                        <Mail size={16} className="text-[var(--dash-text-muted)]" />
+                                        <p className="text-sm text-[var(--dash-text-main)] truncate">{user?.emailAddress}</p>
                                     </div>
-                                    <div>
-                                        <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Email Address</label>
-                                        <div className="flex items-center gap-2 p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
-                                            <Mail size={16} className="text-[var(--dash-text-muted)]" />
-                                            <p className="text-sm text-[var(--dash-text-main)] truncate">{user?.emailAddress}</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Member Since</label>
-                                        <div className="flex items-center gap-2 p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
-                                            <Calendar size={16} className="text-[var(--dash-text-muted)]" />
-                                            <p className="text-sm text-[var(--dash-text-main)]">{user?.joinedOn ? formatDate(user.joinedOn) : 'N/A'}</p>
-                                        </div>
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Member Since</label>
+                                    <div className="flex items-center gap-2 p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
+                                        <Calendar size={16} className="text-[var(--dash-text-muted)]" />
+                                        <p className="text-sm text-[var(--dash-text-main)]">{user?.joinedOn ? formatDate(user.joinedOn) : 'N/A'}</p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            {/* Account Status */}
-                            <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <Shield size={20} className="text-[var(--dash-text-muted)]" />
-                                    <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Account Status</h2>
+                        {/* Account Status */}
+                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 flex flex-col">
+                            <div className="flex items-center gap-3 mb-6">
+                                <Shield size={20} className="text-[var(--dash-text-muted)]" />
+                                <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Account Status</h2>
+                            </div>
+                            <div className="space-y-4 flex-grow">
+                                <div>
+                                    <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Account Tier</label>
+                                    <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
+                                        <p className="text-sm text-[var(--dash-text-main)] font-bold">{user?.userTier !== undefined ? getTierName(user.userTier) : 'N/A'}</p>
+                                    </div>
                                 </div>
-                                <div className="space-y-4">
-                                    <div>
-                                        <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Account Tier</label>
-                                        <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
-                                            <p className="text-sm text-[var(--dash-text-main)] font-bold">{user?.userTier !== undefined ? getTierName(user.userTier) : 'N/A'}</p>
+                                <div>
+                                    <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Account Status</label>
+                                    <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
+                                        <div className="flex items-center gap-2">
+                                            <div className={`w-2 h-2 rounded-full ${user?.active ? 'bg-green-400' : 'bg-red-400'}`}></div>
+                                            <p className="text-sm text-[var(--dash-text-main)]">{user?.active ? 'Active' : 'Inactive'}</p>
                                         </div>
                                     </div>
-                                    <div>
-                                        <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Account Status</label>
-                                        <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
-                                            <div className="flex items-center gap-2">
-                                                <div className={`w-2 h-2 rounded-full ${user?.active ? 'bg-green-400' : 'bg-red-400'}`}></div>
-                                                <p className="text-sm text-[var(--dash-text-main)]">{user?.active ? 'Active' : 'Inactive'}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Initial Setup</label>
-                                        <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
-                                            <div className="flex items-center gap-2">
-                                                <div className={`w-2 h-2 rounded-full ${user?.setupComplete ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
-                                                <p className="text-sm text-[var(--dash-text-main)]">{user?.setupComplete ? 'Complete' : 'Pending'}</p>
-                                            </div>
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Initial Setup</label>
+                                    <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
+                                        <div className="flex items-center gap-2">
+                                            <div className={`w-2 h-2 rounded-full ${user?.setupComplete ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
+                                            <p className="text-sm text-[var(--dash-text-main)]">{user?.setupComplete ? 'Complete' : 'Pending'}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Password Update and Profile Actions */}
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                            {/* Password Update Section */}
-                            <div className="lg:col-span-8">
-                                <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <KeyRound size={20} className="text-[var(--dash-text-muted)]" />
-                                        <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Update Password</h2>
-                                    </div>
-
-                                    <form onSubmit={handlePasswordUpdate} className="space-y-6">
-                                        <div className="space-y-4">
-                                            <div>
-                                                <label htmlFor="newPassword" className="block text-sm font-medium text-[var(--dash-text-muted)] mb-2 uppercase tracking-wider">
-                                                    New Password
-                                                </label>
-                                                <div className="relative">
-                                                    <input
-                                                        id="newPassword"
-                                                        type={showNewPassword ? 'text' : 'password'}
-                                                        value={newPassword}
-                                                        onChange={(e) => setNewPassword(e.target.value)}
-                                                        className="w-full px-4 py-3.5 rounded-xl text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--dash-border-light)] bg-[var(--dash-input-bg)] border border-[var(--dash-input-border)]"
-                                                        placeholder="Enter new password"
-                                                        minLength={12}
-                                                        maxLength={16}
-                                                        required
-                                                    />
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setShowNewPassword(!showNewPassword)}
-                                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] transition-colors"
-                                                    >
-                                                        {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                                    </button>
-                                                </div>
-                                                <p className="text-[10px] text-[var(--dash-text-muted)] mt-2 uppercase tracking-widest">12-16 characters required</p>
-                                            </div>
-
-                                            <div>
-                                                <label htmlFor="confirmPassword" className="block text-sm font-medium text-[var(--dash-text-muted)] mb-2 uppercase tracking-wider">
-                                                    Confirm Password
-                                                </label>
-                                                <div className="relative">
-                                                    <input
-                                                        id="confirmPassword"
-                                                        type={showConfirmPassword ? 'text' : 'password'}
-                                                        value={confirmPassword}
-                                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                                        className="w-full px-4 py-3.5 rounded-xl text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--dash-border-light)] bg-[var(--dash-input-bg)] border border-[var(--dash-input-border)]"
-                                                        placeholder="Confirm new password"
-                                                        minLength={12}
-                                                        maxLength={16}
-                                                        required
-                                                    />
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                                                    >
-                                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {error && (
-                                            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 animate-in fade-in slide-in-from-top-2">
-                                                <p className="text-sm text-red-400 font-medium">{error}</p>
-                                            </div>
-                                        )}
-
-                                        <button
-                                            type="submit"
-                                            disabled={isSubmitting}
-                                            className="w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 uppercase tracking-[0.2em] text-xs"
-                                            style={{
-                                                background: 'var(--dash-secondary-color)',
-                                                color: '#ffffff',
-                                            }}
-                                        >
-                                            {isSubmitting ? 'Updating...' : 'Save New Password'}
-                                        </button>
-                                    </form>
-                                </div>
+                        {/* Password Update Section */}
+                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 flex flex-col">
+                            <div className="flex items-center gap-3 mb-6">
+                                <KeyRound size={20} className="text-[var(--dash-text-muted)]" />
+                                <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Update Password</h2>
                             </div>
 
-                            {/* Profile Actions */}
-                            <div className="lg:col-span-4">
-                                <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 h-full flex flex-col">
-                                    <div className="flex items-center justify-center mb-6">
-                                        <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] shadow-xl">
-                                            <User size={40} />
+                            <form onSubmit={handlePasswordUpdate} className="space-y-6 flex flex-col flex-grow">
+                                <div className="space-y-4 flex-grow">
+                                    <div>
+                                        <label htmlFor="newPassword" className="block text-sm font-medium text-[var(--dash-text-muted)] mb-2 uppercase tracking-wider">
+                                            New Password
+                                        </label>
+                                        <div className="relative">
+                                            <input
+                                                id="newPassword"
+                                                type={showNewPassword ? 'text' : 'password'}
+                                                value={newPassword}
+                                                onChange={(e) => setNewPassword(e.target.value)}
+                                                className="w-full px-4 py-3.5 rounded-xl text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--dash-border-light)] bg-[var(--dash-input-bg)] border border-[var(--dash-input-border)]"
+                                                placeholder="Enter new password"
+                                                minLength={12}
+                                                maxLength={16}
+                                                required
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowNewPassword(!showNewPassword)}
+                                                className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] transition-colors"
+                                            >
+                                                {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div className="flex flex-col items-center mb-6">
-                                        <h2 className="text-xl font-bold text-[var(--dash-text-main)] truncate max-w-full text-center">
-                                            {user?.emailAddress?.split('@')[0]}
-                                        </h2>
-                                        <p className="text-[var(--dash-text-muted)] text-sm font-mono truncate max-w-full text-center">{user?.emailAddress}</p>
+                                        <p className="text-[10px] text-[var(--dash-text-muted)] mt-2 uppercase tracking-widest">12-16 characters required</p>
                                     </div>
 
-                                    <button
-                                        onClick={handleLogout}
-                                        className="w-full group flex items-center justify-center gap-3 py-4 rounded-xl bg-[var(--dash-bg-subtle)] hover:bg-[var(--dash-sidebar-item-hover-bg)] text-[var(--dash-text-main)] transition-all duration-300 border border-[var(--dash-border-light)] uppercase tracking-[0.2em] text-xs font-bold mt-auto"
-                                    >
-                                        <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
-                                        <span>Sign Out</span>
-                                    </button>
+                                    <div>
+                                        <label htmlFor="confirmPassword" className="block text-sm font-medium text-[var(--dash-text-muted)] mb-2 uppercase tracking-wider">
+                                            Confirm Password
+                                        </label>
+                                        <div className="relative">
+                                            <input
+                                                id="confirmPassword"
+                                                type={showConfirmPassword ? 'text' : 'password'}
+                                                value={confirmPassword}
+                                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                                className="w-full px-4 py-3.5 rounded-xl text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--dash-border-light)] bg-[var(--dash-input-bg)] border border-[var(--dash-input-border)]"
+                                                placeholder="Confirm new password"
+                                                minLength={12}
+                                                maxLength={16}
+                                                required
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                                            >
+                                                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {error && (
+                                        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 animate-in fade-in slide-in-from-top-2">
+                                            <p className="text-sm text-red-400 font-medium">{error}</p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 uppercase tracking-[0.2em] text-xs mt-auto"
+                                    style={{
+                                        background: 'var(--dash-secondary-color)',
+                                        color: '#ffffff',
+                                    }}
+                                >
+                                    {isSubmitting ? 'Updating...' : 'Save New Password'}
+                                </button>
+                            </form>
+                        </div>
+
+                        {/* Profile Actions */}
+                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 flex flex-col h-full">
+                            <div className="flex items-center justify-center mb-6">
+                                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] shadow-xl">
+                                    <User size={40} />
                                 </div>
                             </div>
+                            <div className="flex flex-col items-center mb-6">
+                                <h2 className="text-xl font-bold text-[var(--dash-text-main)] truncate max-w-full text-center">
+                                    {user?.emailAddress?.split('@')[0]}
+                                </h2>
+                                <p className="text-[var(--dash-text-muted)] text-sm font-mono truncate max-w-full text-center">{user?.emailAddress}</p>
+                            </div>
+
+                            <button
+                                onClick={handleLogout}
+                                className="w-full group flex items-center justify-center gap-3 py-4 rounded-xl bg-[var(--dash-bg-subtle)] hover:bg-[var(--dash-sidebar-item-hover-bg)] text-[var(--dash-text-main)] transition-all duration-300 border border-[var(--dash-border-light)] uppercase tracking-[0.2em] text-xs font-bold mt-auto"
+                            >
+                                <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
+                                <span>Sign Out</span>
+                            </button>
                         </div>
                     </div>
                 )}

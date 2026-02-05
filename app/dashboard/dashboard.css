@@ -19,8 +19,8 @@
     --dash-accent-color: #06b6d4;
     /* Cyan-500 equivalent */
 
-    --dash-bg-main: hsl(206, 100%, 12%);
-    --dash-bg-subtle: hsl(206, 100%, 12%);
+    --dash-bg-main: hsla(0, 0%, 0%, 0.25);
+    --dash-bg-subtle: hsla(0, 0%, 0%, 0.25);
 
     --dash-text-main: #ffffff;
     --dash-text-muted: rgba(255, 255, 255, 0.6);
