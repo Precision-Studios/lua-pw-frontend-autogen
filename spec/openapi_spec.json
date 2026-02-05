@@ -217,14 +217,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RedirectView"
-                                }
-                            }
-                        }
+                        "description": "OK"
                     }
                 }
             }
@@ -354,6 +347,66 @@
                                     "items": {
                                         "$ref": "#/components/schemas/ShortenResponse"
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/urls/get_long_url": {
+            "get": {
+                "tags": [
+                    "url-controller"
+                ],
+                "operationId": "getLongUrl",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExpansionRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExpansionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/analytics/{id}/countries": {
+            "get": {
+                "tags": [
+                    "analytics-controller"
+                ],
+                "operationId": "loginUser_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLoginRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserLoginResponse"
                                 }
                             }
                         }
@@ -501,6 +554,29 @@
                 }
             },
             "UserRefreshTokenResponse": {},
+            "UserLoginRequest": {
+                "type": "object",
+                "properties": {
+                    "idOrEmailIdentifier": {
+                        "type": "string"
+                    },
+                    "userPassword": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "idOrEmailIdentifier",
+                    "userPassword"
+                ]
+            },
+            "UserLoginResponse": {
+                "type": "object",
+                "properties": {
+                    "secureUserResponse": {
+                        "$ref": "#/components/schemas/SecureUserResponse"
+                    }
+                }
+            },
             "ApplicationContext": {
                 "type": "object",
                 "properties": {
@@ -511,12 +587,12 @@
                     "displayName": {
                         "type": "string"
                     },
-                    "applicationName": {
-                        "type": "string"
-                    },
                     "startupDate": {
                         "type": "integer",
                         "format": "int64"
+                    },
+                    "applicationName": {
+                        "type": "string"
                     },
                     "autowireCapableBeanFactory": {
                         "$ref": "#/components/schemas/AutowireCapableBeanFactory"
@@ -743,13 +819,13 @@
             "Environment": {
                 "type": "object",
                 "properties": {
-                    "defaultProfiles": {
+                    "activeProfiles": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
                     },
-                    "activeProfiles": {
+                    "defaultProfiles": {
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -870,19 +946,19 @@
                     "error": {
                         "type": "boolean"
                     },
-                    "is1xxInformational": {
-                        "type": "boolean"
-                    },
                     "is2xxSuccessful": {
                         "type": "boolean"
                     },
-                    "is4xxClientError": {
+                    "is3xxRedirection": {
+                        "type": "boolean"
+                    },
+                    "is1xxInformational": {
                         "type": "boolean"
                     },
                     "is5xxServerError": {
                         "type": "boolean"
                     },
-                    "is3xxRedirection": {
+                    "is4xxClientError": {
                         "type": "boolean"
                     }
                 }
@@ -913,20 +989,14 @@
                     "defaultContentType": {
                         "type": "string"
                     },
-                    "urlPatterns": {
+                    "isXml": {
+                        "type": "string"
+                    },
+                    "includePreludes": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
-                    },
-                    "errorOnUndeclaredNamespace": {
-                        "type": "string"
-                    },
-                    "trimDirectiveWhitespaces": {
-                        "type": "string"
-                    },
-                    "deferredSyntaxAllowedAsLiteral": {
-                        "type": "string"
                     },
                     "includeCodas": {
                         "type": "array",
@@ -937,22 +1007,28 @@
                     "errorOnELNotFound": {
                         "type": "string"
                     },
-                    "elIgnored": {
+                    "scriptingInvalid": {
                         "type": "string"
                     },
                     "pageEncoding": {
                         "type": "string"
                     },
-                    "scriptingInvalid": {
+                    "elIgnored": {
                         "type": "string"
                     },
-                    "includePreludes": {
+                    "urlPatterns": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
                     },
-                    "isXml": {
+                    "deferredSyntaxAllowedAsLiteral": {
+                        "type": "string"
+                    },
+                    "trimDirectiveWhitespaces": {
+                        "type": "string"
+                    },
+                    "errorOnUndeclaredNamespace": {
                         "type": "string"
                     }
                 }
@@ -1038,25 +1114,25 @@
                             "type": "string"
                         }
                     },
-                    "propagateQueryProperties": {
-                        "type": "boolean"
-                    },
                     "redirectView": {
                         "type": "boolean"
                     },
-                    "attributesCSV": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
-                    "attributesMap": {
-                        "type": "object",
-                        "additionalProperties": {}
+                    "propagateQueryProperties": {
+                        "type": "boolean"
                     },
                     "attributes": {
                         "type": "object",
                         "additionalProperties": {
                             "type": "string"
                         },
+                        "writeOnly": true
+                    },
+                    "attributesMap": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    },
+                    "attributesCSV": {
+                        "type": "string",
                         "writeOnly": true
                     }
                 }
@@ -1172,12 +1248,45 @@
                     "contextPath": {
                         "type": "string"
                     },
-                    "initParameterNames": {},
-                    "sessionCookieConfig": {
-                        "$ref": "#/components/schemas/SessionCookieConfig"
+                    "servletRegistrations": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ServletRegistration"
+                        }
                     },
                     "virtualServerName": {
                         "type": "string"
+                    },
+                    "sessionCookieConfig": {
+                        "$ref": "#/components/schemas/SessionCookieConfig"
+                    },
+                    "initParameterNames": {},
+                    "filterRegistrations": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/FilterRegistration"
+                        }
+                    },
+                    "effectiveMajorVersion": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "sessionTimeout": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "jspConfigDescriptor": {
+                        "$ref": "#/components/schemas/JspConfigDescriptor"
+                    },
+                    "servletContextName": {
+                        "type": "string"
+                    },
+                    "serverInfo": {
+                        "type": "string"
+                    },
+                    "effectiveMinorVersion": {
+                        "type": "integer",
+                        "format": "int32"
                     },
                     "sessionTrackingModes": {
                         "type": "array",
@@ -1192,24 +1301,11 @@
                         "uniqueItems": true,
                         "writeOnly": true
                     },
-                    "sessionTimeout": {
-                        "type": "integer",
-                        "format": "int32"
+                    "requestCharacterEncoding": {
+                        "type": "string"
                     },
                     "responseCharacterEncoding": {
                         "type": "string"
-                    },
-                    "effectiveSessionTrackingModes": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "COOKIE",
-                                "URL",
-                                "SSL"
-                            ]
-                        },
-                        "uniqueItems": true
                     },
                     "defaultSessionTrackingModes": {
                         "type": "array",
@@ -1223,37 +1319,17 @@
                         },
                         "uniqueItems": true
                     },
-                    "requestCharacterEncoding": {
-                        "type": "string"
-                    },
-                    "effectiveMinorVersion": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "effectiveMajorVersion": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "filterRegistrations": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/FilterRegistration"
-                        }
-                    },
-                    "serverInfo": {
-                        "type": "string"
-                    },
-                    "jspConfigDescriptor": {
-                        "$ref": "#/components/schemas/JspConfigDescriptor"
-                    },
-                    "servletContextName": {
-                        "type": "string"
-                    },
-                    "servletRegistrations": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/ServletRegistration"
-                        }
+                    "effectiveSessionTrackingModes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "COOKIE",
+                                "URL",
+                                "SSL"
+                            ]
+                        },
+                        "uniqueItems": true
                     }
                 }
             },
@@ -1302,18 +1378,18 @@
                         "type": "string",
                         "deprecated": true
                     },
-                    "secure": {
-                        "type": "boolean"
+                    "domain": {
+                        "type": "string"
                     },
                     "httpOnly": {
+                        "type": "boolean"
+                    },
+                    "secure": {
                         "type": "boolean"
                     },
                     "maxAge": {
                         "type": "integer",
                         "format": "int32"
-                    },
-                    "domain": {
-                        "type": "string"
                     }
                 }
             },
@@ -1328,26 +1404,25 @@
                     }
                 }
             },
-            "UserLoginRequest": {
+            "ExpansionRequest": {
                 "type": "object",
                 "properties": {
-                    "idOrEmailIdentifier": {
+                    "shortCode": {
                         "type": "string"
                     },
-                    "userPassword": {
-                        "type": "string"
+                    "fromQr": {
+                        "type": "boolean"
+                    },
+                    "recordAnalytics": {
+                        "type": "boolean"
                     }
-                },
-                "required": [
-                    "idOrEmailIdentifier",
-                    "userPassword"
-                ]
+                }
             },
-            "UserLoginResponse": {
+            "ExpansionResponse": {
                 "type": "object",
                 "properties": {
-                    "secureUserResponse": {
-                        "$ref": "#/components/schemas/SecureUserResponse"
+                    "longUrl": {
+                        "type": "string"
                     }
                 }
             }

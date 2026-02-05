@@ -62,9 +62,11 @@
 
     /* Layout */
     background-color: var(--dash-bg-main);
-    background-image:
-        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+    background-image: url('/gustavo-zambelli--JMK4lyhnGM-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--dash-text-main);
 
     /* Local Scoped Overrides for Global Variables */
@@ -140,3 +142,36 @@
 }
 
 /* Sidebar Custom Overrides if needed, though we will try to use utility classes in the component */
+
+/* Attribution styling */
+.dash-attribution {
+    position: fixed;
+    bottom: 1rem;
+    right: 1.5rem;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    z-index: 40;
+    transition: color 0.3s ease;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+}
+
+.dash-attribution a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.dash-attribution a:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .dash-attribution {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.6rem;
+    }
+}
