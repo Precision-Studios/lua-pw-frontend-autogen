@@ -20,6 +20,21 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
     let longUrl: string | null = null;
     let error: string | null = null;
 
+    console.log(`[RedirectPage] Resolving shortCode: "${shortCode}"`);
+
+    // Skip resolution for common non-link paths that might fall through
+    const reservedPaths = ['404', 'favicon.ico', 'robots.txt', 'sitemap.xml'];
+    if (reservedPaths.includes(shortCode)) {
+        console.log(`[RedirectPage] Skipping reserved path: ${shortCode}`);
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen bg-[#0a0a0a] text-white p-4">
+                <h1 className="text-4xl font-bold text-red-500">404</h1>
+                <p className="text-xl text-gray-400">Page not found</p>
+                <a href="/" className="mt-4 px-6 py-2 bg-blue-600 rounded-lg">Go Home</a>
+            </div>
+        );
+    }
+
     try {
         const response = await urlApi.getLongUrl({
             shortCode,
@@ -33,7 +48,7 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
             error = 'Invalid long URL received from server.';
         }
     } catch (err: any) {
-        console.error('Redirection error:', err);
+        console.error(`[RedirectPage] Error resolving "${shortCode}":`, err.message);
         if (err.response?.status === 404) {
             error = 'The link you are looking for does not exist.';
         } else {
