@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { authApi, userApi } from '@/lib/api';
 import LogoSection from '@/components/layout/LogoSection';
 import LoadingAtom from '@/components/common/LoadingAtom';
-import { Lock, ArrowRight, ShieldCheck, LogOut } from 'lucide-react';
+import { Lock, ArrowRight, ShieldCheck, LogOut, Check, X } from 'lucide-react';
 import './SetupPassword.css';
 
 export default function SetupPassword() {
@@ -35,12 +35,22 @@ export default function SetupPassword() {
         checkStatus();
     }, [router]);
 
+    const rules = [
+        { id: 'length', label: 'At least 12 characters', isValid: password.length >= 12 },
+        { id: 'uppercase', label: 'At least one uppercase letter', isValid: /[A-Z]/.test(password) },
+        { id: 'lowercase', label: 'At least one lowercase letter', isValid: /[a-z]/.test(password) },
+        { id: 'number', label: 'At least one number', isValid: /[0-9]/.test(password) },
+        { id: 'special', label: 'At least one special character', isValid: /[^A-Za-z0-9]/.test(password) },
+    ];
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
 
-        if (password.length < 12) {
-            setError('Password must be at least 12 characters long');
+        // Validate all rules
+        const firstInvalidRule = rules.find(rule => !rule.isValid);
+        if (firstInvalidRule) {
+            setError(`Password does not meet requirements: ${firstInvalidRule.label}`);
             return;
         }
 
@@ -52,8 +62,7 @@ export default function SetupPassword() {
         setLoading(true);
 
         try {
-            // Use authApi.updateUser (which we should double check exists in lib/api or add it)
-            // Checking lib/api.ts - we added updateUser in step 55
+            // Use authApi.updateUser
             await authApi.updateUser({
                 newPassword: password
             });
@@ -139,6 +148,28 @@ export default function SetupPassword() {
                                     aria-invalid={error?.includes('match') ? 'true' : 'false'}
                                     aria-describedby={error ? "setup-error" : undefined}
                                 />
+                            </div>
+                        </div>
+
+                        {/* Password Rules */}
+                        <div className="password-rules-container">
+                            <p className="rules-label">Password Requirements:</p>
+                            <div className="rules-list">
+                                {rules.map((rule) => (
+                                    <div
+                                        key={rule.id}
+                                        className={`rule-item ${rule.isValid ? 'valid' : 'invalid'}`}
+                                    >
+                                        <div className="rule-icon-wrapper">
+                                            {rule.isValid ? (
+                                                <Check size={12} className="rule-icon check" />
+                                            ) : (
+                                                <div className="rule-icon-placeholder" />
+                                            )}
+                                        </div>
+                                        <span className="rule-text">{rule.label}</span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
