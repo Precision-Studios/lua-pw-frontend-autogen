@@ -12,9 +12,11 @@ interface UrlData {
 
 interface UrlTableProps {
     urls: UrlData[];
+    title?: string;
+    totalCount?: number;
 }
 
-const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
+const UrlTable: React.FC<UrlTableProps> = ({ urls, title, totalCount }) => {
     const [selectedUrl, setSelectedUrl] = useState<UrlData | null>(null);
     const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
 
@@ -54,7 +56,17 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
     }
 
     return (
-        <div className="w-full overflow-hidden">
+        <div className="w-full bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 overflow-hidden">
+            {(title || totalCount !== undefined) && (
+                <div className="mb-8 flex items-baseline justify-between border-b border-[var(--dash-border-light)] pb-6 mt-2">
+                    <h2 className="text-2xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">{title || 'Your Links'}</h2>
+                    {totalCount !== undefined && (
+                        <span className="text-sm text-[var(--dash-text-muted)] font-mono">
+                            {totalCount} TOTAL
+                        </span>
+                    )}
+                </div>
+            )}
             <table className="w-full text-left border-collapse">
                 <thead>
                     <tr className="border-b border-[var(--dash-border-light)]">
@@ -65,8 +77,8 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                 </thead>
                 <tbody className="divide-y divide-[var(--dash-border-light)]">
                     {urls.map((url) => (
-                        <tr key={url.shortUrl} className="group hover:bg-[var(--dash-bg-subtle)]">
-                            <td className="py-6 pr-8 max-w-[200px] xl:max-w-[300px]">
+                        <tr key={url.shortUrl} className="group hover:bg-[var(--dash-bg-subtle)]/50 transition-colors">
+                            <td className="py-6 pr-8 max-w-[200px] xl:max-w-[350px]">
                                 <div className="truncate text-[var(--dash-text-muted)] font-light text-sm" title={url.longUrl}>
                                     {url.longUrl}
                                 </div>
@@ -76,7 +88,7 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                                     href={getFullUrl(url.shortUrl)}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="font-medium text-[var(--dash-text-main)] hover:underline decoration-[var(--dash-text-muted)] underline-offset-4 flex items-center gap-2"
+                                    className="font-medium text-[var(--dash-text-main)] hover:text-[var(--dash-primary-color)] transition-colors flex items-center gap-2"
                                 >
                                     {getFullUrl(url.shortUrl).replace(/^https?:\/\//, '')}
                                     <ExternalLink size={10} className="opacity-30" />
@@ -86,18 +98,18 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                                 <div className="flex items-center justify-end gap-1">
                                     <button
                                         onClick={() => handleCopy(url.shortUrl)}
-                                        className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--dash-bg-subtle)] text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)]"
+                                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[var(--dash-sidebar-item-hover-bg)] text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] transition-all"
                                         title="Copy Link"
                                     >
                                         {copiedUrl === url.shortUrl ? (
-                                            <Check size={14} className="text-[var(--dash-text-main)]" />
+                                            <Check size={14} className="text-[var(--dash-success)]" />
                                         ) : (
                                             <Copy size={14} />
                                         )}
                                     </button>
                                     <button
                                         onClick={() => setSelectedUrl(url)}
-                                        className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--dash-bg-subtle)] text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)]"
+                                        className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[var(--dash-sidebar-item-hover-bg)] text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] transition-all"
                                         title="QR Code"
                                     >
                                         <QrCode size={14} />

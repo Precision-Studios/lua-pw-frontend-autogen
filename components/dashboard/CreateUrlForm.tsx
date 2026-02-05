@@ -32,10 +32,6 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
 
     return (
         <div className="w-full">
-            <h2 className="text-[10px] text-[var(--dash-text-muted)] uppercase tracking-[0.2em] font-medium mb-4 ml-1">
-                Create New Link
-            </h2>
-
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <div className="relative group">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--dash-text-muted)] group-focus-within:text-[var(--dash-text-main)]">

@@ -55,24 +55,18 @@ export default function LinksPage() {
                         <LoadingAtom />
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                         {/* Left Column: Create Form */}
-                        <div className="lg:col-span-12 space-y-8">
-                            <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
-                                <h2 className="text-2xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight mb-6">Create New Link</h2>
+                        <div className="lg:col-span-4">
+                            <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 sticky top-24">
+                                <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight mb-6">Create New Link</h2>
                                 <CreateUrlForm onUrlCreated={handleUrlCreated} />
                             </div>
                         </div>
 
-                        {/* Bottom/Right Column: List */}
-                        <div className="lg:col-span-12">
-                            <div className="mb-6 flex items-baseline justify-between border-b border-[var(--dash-border-light)] pb-4">
-                                <h2 className="text-2xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Your Links</h2>
-                                <span className="text-sm text-[var(--dash-text-muted)] font-mono">
-                                    {urls.length} TOTAL
-                                </span>
-                            </div>
-                            <UrlTable urls={urls} />
+                        {/* Right Column: List */}
+                        <div className="lg:col-span-8">
+                            <UrlTable urls={urls} title="Your Links" totalCount={urls.length} />
                         </div>
                     </div>
                 )}
