@@ -18,12 +18,22 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
     const [selectedUrl, setSelectedUrl] = useState<UrlData | null>(null);
     const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
 
-    const getFullUrl = (shortUrl: string) => {
-        if (shortUrl.startsWith('http')) return shortUrl;
-        if (typeof window !== 'undefined') {
-            return `${window.location.origin}/${shortUrl}`;
+    const getFullUrl = (shortUrl: string, isQr: boolean = false) => {
+        let url = shortUrl;
+        if (!url.startsWith('http')) {
+            if (typeof window !== 'undefined') {
+                url = `${window.location.origin}/${shortUrl}`;
+            } else {
+                url = `/${shortUrl}`;
+            }
         }
-        return `/${shortUrl}`;
+
+        if (isQr) {
+            const separator = url.includes('?') ? '&' : '?';
+            url = `${url}${separator}qr=true`;
+        }
+
+        return url;
     };
 
     const handleCopy = (shortUrl: string) => {
@@ -103,7 +113,7 @@ const UrlTable: React.FC<UrlTableProps> = ({ urls }) => {
                 <QrCodeModal
                     isOpen={!!selectedUrl}
                     onClose={() => setSelectedUrl(null)}
-                    shortUrl={getFullUrl(selectedUrl.shortUrl)}
+                    shortUrl={getFullUrl(selectedUrl.shortUrl, true)}
                     isQRActivated={selectedUrl.isQRActivated}
                 />
             )}
