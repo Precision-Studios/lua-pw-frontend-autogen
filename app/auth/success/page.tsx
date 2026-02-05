@@ -3,10 +3,13 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { authApi, userApi } from '@/lib/api';
+import LoadingAtom from '@/components/common/LoadingAtom';
+import '../../Home.css';
 
 export default function AuthSuccessPage() {
     const router = useRouter();
     const [status, setStatus] = useState<string>('Initializing session...');
+    const [subStatus, setSubStatus] = useState<string>('Connecting to LUA Core');
 
     useEffect(() => {
         const initSession = async () => {
@@ -14,6 +17,7 @@ export default function AuthSuccessPage() {
                 // 1. Refresh Token Exchange
                 await authApi.refresh();
                 setStatus('Fetching user details...');
+                setSubStatus('Retrieving profile from secure vault');
 
                 // 2. Fetch User Details
                 const response = await userApi.details();
@@ -21,6 +25,7 @@ export default function AuthSuccessPage() {
 
                 // 3. Routing Logic
                 setStatus('Redirecting...');
+                setSubStatus('Syncing your dashboard');
                 if (!user.active) {
                     router.push('/account-suspended');
                 } else if (!user.setupComplete) {
@@ -30,20 +35,23 @@ export default function AuthSuccessPage() {
                 }
             } catch (err: any) {
                 console.error('Auth initialization failed:', err);
-                let errorMessage = 'Authentication failed. Redirecting to login...';
+                let errorMessage = 'Authentication failed';
+                let subError = 'Redirecting to login...';
 
                 if (err.response) {
-                    errorMessage = `Auth Failed: ${err.response.status} ${err.response.statusText}`;
+                    errorMessage = `Auth Failed: ${err.response.status}`;
+                    subError = err.response.statusText;
                     if (err.response.data && typeof err.response.data === 'string') {
-                        errorMessage += ` - ${err.response.data}`;
+                        subError = err.response.data;
                     } else if (err.response.data && err.response.data.message) {
-                        errorMessage += ` - ${err.response.data.message}`;
+                        subError = err.response.data.message;
                     }
                 } else if (err.message) {
-                    errorMessage = `Error: ${err.message}`;
+                    subError = `Error: ${err.message}`;
                 }
 
                 setStatus(errorMessage);
+                setSubStatus(subError);
                 // Increase timeout to allow reading the error
                 setTimeout(() => router.push('/'), 5000);
             }
@@ -53,13 +61,8 @@ export default function AuthSuccessPage() {
     }, [router]);
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center">
-            {/* Background is handled by globals.css on body, but we can enforce or add overlay if needed. 
-                Using the glass effect for the status card. */}
-            <div className="glass flex flex-col items-center space-y-6 rounded-2xl p-8 backdrop-blur-xl">
-                <div className="h-12 w-12 animate-spin rounded-full border-4 border-[var(--secondary)] border-t-transparent shadow-[0_0_15px_var(--glow)]"></div>
-                <p className="text-[var(--foreground)] text-lg font-medium tracking-wide animate-pulse">{status}</p>
-            </div>
-        </div>
+        <main className="main-container flex items-center justify-center bg-[#070b24]">
+            <LoadingAtom title={status} subtitle={subStatus} />
+        </main>
     );
 }

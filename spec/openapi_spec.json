@@ -217,14 +217,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RedirectView"
-                                }
-                            }
-                        }
+                        "description": "OK"
                     }
                 }
             }
@@ -354,6 +347,66 @@
                                     "items": {
                                         "$ref": "#/components/schemas/ShortenResponse"
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/urls/get_long_url": {
+            "get": {
+                "tags": [
+                    "url-controller"
+                ],
+                "operationId": "getLongUrl",
+                "parameters": [
+                    {
+                        "name": "expansionRequest",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/ExpansionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExpansionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/analytics/{id}/countries": {
+            "get": {
+                "tags": [
+                    "analytics-controller"
+                ],
+                "operationId": "loginUser_1",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLoginRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserLoginResponse"
                                 }
                             }
                         }
@@ -501,6 +554,29 @@
                 }
             },
             "UserRefreshTokenResponse": {},
+            "UserLoginRequest": {
+                "type": "object",
+                "properties": {
+                    "idOrEmailIdentifier": {
+                        "type": "string"
+                    },
+                    "userPassword": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "idOrEmailIdentifier",
+                    "userPassword"
+                ]
+            },
+            "UserLoginResponse": {
+                "type": "object",
+                "properties": {
+                    "secureUserResponse": {
+                        "$ref": "#/components/schemas/SecureUserResponse"
+                    }
+                }
+            },
             "ApplicationContext": {
                 "type": "object",
                 "properties": {
@@ -524,15 +600,15 @@
                     "environment": {
                         "$ref": "#/components/schemas/Environment"
                     },
-                    "beanDefinitionCount": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
                     "beanDefinitionNames": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "beanDefinitionCount": {
+                        "type": "integer",
+                        "format": "int32"
                     },
                     "parentBeanFactory": {
                         "$ref": "#/components/schemas/BeanFactory"
@@ -760,13 +836,13 @@
             "FilterRegistration": {
                 "type": "object",
                 "properties": {
-                    "servletNameMappings": {
+                    "urlPatternMappings": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
                     },
-                    "urlPatternMappings": {
+                    "servletNameMappings": {
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -870,19 +946,19 @@
                     "error": {
                         "type": "boolean"
                     },
-                    "is1xxInformational": {
-                        "type": "boolean"
-                    },
-                    "is2xxSuccessful": {
-                        "type": "boolean"
-                    },
                     "is4xxClientError": {
                         "type": "boolean"
                     },
                     "is5xxServerError": {
                         "type": "boolean"
                     },
+                    "is2xxSuccessful": {
+                        "type": "boolean"
+                    },
                     "is3xxRedirection": {
+                        "type": "boolean"
+                    },
+                    "is1xxInformational": {
                         "type": "boolean"
                     }
                 }
@@ -890,16 +966,16 @@
             "JspConfigDescriptor": {
                 "type": "object",
                 "properties": {
-                    "taglibs": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TaglibDescriptor"
-                        }
-                    },
                     "jspPropertyGroups": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/JspPropertyGroupDescriptor"
+                        }
+                    },
+                    "taglibs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TaglibDescriptor"
                         }
                     }
                 }
@@ -910,31 +986,7 @@
                     "buffer": {
                         "type": "string"
                     },
-                    "defaultContentType": {
-                        "type": "string"
-                    },
-                    "urlPatterns": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "errorOnUndeclaredNamespace": {
-                        "type": "string"
-                    },
-                    "trimDirectiveWhitespaces": {
-                        "type": "string"
-                    },
-                    "deferredSyntaxAllowedAsLiteral": {
-                        "type": "string"
-                    },
-                    "includeCodas": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "errorOnELNotFound": {
+                    "isXml": {
                         "type": "string"
                     },
                     "elIgnored": {
@@ -946,14 +998,38 @@
                     "scriptingInvalid": {
                         "type": "string"
                     },
+                    "errorOnELNotFound": {
+                        "type": "string"
+                    },
                     "includePreludes": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
                     },
-                    "isXml": {
+                    "includeCodas": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "deferredSyntaxAllowedAsLiteral": {
                         "type": "string"
+                    },
+                    "trimDirectiveWhitespaces": {
+                        "type": "string"
+                    },
+                    "errorOnUndeclaredNamespace": {
+                        "type": "string"
+                    },
+                    "defaultContentType": {
+                        "type": "string"
+                    },
+                    "urlPatterns": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 }
             },
@@ -1038,25 +1114,25 @@
                             "type": "string"
                         }
                     },
-                    "propagateQueryProperties": {
-                        "type": "boolean"
-                    },
                     "redirectView": {
                         "type": "boolean"
                     },
-                    "attributesCSV": {
-                        "type": "string",
-                        "writeOnly": true
-                    },
-                    "attributesMap": {
-                        "type": "object",
-                        "additionalProperties": {}
+                    "propagateQueryProperties": {
+                        "type": "boolean"
                     },
                     "attributes": {
                         "type": "object",
                         "additionalProperties": {
                             "type": "string"
                         },
+                        "writeOnly": true
+                    },
+                    "attributesMap": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    },
+                    "attributesCSV": {
+                        "type": "string",
                         "writeOnly": true
                     }
                 }
@@ -1169,47 +1245,9 @@
                         "format": "int32"
                     },
                     "attributeNames": {},
+                    "initParameterNames": {},
                     "contextPath": {
                         "type": "string"
-                    },
-                    "initParameterNames": {},
-                    "sessionCookieConfig": {
-                        "$ref": "#/components/schemas/SessionCookieConfig"
-                    },
-                    "virtualServerName": {
-                        "type": "string"
-                    },
-                    "sessionTrackingModes": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "COOKIE",
-                                "URL",
-                                "SSL"
-                            ]
-                        },
-                        "uniqueItems": true,
-                        "writeOnly": true
-                    },
-                    "sessionTimeout": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "responseCharacterEncoding": {
-                        "type": "string"
-                    },
-                    "effectiveSessionTrackingModes": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "COOKIE",
-                                "URL",
-                                "SSL"
-                            ]
-                        },
-                        "uniqueItems": true
                     },
                     "defaultSessionTrackingModes": {
                         "type": "array",
@@ -1226,11 +1264,47 @@
                     "requestCharacterEncoding": {
                         "type": "string"
                     },
-                    "effectiveMinorVersion": {
-                        "type": "integer",
-                        "format": "int32"
+                    "effectiveSessionTrackingModes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "COOKIE",
+                                "URL",
+                                "SSL"
+                            ]
+                        },
+                        "uniqueItems": true
                     },
-                    "effectiveMajorVersion": {
+                    "responseCharacterEncoding": {
+                        "type": "string"
+                    },
+                    "virtualServerName": {
+                        "type": "string"
+                    },
+                    "sessionCookieConfig": {
+                        "$ref": "#/components/schemas/SessionCookieConfig"
+                    },
+                    "sessionTrackingModes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "COOKIE",
+                                "URL",
+                                "SSL"
+                            ]
+                        },
+                        "uniqueItems": true,
+                        "writeOnly": true
+                    },
+                    "servletRegistrations": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ServletRegistration"
+                        }
+                    },
+                    "sessionTimeout": {
                         "type": "integer",
                         "format": "int32"
                     },
@@ -1240,20 +1314,22 @@
                             "$ref": "#/components/schemas/FilterRegistration"
                         }
                     },
-                    "serverInfo": {
-                        "type": "string"
-                    },
                     "jspConfigDescriptor": {
                         "$ref": "#/components/schemas/JspConfigDescriptor"
                     },
-                    "servletContextName": {
+                    "effectiveMajorVersion": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "effectiveMinorVersion": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "serverInfo": {
                         "type": "string"
                     },
-                    "servletRegistrations": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/ServletRegistration"
-                        }
+                    "servletContextName": {
+                        "type": "string"
                     }
                 }
             },
@@ -1302,52 +1378,51 @@
                         "type": "string",
                         "deprecated": true
                     },
-                    "secure": {
-                        "type": "boolean"
+                    "domain": {
+                        "type": "string"
                     },
-                    "httpOnly": {
+                    "secure": {
                         "type": "boolean"
                     },
                     "maxAge": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "domain": {
-                        "type": "string"
+                    "httpOnly": {
+                        "type": "boolean"
                     }
                 }
             },
             "TaglibDescriptor": {
                 "type": "object",
                 "properties": {
-                    "taglibLocation": {
+                    "taglibURI": {
                         "type": "string"
                     },
-                    "taglibURI": {
+                    "taglibLocation": {
                         "type": "string"
                     }
                 }
             },
-            "UserLoginRequest": {
+            "ExpansionRequest": {
                 "type": "object",
                 "properties": {
-                    "idOrEmailIdentifier": {
+                    "shortCode": {
                         "type": "string"
                     },
-                    "userPassword": {
-                        "type": "string"
+                    "fromQr": {
+                        "type": "boolean"
+                    },
+                    "recordAnalytics": {
+                        "type": "boolean"
                     }
-                },
-                "required": [
-                    "idOrEmailIdentifier",
-                    "userPassword"
-                ]
+                }
             },
-            "UserLoginResponse": {
+            "ExpansionResponse": {
                 "type": "object",
                 "properties": {
-                    "secureUserResponse": {
-                        "$ref": "#/components/schemas/SecureUserResponse"
+                    "longUrl": {
+                        "type": "string"
                     }
                 }
             }

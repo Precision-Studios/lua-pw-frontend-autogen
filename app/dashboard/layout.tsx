@@ -12,7 +12,7 @@ export default function DashboardLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(true);
 
     return (
         <UserProvider>
@@ -24,6 +24,11 @@ export default function DashboardLayout({
                 >
                     <TopNav />
                     {children}
+                    <div className="dash-attribution">
+                        <span>Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a></span>
+                        <span className="opacity-30">|</span>
+                        <span>Photo by <a href="https://unsplash.com/@kencheungphoto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ken Cheung</a> on <a href="https://unsplash.com/photos/tree-on-body-of-water-near-mountains-KonWFWUaAuk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+                    </div>
                 </div>
             </div>
         </UserProvider>

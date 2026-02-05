@@ -24,7 +24,7 @@ const Toast: React.FC<ToastProps> = ({ message, type, onClose, duration = 3000 }
     return (
         <div className="fixed top-4 right-4 z-[100] animate-in">
             <div
-                className="flex items-center gap-3 px-4 py-3 rounded-lg dash-glass min-w-[300px] max-w-md"
+                className="flex items-center gap-3 px-4 py-3 bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-2xl min-w-[300px] max-w-md"
                 style={{
                     borderLeft: `3px solid var(${type === 'success' ? '--success' : '--error'})`,
                 }}
