@@ -151,7 +151,7 @@
     right: 1.5rem;
     font-size: 0.65rem;
     color: rgba(255, 255, 255, 0.4);
-    z-index: 40;
+    z-index: 0;
     background: rgba(0, 0, 0, 0.3);
     padding: 6px 16px;
     border-radius: 99px;

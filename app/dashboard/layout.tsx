@@ -19,11 +19,13 @@ export default function DashboardLayout({
             <div className="flex min-h-screen dashboard-wrapper">
                 <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
                 <div
-                    className={`flex-1 transition-all duration-500 ease-in-out ${isCollapsed ? 'md:pl-20' : 'md:pl-72'
+                    className={`flex-1 transition-all duration-500 ease-in-out ${isCollapsed ? 'md:pl-32' : 'md:pl-80'
                         } w-full flex flex-col`}
                 >
                     <TopNav />
-                    {children}
+                    <main className="flex-1 w-full relative z-10">
+                        {children}
+                    </main>
                     <div className="dash-attribution">
                         <span>Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a></span>
                         <span className="opacity-30">|</span>
