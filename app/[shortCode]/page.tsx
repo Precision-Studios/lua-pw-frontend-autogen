@@ -54,6 +54,9 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
                         Go to Homepage
                     </a>
                 </div>
+                <div className="absolute bottom-8 text-[10px] text-gray-500 uppercase tracking-widest opacity-50">
+                    Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Precision Studios</a>
+                </div>
             </div>
         );
     }
