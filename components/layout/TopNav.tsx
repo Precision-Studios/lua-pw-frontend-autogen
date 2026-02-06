@@ -5,6 +5,7 @@ import { authApi } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LoadingAtom from '../common/LoadingAtom';
+import Card from '../common/Card';
 
 const TopNav = () => {
     const router = useRouter();
@@ -25,7 +26,9 @@ const TopNav = () => {
         <>
             {isLoggingOut && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070b24]">
-                    <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
+                    <Card active padding="p-5" borderRadius="rounded-xl">
+                        <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
+                    </Card>
                 </div>
             )}
             <nav className="w-full py-6 px-4 md:px-8 flex items-center justify-end z-40">

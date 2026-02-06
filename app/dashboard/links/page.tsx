@@ -53,7 +53,9 @@ export default function LinksPage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-20">
-                        <LoadingAtom />
+                        <Card active padding="p-5" borderRadius="rounded-xl">
+                            <LoadingAtom />
+                        </Card>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

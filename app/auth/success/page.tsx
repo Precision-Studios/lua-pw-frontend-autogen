@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { authApi, userApi } from '@/lib/api';
 import LoadingAtom from '@/components/common/LoadingAtom';
+import Card from '@/components/common/Card';
 import '../../Home.css';
 
 export default function AuthSuccessPage() {
@@ -62,7 +63,9 @@ export default function AuthSuccessPage() {
 
     return (
         <main className="main-container flex items-center justify-center bg-[#070b24]">
-            <LoadingAtom title={status} subtitle={subStatus} />
+            <Card active padding="p-5" borderRadius="rounded-xl">
+                <LoadingAtom title={status} subtitle={subStatus} />
+            </Card>
         </main>
     );
 }

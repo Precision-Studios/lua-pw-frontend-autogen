@@ -30,9 +30,9 @@ const LoadingAtom = ({
                 <svg className="absolute inset-0 w-full h-full overflow-visible" viewBox="0 0 100 100">
                     <defs>
                         <linearGradient id="orbitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="rgba(255,255,255,0.02)" />
-                            <stop offset="50%" stopColor="rgba(255,255,255,0.2)" />
-                            <stop offset="100%" stopColor="rgba(255,255,255,0.02)" />
+                            <stop offset="0%" stopColor="rgba(255,255,255,0.05)" />
+                            <stop offset="50%" stopColor="rgba(255,255,255,0.5)" />
+                            <stop offset="100%" stopColor="rgba(255,255,255,0.05)" />
                         </linearGradient>
                     </defs>
 
@@ -41,14 +41,14 @@ const LoadingAtom = ({
                         cx="50" cy="50" rx="48" ry="18"
                         fill="none"
                         stroke="url(#orbitGradient)"
-                        strokeWidth="0.75"
+                        strokeWidth="2"
                     />
                     {/* Orbit 2 - 60deg */}
                     <ellipse
                         cx="50" cy="50" rx="48" ry="18"
                         fill="none"
                         stroke="url(#orbitGradient)"
-                        strokeWidth="0.75"
+                        strokeWidth="2"
                         transform="rotate(60 50 50)"
                     />
                     {/* Orbit 3 - 120deg */}
@@ -56,12 +56,12 @@ const LoadingAtom = ({
                         cx="50" cy="50" rx="48" ry="18"
                         fill="none"
                         stroke="url(#orbitGradient)"
-                        strokeWidth="0.75"
+                        strokeWidth="2"
                         transform="rotate(120 50 50)"
                     />
 
                     {/* Electron 1 */}
-                    <circle r="2.2" fill="white" className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+                    <circle r="3" fill="white" className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
                         <animateMotion
                             dur="2.5s"
                             repeatCount="indefinite"
@@ -71,7 +71,7 @@ const LoadingAtom = ({
 
                     {/* Electron 2 */}
                     <g transform="rotate(60 50 50)">
-                        <circle r="2.2" fill="white" className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+                        <circle r="3" fill="white" className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
                             <animateMotion
                                 dur="3.2s"
                                 repeatCount="indefinite"
@@ -82,7 +82,7 @@ const LoadingAtom = ({
 
                     {/* Electron 3 */}
                     <g transform="rotate(120 50 50)">
-                        <circle r="2.2" fill="white" className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+                        <circle r="3" fill="white" className="drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
                             <animateMotion
                                 dur="4.1s"
                                 repeatCount="indefinite"
@@ -95,13 +95,13 @@ const LoadingAtom = ({
 
             <div className="flex flex-col items-center gap-3 animate-in fade-in zoom-in duration-1000">
                 <div className="flex items-center gap-2">
-                    <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-white/30" />
-                    <h2 className="text-white text-base font-black uppercase tracking-[0.5em] ml-[0.5em]">
+                    <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-white/50" />
+                    <h2 className="text-white text-xl font-black uppercase tracking-[0.5em] ml-[0.5em]">
                         {title}
                     </h2>
-                    <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-white/30" />
+                    <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-white/50" />
                 </div>
-                <p className="text-white/30 text-[9px] uppercase tracking-[0.4em] font-medium animate-pulse">
+                <p className="text-white/60 text-xs uppercase tracking-[0.4em] font-medium animate-pulse">
                     {subtitle}
                 </p>
             </div>
