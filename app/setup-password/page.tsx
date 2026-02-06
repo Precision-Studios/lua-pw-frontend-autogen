@@ -216,7 +216,9 @@ export default function SetupPassword() {
 
             {isLoggingOut && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070b24]">
-                    <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
+                    <Card active padding="p-5" borderRadius="rounded-xl">
+                        <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
+                    </Card>
                 </div>
             )}
 

@@ -68,7 +68,9 @@ export default function DashboardPage() {
 
                 {loading || userLoading ? (
                     <div className="flex flex-col items-center justify-center py-20">
-                        <LoadingAtom />
+                        <Card active padding="p-5" borderRadius="rounded-xl">
+                            <LoadingAtom />
+                        </Card>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-12">

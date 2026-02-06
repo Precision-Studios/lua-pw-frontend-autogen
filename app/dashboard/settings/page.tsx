@@ -111,7 +111,9 @@ export default function SettingsPage() {
         <div className="flex flex-col">
             {isLoggingOut && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070b24]">
-                    <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
+                    <Card active padding="p-5" borderRadius="rounded-xl">
+                        <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
+                    </Card>
                 </div>
             )}
             <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
@@ -126,9 +128,10 @@ export default function SettingsPage() {
                 </div>
 
                 {loading ? (
-                    <div className="flex flex-col items-center justify-center py-20 animate-pulse">
-                        <Loader2 size={48} className="text-[var(--dash-text-muted)] animate-spin mb-4" />
-                        <p className="text-[var(--dash-text-muted)] uppercase tracking-widest text-sm">Loading Settings...</p>
+                    <div className="flex flex-col items-center justify-center py-20">
+                        <Card active padding="p-5" borderRadius="rounded-xl">
+                            <LoadingAtom title="Loading Settings" subtitle="Fetching your profile" />
+                        </Card>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
