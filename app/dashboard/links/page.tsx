@@ -5,6 +5,7 @@ import { userApi } from '@/lib/api';
 import CreateUrlForm from '@/components/dashboard/CreateUrlForm';
 import UrlTable from '@/components/dashboard/UrlTable';
 import LoadingAtom from '@/components/common/LoadingAtom';
+import Card from '@/components/common/Card';
 
 export default function LinksPage() {
     const [urls, setUrls] = useState<any[]>([]);
@@ -57,11 +58,11 @@ export default function LinksPage() {
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                         {/* Left Column: Create Form */}
-                        <div className="lg:col-span-4">
-                            <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 sticky top-24">
+                        <div className="lg:col-span-4 transition-all duration-500">
+                            <Card className="sticky top-24">
                                 <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight mb-6">Create New Link</h2>
                                 <CreateUrlForm onUrlCreated={handleUrlCreated} />
-                            </div>
+                            </Card>
                         </div>
 
                         {/* Right Column: List */}

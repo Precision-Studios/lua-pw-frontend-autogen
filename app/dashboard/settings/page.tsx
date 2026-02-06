@@ -7,6 +7,7 @@ import { authApi } from '@/lib/api';
 import { useUser } from '@/lib/UserContext';
 import Toast, { ToastType } from '@/components/common/Toast';
 import LoadingAtom from '@/components/common/LoadingAtom';
+import Card from '@/components/common/Card';
 
 interface ToastState {
     message: string;
@@ -132,7 +133,7 @@ export default function SettingsPage() {
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
                         {/* Account Overview */}
-                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 flex flex-col">
+                        <Card className="flex flex-col">
                             <div className="flex items-center gap-3 mb-6">
                                 <User size={20} className="text-[var(--dash-text-muted)]" />
                                 <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Account Overview</h2>
@@ -160,10 +161,10 @@ export default function SettingsPage() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Card>
 
                         {/* Account Status */}
-                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 flex flex-col">
+                        <Card className="flex flex-col">
                             <div className="flex items-center gap-3 mb-6">
                                 <Shield size={20} className="text-[var(--dash-text-muted)]" />
                                 <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Account Status</h2>
@@ -194,10 +195,10 @@ export default function SettingsPage() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Card>
 
                         {/* Password Update Section */}
-                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 flex flex-col">
+                        <Card className="flex flex-col">
                             <div className="flex items-center gap-3 mb-6">
                                 <KeyRound size={20} className="text-[var(--dash-text-muted)]" />
                                 <h2 className="text-xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight">Update Password</h2>
@@ -277,10 +278,10 @@ export default function SettingsPage() {
                                     {isSubmitting ? 'Updating...' : 'Save New Password'}
                                 </button>
                             </form>
-                        </div>
+                        </Card>
 
                         {/* Profile Actions */}
-                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 flex flex-col h-full">
+                        <Card className="flex flex-col h-full">
                             <div className="flex items-center justify-center mb-6">
                                 <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] shadow-xl">
                                     <User size={40} />
@@ -300,7 +301,7 @@ export default function SettingsPage() {
                                 <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
                                 <span>Sign Out</span>
                             </button>
-                        </div>
+                        </Card>
                     </div>
                 )}
 

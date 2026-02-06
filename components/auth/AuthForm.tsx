@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Github, Chrome, Lock, User, ArrowRight, AlertCircle } from 'lucide-react';
-import { LiquidGlass } from '@liquidglass/react';
 import { authApi, API_BASE_URL } from '@/lib/api';
+import LoadingAtom from '@/components/common/LoadingAtom';
+import Card from '@/components/common/Card';
 import './AuthForm.css';
 
 export default function AuthForm() {
@@ -41,17 +42,8 @@ export default function AuthForm() {
 
     return (
         <div className="auth-container animate-in" style={{ padding: 0 }}>
-            <LiquidGlass
-                borderRadius={16}
-                blur={1}              // Increased significantly (from 2) for real frosting
-                contrast={1.3}        // Slight pop
-                brightness={1.05}       // Brightens background (classic glass look)
-                saturation={1.1}       // Boosts colors behind the glass
-                displacementScale={2} // High value makes the "liquid" distortion visible
-                elasticity={0.6}       // Adds the "jelly" feel on mouse movement
-                shadowIntensity={0.25}
-            >
-                <div style={{ padding: '2.5rem' }}>
+            <Card className="w-full max-w-xl" padding="p-10" active borderRadius="rounded-2xl">
+                <div>
                     <div className="auth-header space-y-3">
                         <h2 className="auth-title">
                             {isLogin ? 'Welcome Back' : 'Join LUA.PW'}
@@ -159,7 +151,7 @@ export default function AuthForm() {
                         </button>
                     </div>
                 </div>
-            </LiquidGlass>
+            </Card>
         </div>
     );
 }

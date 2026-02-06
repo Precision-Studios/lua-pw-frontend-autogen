@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { authApi, userApi } from '@/lib/api';
 import LogoSection from '@/components/layout/LogoSection';
 import LoadingAtom from '@/components/common/LoadingAtom';
+import Card from '@/components/common/Card';
 import { Lock, ArrowRight, ShieldCheck, LogOut, Check, X } from 'lucide-react';
 import './SetupPassword.css';
 
@@ -103,7 +104,7 @@ export default function SetupPassword() {
 
             {/* Right Section - Form */}
             <section className="setup-form-section">
-                <div className="setup-card">
+                <Card className="w-full max-w-md" padding="p-10">
                     <div className="setup-header">
                         <h1 className="setup-title">Secure Your Account</h1>
                         <p className="setup-subtitle">
@@ -200,7 +201,7 @@ export default function SetupPassword() {
                             )}
                         </button>
                     </form>
-                </div>
+                </Card>
 
                 <button
                     type="button"
@@ -223,7 +224,7 @@ export default function SetupPassword() {
             <div className="attribution-container">
                 <span>Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a></span>
                 <span className="opacity-30">|</span>
-                <span>Photo by <a href="https://unsplash.com/@asoggetti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alessio Soggetti</a> on <a href="https://unsplash.com/photos/snow-covered-mountain-17_tB-oI0ao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+                <span>Photo by <a href="https://unsplash.com/@peter_mc_greats?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Pietro De Grandi</a> on <a href="https://unsplash.com/photos/three-brown-wooden-boat-on-blue-lake-water-taken-at-daytime-T7K4aEPoGGk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
             </div>
         </main>
     );

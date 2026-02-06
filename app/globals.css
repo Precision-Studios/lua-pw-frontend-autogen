@@ -1,6 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 @import "tailwindcss";
 
+:root {
+  --dash-sidebar-bg: rgba(0, 0, 0, 0.6);
+  --dash-sidebar-border: rgba(255, 255, 255, 0.1);
+  --dash-border-hover: rgba(255, 255, 255, 0.2);
+  --dash-text-main: #ffffff;
+  --dash-text-muted: rgba(255, 255, 255, 0.6);
+  --dash-bg-subtle: hsla(0, 0%, 0%, 0.25);
+  --dash-primary-color: #3b82f6;
+  --dash-secondary-color: #8b5cf6;
+  --dash-accent-color: #06b6d4;
+}
+
 @theme {
   --color-brand-1: var(--brand-1);
   --color-brand-2: var(--brand-2);
