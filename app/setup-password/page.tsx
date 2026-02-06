@@ -103,7 +103,7 @@ export default function SetupPassword() {
 
             {/* Right Section - Form */}
             <section className="setup-form-section">
-                <div className="setup-card">
+                <div className="w-full max-w-md bg-black/60 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/40 rounded-[2rem] p-10">
                     <div className="setup-header">
                         <h1 className="setup-title">Secure Your Account</h1>
                         <p className="setup-subtitle">
