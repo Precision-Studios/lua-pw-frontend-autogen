@@ -8,6 +8,7 @@ import { useUser } from '@/lib/UserContext';
 
 
 import LoadingAtom from '@/components/common/LoadingAtom';
+import Card from '@/components/common/Card';
 
 export default function DashboardPage() {
     const [urls, setUrls] = useState<any[]>([]);
@@ -74,10 +75,11 @@ export default function DashboardPage() {
                         {/* Stats Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {stats.map((stat, idx) => (
-                                <Link
+                                <Card
                                     key={idx}
                                     href={stat.href}
-                                    className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8 group hover:bg-black/40 hover:border-[var(--dash-border-hover)]"
+                                    hoverable
+                                    className="h-full"
                                 >
                                     <div className="flex items-start justify-between mb-4">
                                         <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-2xl">
@@ -86,30 +88,30 @@ export default function DashboardPage() {
                                     </div>
                                     <div className="text-4xl font-black text-[var(--dash-text-main)] mb-1">{stat.value}</div>
                                     <div className="text-[var(--dash-text-muted)] uppercase tracking-widest text-xs font-bold">{stat.label}</div>
-                                </Link>
+                                </Card>
                             ))}
                         </div>
 
                         {/* Quick Actions */}
-                        <div className="bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-sidebar-border)] shadow-2xl shadow-black/40 rounded-[2rem] p-8">
+                        <Card>
                             <h2 className="text-2xl font-bold text-[var(--dash-text-main)] uppercase tracking-tight mb-8">Quick Actions</h2>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 <Link
                                     href="/dashboard/links"
-                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm"
+                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm transition-all duration-300 hover:scale-[1.02]"
                                 >
                                     <PlusCircle size={24} className="text-[var(--dash-primary-color)]" />
                                     New Link
                                 </Link>
                                 <Link
                                     href="/dashboard/qr-codes"
-                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm"
+                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm transition-all duration-300 hover:scale-[1.02]"
                                 >
                                     <QrCode size={24} className="text-[var(--dash-secondary-color)]" />
                                     New QR Code
                                 </Link>
                             </div>
-                        </div>
+                        </Card>
                     </div>
                 )}
             </main>

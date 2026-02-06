@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Github, Chrome, Lock, User, ArrowRight, AlertCircle } from 'lucide-react';
 import { authApi, API_BASE_URL } from '@/lib/api';
+import LoadingAtom from '@/components/common/LoadingAtom';
+import Card from '@/components/common/Card';
 import './AuthForm.css';
 
 export default function AuthForm() {
@@ -40,7 +42,7 @@ export default function AuthForm() {
 
     return (
         <div className="auth-container animate-in" style={{ padding: 0 }}>
-            <div className="bg-black/60 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/40 rounded-[2rem] p-10">
+            <Card className="w-full max-w-xl" padding="p-10" active borderRadius="rounded-2xl">
                 <div>
                     <div className="auth-header space-y-3">
                         <h2 className="auth-title">
@@ -149,7 +151,7 @@ export default function AuthForm() {
                         </button>
                     </div>
                 </div>
-            </div>
+            </Card>
         </div>
     );
 }
