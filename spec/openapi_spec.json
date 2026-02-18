@@ -335,6 +335,26 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 20
+                        }
                     }
                 ],
                 "responses": {
@@ -343,10 +363,7 @@
                         "content": {
                             "*/*": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/ShortenResponse"
-                                    }
+                                    "$ref": "#/components/schemas/PageShortenResponse"
                                 }
                             }
                         }
@@ -600,15 +617,15 @@
                     "environment": {
                         "$ref": "#/components/schemas/Environment"
                     },
+                    "beanDefinitionCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
                     "beanDefinitionNames": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
-                    },
-                    "beanDefinitionCount": {
-                        "type": "integer",
-                        "format": "int32"
                     },
                     "parentBeanFactory": {
                         "$ref": "#/components/schemas/BeanFactory"
@@ -946,16 +963,16 @@
                     "error": {
                         "type": "boolean"
                     },
-                    "is4xxClientError": {
-                        "type": "boolean"
-                    },
-                    "is5xxServerError": {
+                    "is3xxRedirection": {
                         "type": "boolean"
                     },
                     "is2xxSuccessful": {
                         "type": "boolean"
                     },
-                    "is3xxRedirection": {
+                    "is5xxServerError": {
+                        "type": "boolean"
+                    },
+                    "is4xxClientError": {
                         "type": "boolean"
                     },
                     "is1xxInformational": {
@@ -966,16 +983,16 @@
             "JspConfigDescriptor": {
                 "type": "object",
                 "properties": {
-                    "jspPropertyGroups": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/JspPropertyGroupDescriptor"
-                        }
-                    },
                     "taglibs": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/TaglibDescriptor"
+                        }
+                    },
+                    "jspPropertyGroups": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/JspPropertyGroupDescriptor"
                         }
                     }
                 }
@@ -986,19 +1003,25 @@
                     "buffer": {
                         "type": "string"
                     },
+                    "defaultContentType": {
+                        "type": "string"
+                    },
+                    "urlPatterns": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "errorOnUndeclaredNamespace": {
+                        "type": "string"
+                    },
+                    "trimDirectiveWhitespaces": {
+                        "type": "string"
+                    },
+                    "deferredSyntaxAllowedAsLiteral": {
+                        "type": "string"
+                    },
                     "isXml": {
-                        "type": "string"
-                    },
-                    "elIgnored": {
-                        "type": "string"
-                    },
-                    "pageEncoding": {
-                        "type": "string"
-                    },
-                    "scriptingInvalid": {
-                        "type": "string"
-                    },
-                    "errorOnELNotFound": {
                         "type": "string"
                     },
                     "includePreludes": {
@@ -1007,25 +1030,19 @@
                             "type": "string"
                         }
                     },
+                    "elIgnored": {
+                        "type": "string"
+                    },
+                    "pageEncoding": {
+                        "type": "string"
+                    },
+                    "errorOnELNotFound": {
+                        "type": "string"
+                    },
+                    "scriptingInvalid": {
+                        "type": "string"
+                    },
                     "includeCodas": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "deferredSyntaxAllowedAsLiteral": {
-                        "type": "string"
-                    },
-                    "trimDirectiveWhitespaces": {
-                        "type": "string"
-                    },
-                    "errorOnUndeclaredNamespace": {
-                        "type": "string"
-                    },
-                    "defaultContentType": {
-                        "type": "string"
-                    },
-                    "urlPatterns": {
                         "type": "array",
                         "items": {
                             "type": "string"
@@ -1279,11 +1296,15 @@
                     "responseCharacterEncoding": {
                         "type": "string"
                     },
+                    "sessionCookieConfig": {
+                        "$ref": "#/components/schemas/SessionCookieConfig"
+                    },
                     "virtualServerName": {
                         "type": "string"
                     },
-                    "sessionCookieConfig": {
-                        "$ref": "#/components/schemas/SessionCookieConfig"
+                    "sessionTimeout": {
+                        "type": "integer",
+                        "format": "int32"
                     },
                     "sessionTrackingModes": {
                         "type": "array",
@@ -1298,15 +1319,11 @@
                         "uniqueItems": true,
                         "writeOnly": true
                     },
-                    "servletRegistrations": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/ServletRegistration"
-                        }
+                    "jspConfigDescriptor": {
+                        "$ref": "#/components/schemas/JspConfigDescriptor"
                     },
-                    "sessionTimeout": {
-                        "type": "integer",
-                        "format": "int32"
+                    "serverInfo": {
+                        "type": "string"
                     },
                     "filterRegistrations": {
                         "type": "object",
@@ -1314,22 +1331,22 @@
                             "$ref": "#/components/schemas/FilterRegistration"
                         }
                     },
-                    "jspConfigDescriptor": {
-                        "$ref": "#/components/schemas/JspConfigDescriptor"
+                    "effectiveMinorVersion": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "servletContextName": {
+                        "type": "string"
                     },
                     "effectiveMajorVersion": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "effectiveMinorVersion": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "serverInfo": {
-                        "type": "string"
-                    },
-                    "servletContextName": {
-                        "type": "string"
+                    "servletRegistrations": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ServletRegistration"
+                        }
                     }
                 }
             },
@@ -1396,11 +1413,97 @@
             "TaglibDescriptor": {
                 "type": "object",
                 "properties": {
-                    "taglibURI": {
-                        "type": "string"
-                    },
                     "taglibLocation": {
                         "type": "string"
+                    },
+                    "taglibURI": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PageShortenResponse": {
+                "type": "object",
+                "properties": {
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "content": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ShortenResponse"
+                        }
+                    },
+                    "number": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "first": {
+                        "type": "boolean"
+                    },
+                    "last": {
+                        "type": "boolean"
+                    },
+                    "numberOfElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "sort": {
+                        "$ref": "#/components/schemas/SortObject"
+                    },
+                    "pageable": {
+                        "$ref": "#/components/schemas/PageableObject"
+                    },
+                    "empty": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "PageableObject": {
+                "type": "object",
+                "properties": {
+                    "offset": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "sort": {
+                        "$ref": "#/components/schemas/SortObject"
+                    },
+                    "paged": {
+                        "type": "boolean"
+                    },
+                    "pageNumber": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "unpaged": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "SortObject": {
+                "type": "object",
+                "properties": {
+                    "empty": {
+                        "type": "boolean"
+                    },
+                    "sorted": {
+                        "type": "boolean"
+                    },
+                    "unsorted": {
+                        "type": "boolean"
                     }
                 }
             },

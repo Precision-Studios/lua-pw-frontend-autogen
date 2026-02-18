@@ -20,7 +20,7 @@ export default function DashboardPage() {
 
             try {
                 const urlsRes = await userApi.allUrls();
-                setUrls(urlsRes.data);
+                setUrls(urlsRes.data.content || []);
             } catch (error) {
                 console.error("Failed to load dashboard data", error);
             } finally {
@@ -34,7 +34,7 @@ export default function DashboardPage() {
     const stats = [
         {
             label: 'Total Links',
-            value: urls.length,
+            value: user?.totalShortUrls || 0,
             icon: <LinkIcon className="text-[var(--dash-primary-color)]" size={24} />,
             href: '/dashboard/links'
         },
@@ -46,7 +46,7 @@ export default function DashboardPage() {
         },
         {
             label: 'QR Codes',
-            value: urls.filter(u => u.qrCodeUrl).length,
+            value: user?.totalQRCodes || 0,
             icon: <QrCode className="text-[var(--dash-accent-color)]" size={24} />,
             href: '/dashboard/qr-codes'
         }

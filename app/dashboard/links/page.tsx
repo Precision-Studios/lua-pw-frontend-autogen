@@ -9,6 +9,7 @@ import Card from '@/components/common/Card';
 
 export default function LinksPage() {
     const [urls, setUrls] = useState<any[]>([]);
+    const [totalCount, setTotalCount] = useState(0);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -16,7 +17,8 @@ export default function LinksPage() {
 
             try {
                 const urlsRes = await userApi.allUrls();
-                setUrls(urlsRes.data);
+                setUrls(urlsRes.data.content || []);
+                setTotalCount(urlsRes.data.totalElements || 0);
             } catch (error) {
                 console.error("Failed to load links", error);
             } finally {
@@ -34,6 +36,7 @@ export default function LinksPage() {
                 // Move existing to top
                 return [newUrl, ...prev.filter(u => u.shortUrl !== newUrl.shortUrl)];
             }
+            setTotalCount(c => c + 1);
             return [newUrl, ...prev];
         });
     };
@@ -69,7 +72,7 @@ export default function LinksPage() {
 
                         {/* Right Column: List */}
                         <div className="lg:col-span-8">
-                            <UrlTable urls={urls} title="Your Links" totalCount={urls.length} />
+                            <UrlTable urls={urls} title="Your Links" totalCount={totalCount} />
                         </div>
                     </div>
                 )}
