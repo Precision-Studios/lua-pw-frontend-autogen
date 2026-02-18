@@ -74,7 +74,8 @@ export const authApi = {
 
 export const userApi = {
     details: () => apiClient.get('/api/v1/user/details'),
-    allUrls: () => apiClient.get('/api/v1/user/all'),
+    allUrls: (page: number = 0, size: number = 10) =>
+        apiClient.get('/api/v1/user/all', { params: { page, size } }),
 };
 
 export const normalizeUrl = (url: string): string => {

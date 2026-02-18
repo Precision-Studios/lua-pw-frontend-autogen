@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { urlApi } from '@/lib/api';
 import RedirectClient from '@/components/RedirectClient';
+import Link from 'next/link';
 
 interface RedirectPageProps {
     params: { shortCode: string };
@@ -30,7 +31,7 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
             <div className="flex flex-col items-center justify-center min-h-screen bg-[#0a0a0a] text-white p-4">
                 <h1 className="text-4xl font-bold text-red-500">404</h1>
                 <p className="text-xl text-gray-400">Page not found</p>
-                <a href="/" className="mt-4 px-6 py-2 bg-blue-600 rounded-lg">Go Home</a>
+                <Link href="/" className="mt-4 px-6 py-2 bg-blue-600 rounded-lg">Go Home</Link>
             </div>
         );
     }
@@ -62,12 +63,12 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
                 <div className="max-w-md w-full text-center space-y-6 relative z-10">
                     <h1 className="text-4xl font-bold text-red-500">Oops!</h1>
                     <p className="text-xl text-gray-400">{error}</p>
-                    <a
+                    <Link
                         href="/"
                         className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors"
                     >
                         Go to Homepage
-                    </a>
+                    </Link>
                 </div>
                 <div className="absolute bottom-8 text-[10px] text-gray-500 uppercase tracking-widest opacity-50 z-0">
                     Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Precision Studios</a>

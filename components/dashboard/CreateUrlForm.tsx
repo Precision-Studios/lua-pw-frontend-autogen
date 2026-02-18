@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { urlApi } from '@/lib/api';
 import { Link, Loader2, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface CreateUrlFormProps {
     onUrlCreated: (newUrl: any) => void;
@@ -32,17 +33,17 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
 
     return (
         <div className="w-full">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <div className="relative group">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--dash-text-muted)] group-focus-within:text-[var(--dash-text-main)]">
-                        <Link size={20} />
+            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4">
+                <div className="relative group flex-1">
+                    <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[var(--dash-text-muted)] group-focus-within:text-[var(--dash-primary-color)] transition-colors">
+                        <Link size={18} />
                     </div>
                     <input
                         type="text"
                         value={longUrl}
                         onChange={(e) => setLongUrl(e.target.value)}
-                        placeholder="Paste your long URL here"
-                        className="w-full p-4 pl-12 bg-[var(--dash-input-bg)] border border-[var(--dash-input-border)] text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] rounded-xl focus:outline-none focus:border-[var(--dash-border-hover)] font-light"
+                        placeholder="Paste your long link here..."
+                        className="w-full p-5 pl-14 bg-[var(--dash-input-bg)] backdrop-blur-md border border-[var(--dash-input-border)] text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] rounded-2xl focus:outline-none focus:border-[var(--dash-primary-color)] hover:border-[var(--dash-border-hover)] transition-all font-light text-base lg:text-lg"
                         required
                     />
                 </div>
@@ -50,26 +51,30 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full p-4 bg-[var(--dash-button-bg)] text-[var(--dash-button-text)] font-bold rounded-xl hover:bg-[var(--dash-button-hover-bg)] uppercase tracking-widest text-sm flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="md:px-10 py-5 bg-[var(--dash-button-bg)] text-[var(--dash-button-text)] font-black rounded-2xl hover:bg-[var(--dash-button-hover-bg)] uppercase tracking-widest text-xs flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed transition-all shadow-lg active:scale-[0.98]"
                 >
                     {loading ? (
                         <>
-                            <Loader2 size={16} className="animate-spin" />
+                            <Loader2 size={18} className="animate-spin" />
                             <span>Processing</span>
                         </>
                     ) : (
                         <>
-                            <span>Shorten Link</span>
-                            <ArrowRight size={16} />
+                            <span>Shorten</span>
+                            <ArrowRight size={18} />
                         </>
                     )}
                 </button>
             </form>
 
             {error && (
-                <p className="mt-3 text-red-400 text-xs text-center font-mono">
+                <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 text-red-400 text-[10px] text-center font-bold uppercase tracking-widest"
+                >
                     {error}
-                </p>
+                </motion.p>
             )}
         </div>
     );
