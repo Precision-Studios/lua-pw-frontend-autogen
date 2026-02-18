@@ -124,7 +124,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, onQrClick, copiedUrl }) 
                             <button
                                 onClick={() => onQrClick(url)}
                                 className="w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] hover:border-[var(--dash-secondary-color)] hover:bg-[var(--dash-secondary-color)]/5 transition-all"
-                                title="QR Code"
+                                title="Create QR Code"
                             >
                                 <QrCode size={16} />
                             </button>

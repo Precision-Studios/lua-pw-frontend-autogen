@@ -14,10 +14,12 @@ const QrCodeModal: React.FC<QrCodeModalProps> = ({ isOpen, onClose, shortUrl, is
     const svgRef = useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-        if (isOpen && !isQRActivated) {
-            urlApi.generateQR(shortUrl).catch(err => console.error("Failed to register QR stats", err));
+        if (isOpen) {
+            // Clean the URL by removing the ?qr=true suffix for the analytics/activation endpoint
+            const cleanUrl = shortUrl.split('?')[0];
+            urlApi.generateQR(cleanUrl).catch(err => console.error("Failed to register QR stats", err));
         }
-    }, [isOpen, shortUrl, isQRActivated]);
+    }, [isOpen, shortUrl]);
 
     if (!isOpen) return null;
 
