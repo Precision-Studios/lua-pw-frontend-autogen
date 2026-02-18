@@ -16,7 +16,7 @@ interface ToastState {
 
 export default function SettingsPage() {
     const router = useRouter();
-    const { user, loading } = useUser();
+    const { user, loading, refetchUser } = useUser();
     const [toast, setToast] = useState<ToastState | null>(null);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -72,6 +72,7 @@ export default function SettingsPage() {
 
         try {
             await authApi.updateUser({ newPassword });
+            await refetchUser();
             setToast({
                 message: 'Password updated successfully',
                 type: 'success',
@@ -189,7 +190,7 @@ export default function SettingsPage() {
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Initial Setup</label>
+                                    <label className="block text-xs font-medium text-[var(--dash-text-muted)] mb-1 uppercase tracking-wider">Password Change</label>
                                     <div className="p-3 bg-[var(--dash-bg-subtle)] rounded-lg border border-[var(--dash-border-light)]">
                                         <div className="flex items-center gap-2">
                                             <div className={`w-2 h-2 rounded-full ${user?.setupComplete ? 'bg-green-400' : 'bg-yellow-400'}`}></div>

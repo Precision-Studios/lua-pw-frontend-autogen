@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Sidebar from '@/components/layout/Sidebar';
 import TopNav from '@/components/layout/TopNav';
 import { UserProvider } from '@/lib/UserContext';
+import SetupWarning from '@/components/dashboard/SetupWarning';
 
 import './dashboard.css';
 
@@ -16,6 +17,7 @@ export default function DashboardLayout({
 
     return (
         <UserProvider>
+            <SetupWarning />
             <div className="flex min-h-screen dashboard-wrapper">
                 <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
                 <div
