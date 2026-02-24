@@ -65,21 +65,21 @@ const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, onQrClick, copiedUrl }) 
                             </div>
                             <span className="text-[10px] font-bold text-[var(--dash-text-muted)] uppercase tracking-widest">Original Link</span>
                         </div>
-                        <h3 className="text-[var(--dash-text-muted)] font-light text-sm truncate mb-4" title={url.longUrl}>
+                        <h3 className="text-[var(--dash-text-main)] font-medium text-sm truncate mb-4" title={url.longUrl}>
                             {url.longUrl}
                         </h3>
 
                         <div className="flex flex-wrap items-center gap-4">
-                            <div className="flex items-center gap-2 text-xs text-[var(--dash-text-muted)] font-mono bg-[var(--dash-bg-subtle)] px-3 py-1.5 rounded-full border border-[var(--dash-border-light)]">
-                                <Calendar size={12} className="opacity-50" />
-                                <span className="opacity-50 uppercase text-[9px] mr-1">Created</span>
-                                {formatDate(url.createdAt)}
+                            <div className="flex items-center gap-2 text-xs font-mono bg-[var(--dash-success)]/10 px-3 py-1.5 rounded-full border border-[var(--dash-success)]/20">
+                                <Calendar size={12} className="text-[var(--dash-success)]" />
+                                <span className="uppercase text-[9px] mr-1 text-[var(--dash-success)]">Created</span>
+                                <span className="text-[var(--dash-text-main)]">{formatDate(url.createdAt)}</span>
                             </div>
                             {url.expireAt && (
-                                <div className="flex items-center gap-2 text-xs text-[var(--dash-text-muted)] font-mono bg-[var(--dash-bg-subtle)] px-3 py-1.5 rounded-full border border-[var(--dash-border-light)]">
-                                    <Clock size={12} className="opacity-50" />
-                                    <span className="opacity-50 uppercase text-[9px] mr-1 text-orange-400">Expires</span>
-                                    {formatDate(url.expireAt)}
+                                <div className="flex items-center gap-2 text-xs font-mono bg-[var(--dash-error)]/15 px-3 py-1.5 rounded-full border border-[var(--dash-error)]/35">
+                                    <Clock size={12} className="text-[var(--dash-error)]" />
+                                    <span className="uppercase text-[9px] mr-1 text-[var(--dash-error)]">Expires</span>
+                                    <span className="text-[var(--dash-error)]">{formatDate(url.expireAt)}</span>
                                 </div>
                             )}
                         </div>

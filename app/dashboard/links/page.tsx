@@ -93,21 +93,19 @@ export default function LinksPage() {
                         transition={{ delay: 0.3 }}
                         className="w-full"
                     >
-                        {loading && urls.length === 0 ? (
+                        {loading ? (
                             <div className="flex flex-col items-center justify-center py-40">
                                 <LoadingAtom />
                             </div>
                         ) : (
-                            <div className={loading ? "opacity-50 pointer-events-none transition-opacity duration-500" : "transition-opacity duration-500"}>
-                                <UrlTable
-                                    urls={urls}
-                                    title="Your Links"
-                                    totalCount={totalCount}
-                                    currentPage={currentPage}
-                                    totalPages={totalPages}
-                                    onPageChange={handlePageChange}
-                                />
-                            </div>
+                            <UrlTable
+                                urls={urls}
+                                title="Your Links"
+                                totalCount={totalCount}
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
+                            />
                         )}
                     </motion.div>
                 </div>
