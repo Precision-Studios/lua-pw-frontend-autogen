@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, QrCode, ExternalLink, ArrowRight, Check, ChevronLeft, ChevronRight, LayoutGrid, ListFilter } from 'lucide-react';
+import { ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react';
 import QrCodeModal from './QrCodeModal';
 import UrlCard from './UrlCard';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -62,7 +62,7 @@ const UrlTable: React.FC<UrlTableProps> = ({
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="w-full py-20 text-center border-2 border-dashed border-[var(--dash-border-light)] rounded-3xl bg-[var(--dash-sidebar-bg)]/30 backdrop-blur-sm"
+                className="w-full py-20 text-center border-2 border-dashed border-[var(--dash-border-light)] rounded-3xl bg-[var(--dash-bg-subtle)]"
             >
                 <div className="flex flex-col items-center gap-4">
                     <div className="w-16 h-16 rounded-full bg-[var(--dash-bg-subtle)] flex items-center justify-center text-[var(--dash-text-muted)] border border-[var(--dash-border-light)]">
@@ -95,7 +95,7 @@ const UrlTable: React.FC<UrlTableProps> = ({
 
             {/* Pagination UI */}
             {totalPages > 1 && (
-                <div className="flex items-center justify-between p-6 bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-border-light)] rounded-2xl">
+                <div className="flex items-center justify-between p-6 bg-[var(--dash-sidebar-bg)] border border-[var(--dash-border-light)] rounded-2xl">
                     <div className="hidden sm:block text-[10px] font-bold text-[var(--dash-text-muted)] uppercase tracking-[0.2em]">
                         Page <span className="text-[var(--dash-text-main)]">{currentPage + 1}</span> / <span className="text-[var(--dash-text-main)]">{totalPages}</span>
                     </div>
@@ -105,7 +105,7 @@ const UrlTable: React.FC<UrlTableProps> = ({
                             disabled={currentPage === 0}
                             className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all border ${currentPage === 0
                                 ? 'border-transparent text-[var(--dash-text-muted)] opacity-30 cursor-not-allowed'
-                                : 'border-[var(--dash-border-light)] bg-[var(--dash-bg-subtle)] text-[var(--dash-text-main)] hover:bg-[var(--dash-primary-color)] hover:text-white hover:border-[var(--dash-primary-color)] shadow-lg hover:shadow-[var(--dash-primary-color)]/20'
+                                : 'border-[var(--dash-border-light)] bg-[var(--dash-bg-subtle)] text-[var(--dash-text-main)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)]'
                                 }`}
                         >
                             <ChevronLeft size={18} />
@@ -123,7 +123,7 @@ const UrlTable: React.FC<UrlTableProps> = ({
                                             key={i}
                                             onClick={() => onPageChange?.(i)}
                                             className={`w-10 h-10 flex items-center justify-center rounded-xl text-xs font-black transition-all border ${i === currentPage
-                                                ? 'bg-[var(--dash-primary-color)] border-[var(--dash-primary-color)] text-white shadow-lg shadow-[var(--dash-primary-color)]/20'
+                                                ? 'bg-[var(--dash-text-main)] border-[var(--dash-text-main)] text-[var(--dash-bg-main)]'
                                                 : 'border-[var(--dash-border-light)] text-[var(--dash-text-muted)] hover:bg-[var(--dash-bg-subtle)] hover:text-[var(--dash-text-main)]'
                                                 }`}
                                         >
@@ -145,7 +145,7 @@ const UrlTable: React.FC<UrlTableProps> = ({
                             disabled={currentPage === totalPages - 1}
                             className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all border ${currentPage === totalPages - 1
                                 ? 'border-transparent text-[var(--dash-text-muted)] opacity-30 cursor-not-allowed'
-                                : 'border-[var(--dash-border-light)] bg-[var(--dash-bg-subtle)] text-[var(--dash-text-main)] hover:bg-[var(--dash-primary-color)] hover:text-white hover:border-[var(--dash-primary-color)] shadow-lg hover:shadow-[var(--dash-primary-color)]/20'
+                                : 'border-[var(--dash-border-light)] bg-[var(--dash-bg-subtle)] text-[var(--dash-text-main)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)]'
                                 }`}
                         >
                             <ChevronRight size={18} />

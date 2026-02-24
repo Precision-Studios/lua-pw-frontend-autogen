@@ -26,28 +26,26 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     ({ children, className, hoverable = false, active = false, padding = "p-8", borderRadius = "rounded-[2rem]", href, shadow = true, blur = 'xl', ...props }, ref) => {
         const blurClasses = {
             'none': '',
-            'sm': 'backdrop-blur-sm',
-            'md': 'backdrop-blur-md',
-            'lg': 'backdrop-blur-lg',
-            'xl': 'backdrop-blur-xl',
-            '2xl': 'backdrop-blur-2xl',
+            'sm': '',
+            'md': '',
+            'lg': '',
+            'xl': '',
+            '2xl': '',
         };
 
         const cardClass = cn(
             // Base styling: Glassmorphic background
-            "bg-[var(--dash-sidebar-bg)] border border-[var(--dash-sidebar-border)] transition-all duration-500 ease-in-out relative overflow-hidden",
+            "bg-[var(--dash-sidebar-bg)] border border-[var(--dash-sidebar-border)] transition-all duration-300 ease-in-out relative overflow-hidden",
             blurClasses[blur],
-            shadow && "shadow-2xl shadow-black/40",
+            shadow && "shadow-none",
             padding,
             borderRadius,
 
             // Interaction/State styles
-            hoverable && "group hover:bg-black/40 hover:border-[var(--dash-border-hover)] hover:scale-[1.02] cursor-pointer",
-            hoverable && shadow && "hover:shadow-black/60",
+            hoverable && "group hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] cursor-pointer",
 
             // Pinned 'Active' state (Static hover look)
-            active && "bg-black/40 border-[var(--dash-border-hover)] scale-[1.02]",
-            active && shadow && "shadow-black/60",
+            active && "bg-[var(--dash-sidebar-bg)] border-[var(--dash-border-hover)]",
 
             className
         );
@@ -58,13 +56,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
                 className={cardClass}
                 {...props}
             >
-                {/* Subtle inner glow */}
-                <div className={cn(
-                    "absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 transition-opacity duration-500 pointer-events-none",
-                    (hoverable || active) && "group-hover:opacity-100",
-                    active && "opacity-100"
-                )} />
-
                 <div className="relative z-10 w-full h-full">
                     {children}
                 </div>

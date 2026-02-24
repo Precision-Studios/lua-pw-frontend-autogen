@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { userApi } from '@/lib/api';
-import { Loader2, Link as LinkIcon, BarChart3, QrCode, PlusCircle } from 'lucide-react';
+import { Link as LinkIcon, BarChart3, QrCode, PlusCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useUser } from '@/lib/UserContext';
 
@@ -100,14 +100,14 @@ export default function DashboardPage() {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 <Link
                                     href="/dashboard/links"
-                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm transition-all duration-300 hover:scale-[1.02]"
+                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm transition-all duration-300"
                                 >
                                     <PlusCircle size={24} className="text-[var(--dash-primary-color)]" />
                                     New Link
                                 </Link>
                                 <Link
                                     href="/dashboard/qr-codes"
-                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm transition-all duration-300 hover:scale-[1.02]"
+                                    className="flex items-center gap-4 p-6 bg-[var(--dash-bg-subtle)] rounded-2xl border border-[var(--dash-border-light)] hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] text-[var(--dash-text-main)] font-bold uppercase tracking-wider text-sm transition-all duration-300"
                                 >
                                     <QrCode size={24} className="text-[var(--dash-secondary-color)]" />
                                     New QR Code

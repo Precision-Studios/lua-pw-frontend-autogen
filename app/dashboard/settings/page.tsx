@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { User, LogOut, KeyRound, Eye, EyeOff, Loader2, Shield, Calendar, Mail, Hash } from 'lucide-react';
+import { User, LogOut, KeyRound, Eye, EyeOff, Shield, Calendar, Mail, Hash } from 'lucide-react';
 import { authApi } from '@/lib/api';
 import { useUser } from '@/lib/UserContext';
 import Toast, { ToastType } from '@/components/common/Toast';
@@ -111,7 +111,7 @@ export default function SettingsPage() {
     return (
         <div className="flex flex-col">
             {isLoggingOut && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070b24]">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--dash-modal-overlay)]">
                     <Card active padding="p-5" borderRadius="rounded-xl">
                         <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
                     </Card>
@@ -256,7 +256,7 @@ export default function SettingsPage() {
                                             <button
                                                 type="button"
                                                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                                                className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] transition-colors"
                                             >
                                                 {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                             </button>
@@ -264,8 +264,8 @@ export default function SettingsPage() {
                                     </div>
 
                                     {error && (
-                                        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 animate-in fade-in slide-in-from-top-2">
-                                            <p className="text-sm text-red-400 font-medium">{error}</p>
+                                        <div className="p-4 rounded-xl bg-[var(--dash-error)]/10 border border-[var(--dash-error)]/30 animate-in fade-in slide-in-from-top-2">
+                                            <p className="text-sm text-[var(--dash-error)] font-medium">{error}</p>
                                         </div>
                                     )}
                                 </div>
@@ -273,10 +273,10 @@ export default function SettingsPage() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 uppercase tracking-[0.2em] text-xs mt-auto"
+                                    className="w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-[0.2em] text-xs mt-auto border border-transparent"
                                     style={{
-                                        background: 'var(--dash-secondary-color)',
-                                        color: '#ffffff',
+                                        background: 'var(--dash-button-bg)',
+                                        color: 'var(--dash-button-text)',
                                     }}
                                 >
                                     {isSubmitting ? 'Updating...' : 'Save New Password'}
@@ -287,7 +287,7 @@ export default function SettingsPage() {
                         {/* Profile Actions */}
                         <Card className="flex flex-col h-full">
                             <div className="flex items-center justify-center mb-6">
-                                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] shadow-xl">
+                                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)]">
                                     <User size={40} />
                                 </div>
                             </div>

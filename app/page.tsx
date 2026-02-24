@@ -12,7 +12,6 @@ import './Home.css';
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [shouldPreloadBg, setShouldPreloadBg] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -31,7 +30,7 @@ export default function Home() {
         } else {
           router.push('/dashboard');
         }
-      } catch (error) {
+      } catch {
         // If refresh fails, show the login page
         setLoading(false);
       }
@@ -39,12 +38,6 @@ export default function Home() {
 
     checkAuth();
   }, [router]);
-
-  useEffect(() => {
-    // Lazy preload dashboard background after landing page finishes
-    const idleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 2000));
-    idleCallback(() => setShouldPreloadBg(true));
-  }, []);
 
   if (loading) {
     return (
@@ -77,14 +70,6 @@ export default function Home() {
       <div className="attribution-container">
         <span>Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a></span>
       </div>
-
-      {/* Preload and decode dashboard background after landing page finishes */}
-      {shouldPreloadBg && (
-        <div
-          style={{ display: 'none', backgroundImage: "url('/ken-cheung-KonWFWUaAuk-unsplash.jpg')" }}
-          aria-hidden="true"
-        />
-      )}
     </main>
   );
 }

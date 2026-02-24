@@ -53,8 +53,8 @@ const QrCodeModal: React.FC<QrCodeModalProps> = ({ isOpen, onClose, shortUrl, is
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--dash-modal-overlay)] backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
-            <div className="relative bg-[var(--dash-modal-bg)] p-8 md:p-12 rounded-3xl w-full max-w-sm flex flex-col items-center gap-8 shadow-2xl scale-95 animate-in zoom-in-95 duration-200" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--dash-modal-overlay)] animate-in fade-in duration-200" onClick={onClose}>
+            <div className="relative bg-[var(--dash-modal-bg)] p-8 md:p-12 rounded-3xl w-full max-w-sm flex flex-col items-center gap-8 border border-[var(--dash-border-light)] scale-95 animate-in zoom-in-95 duration-200" onClick={(e) => e.stopPropagation()}>
                 <button
                     onClick={onClose}
                     className="absolute top-6 right-6 text-[var(--dash-modal-close)] hover:text-[var(--dash-modal-close-hover)] transition-colors"

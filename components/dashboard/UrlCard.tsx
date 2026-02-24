@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Copy, QrCode, ExternalLink, Check, Calendar, Globe, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -42,7 +42,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, onQrClick, copiedUrl }) 
                 day: 'numeric',
                 year: 'numeric'
             });
-        } catch (e) {
+        } catch {
             return dateString;
         }
     };
@@ -55,8 +55,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, onQrClick, copiedUrl }) 
             exit={{ opacity: 0, scale: 0.95 }}
             className="group relative"
         >
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--dash-primary-color)] to-[var(--dash-secondary-color)] rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition duration-500"></div>
-            <div className="relative bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-border-light)] hover:border-[var(--dash-border-hover)] rounded-2xl p-6 transition-all duration-300">
+            <div className="relative bg-[var(--dash-sidebar-bg)] border border-[var(--dash-border-light)] hover:border-[var(--dash-border-hover)] rounded-2xl p-6 transition-all duration-300">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     {/* Content Section */}
                     <div className="flex-1 min-w-0">
@@ -106,7 +105,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, onQrClick, copiedUrl }) 
                                 onClick={() => onCopy(url.shortUrl)}
                                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all border ${copiedUrl === url.shortUrl
                                     ? 'bg-[var(--dash-success)]/10 border-[var(--dash-success)]/30 text-[var(--dash-success)]'
-                                    : 'bg-[var(--dash-bg-subtle)] border-[var(--dash-border-light)] text-[var(--dash-text-main)] hover:border-[var(--dash-primary-color)] hover:bg-[var(--dash-primary-color)]/5'
+                                    : 'bg-[var(--dash-bg-subtle)] border-[var(--dash-border-light)] text-[var(--dash-text-main)] hover:border-[var(--dash-border-hover)] hover:bg-[var(--dash-sidebar-item-hover-bg)]'
                                     }`}
                             >
                                 {copiedUrl === url.shortUrl ? (
@@ -123,7 +122,7 @@ const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, onQrClick, copiedUrl }) 
                             </button>
                             <button
                                 onClick={() => onQrClick(url)}
-                                className="w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] hover:border-[var(--dash-secondary-color)] hover:bg-[var(--dash-secondary-color)]/5 transition-all"
+                                className="w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] hover:border-[var(--dash-border-hover)] hover:bg-[var(--dash-sidebar-item-hover-bg)] transition-all"
                                 title="Create QR Code"
                             >
                                 <QrCode size={16} />

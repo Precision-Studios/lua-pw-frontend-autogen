@@ -65,21 +65,21 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
             {/* Mobile Toggle Button */}
             <button
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
-                className="md:hidden fixed top-6 left-4 z-[60] p-2 rounded-lg bg-[var(--dash-sidebar-bg)] backdrop-blur-md text-[var(--dash-text-main)] border border-[var(--dash-border-light)] shadow-xl"
+                className="md:hidden fixed top-6 left-4 z-[60] p-2 rounded-lg bg-[var(--dash-sidebar-bg)] text-[var(--dash-text-main)] border border-[var(--dash-border-light)]"
             >
-                {isMobileOpen ? <ChevronLeft size={20} /> : <div className="flex flex-col gap-1 w-5"><div className="h-0.5 w-full bg-white"></div><div className="h-0.5 w-full bg-white"></div><div className="h-0.5 w-full bg-white"></div></div>}
+                {isMobileOpen ? <ChevronLeft size={20} /> : <div className="flex flex-col gap-1 w-5"><div className="h-0.5 w-full bg-[var(--dash-text-main)]"></div><div className="h-0.5 w-full bg-[var(--dash-text-main)]"></div><div className="h-0.5 w-full bg-[var(--dash-text-main)]"></div></div>}
             </button>
 
             {/* Mobile Overlay */}
             {isMobileOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-40 md:hidden"
+                    className="fixed inset-0 bg-black/25 z-40 md:hidden"
                     onClick={() => setIsMobileOpen(false)}
                 />
             )}
 
             <aside
-                className={`fixed left-6 top-1/2 -translate-y-1/2 h-fit max-h-[calc(100vh-3rem)] transition-all duration-500 ease-in-out z-50 flex flex-col rounded-[2.5rem] border border-[var(--dash-sidebar-border)] bg-[var(--dash-sidebar-bg)] backdrop-blur-xl shadow-2xl shadow-black/40 overflow-y-auto no-scrollbar
+                className={`fixed left-6 top-1/2 -translate-y-1/2 h-fit max-h-[calc(100vh-3rem)] transition-all duration-500 ease-in-out z-50 flex flex-col rounded-[2.5rem] border border-[var(--dash-sidebar-border)] bg-[var(--dash-sidebar-bg)] overflow-y-auto no-scrollbar
                     ${isCollapsed ? 'w-24' : 'w-72'}
                     ${isMobileOpen ? 'translate-x-0' : '-translate-x-[calc(100%+6rem)] md:translate-x-0'}
                 `}
@@ -87,7 +87,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }: SidebarProps) => {
                 {/* Logo/Header */}
                 <div className={`p-6 h-24 flex items-center border-b border-[var(--dash-border-light)] ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
                     {!isCollapsed && (
-                        <Link href="/dashboard" className="text-2xl font-black text-[var(--dash-text-main)] uppercase tracking-tight">
+                        <Link href="/dashboard" className="text-4xl leading-none text-[var(--dash-text-main)] tracking-tight" style={{ fontFamily: '"Just Another Hand", cursive' }}>
                             LUA<span className="opacity-70">.PW</span>
                         </Link>
                     )}

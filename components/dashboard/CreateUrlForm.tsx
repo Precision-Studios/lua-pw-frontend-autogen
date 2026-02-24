@@ -43,7 +43,7 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
                         value={longUrl}
                         onChange={(e) => setLongUrl(e.target.value)}
                         placeholder="Paste your long link here..."
-                        className="w-full p-5 pl-14 bg-[var(--dash-input-bg)] backdrop-blur-md border border-[var(--dash-input-border)] text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] rounded-2xl focus:outline-none focus:border-[var(--dash-primary-color)] hover:border-[var(--dash-border-hover)] transition-all font-light text-base lg:text-lg"
+                        className="w-full p-5 pl-14 bg-[var(--dash-input-bg)] border border-[var(--dash-input-border)] text-[var(--dash-text-main)] placeholder-[var(--dash-input-placeholder)] rounded-2xl focus:outline-none focus:border-[var(--dash-border-hover)] hover:border-[var(--dash-border-hover)] transition-all font-light text-base lg:text-lg"
                         required
                     />
                 </div>
@@ -51,7 +51,7 @@ const CreateUrlForm: React.FC<CreateUrlFormProps> = ({ onUrlCreated }) => {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="md:px-10 py-5 bg-[var(--dash-button-bg)] text-[var(--dash-button-text)] font-black rounded-2xl hover:bg-[var(--dash-button-hover-bg)] uppercase tracking-widest text-xs flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed transition-all shadow-lg active:scale-[0.98]"
+                    className="md:px-10 py-5 bg-[var(--dash-button-bg)] text-[var(--dash-button-text)] font-black rounded-2xl hover:bg-[var(--dash-button-hover-bg)] uppercase tracking-widest text-xs flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed transition-all border border-transparent active:scale-[0.98]"
                 >
                     {loading ? (
                         <>

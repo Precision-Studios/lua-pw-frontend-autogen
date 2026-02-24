@@ -5,8 +5,7 @@ import { userApi } from '@/lib/api';
 import CreateUrlForm from '@/components/dashboard/CreateUrlForm';
 import UrlTable from '@/components/dashboard/UrlTable';
 import LoadingAtom from '@/components/common/LoadingAtom';
-import Card from '@/components/common/Card';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function LinksPage() {
     const [urls, setUrls] = useState<any[]>([]);
@@ -94,7 +93,7 @@ export default function LinksPage() {
                     >
                         {loading && urls.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-40">
-                                <div className="p-8 bg-[var(--dash-sidebar-bg)] backdrop-blur-xl border border-[var(--dash-border-light)] rounded-3xl">
+                                <div className="p-8 bg-[var(--dash-sidebar-bg)] border border-[var(--dash-border-light)] rounded-3xl">
                                     <LoadingAtom />
                                 </div>
                             </div>
