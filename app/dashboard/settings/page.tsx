@@ -8,6 +8,7 @@ import { useUser } from '@/lib/UserContext';
 import Toast, { ToastType } from '@/components/common/Toast';
 import LoadingAtom from '@/components/common/LoadingAtom';
 import Card from '@/components/common/Card';
+import { debugDelay } from '@/lib/utils';
 
 interface ToastState {
     message: string;
@@ -32,9 +33,11 @@ export default function SettingsPage() {
         setIsLoggingOut(true);
         try {
             await authApi.logout();
+            await debugDelay();
             router.push('/');
         } catch (error) {
             console.error("Logout failed", error);
+            await debugDelay();
             router.push('/');
         }
     };
@@ -111,10 +114,8 @@ export default function SettingsPage() {
     return (
         <div className="flex flex-col">
             {isLoggingOut && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--dash-modal-overlay)]">
-                    <Card active padding="p-5" borderRadius="rounded-xl">
-                        <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
-                    </Card>
+                <div className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none">
+                    <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
                 </div>
             )}
             <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
@@ -130,9 +131,7 @@ export default function SettingsPage() {
 
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-20">
-                        <Card active padding="p-5" borderRadius="rounded-xl">
-                            <LoadingAtom title="Loading Settings" subtitle="Fetching your profile" />
-                        </Card>
+                        <LoadingAtom title="Loading Settings" subtitle="Fetching your profile" />
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">

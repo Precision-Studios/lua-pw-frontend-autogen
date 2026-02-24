@@ -7,6 +7,7 @@ import LogoSection from '@/components/layout/LogoSection';
 import LoadingAtom from '@/components/common/LoadingAtom';
 import Card from '@/components/common/Card';
 import { Lock, ArrowRight, ShieldCheck, LogOut, Check, X } from 'lucide-react';
+import { debugDelay } from '@/lib/utils';
 import './SetupPassword.css';
 
 export default function SetupPassword() {
@@ -68,6 +69,7 @@ export default function SetupPassword() {
                 newPassword: password
             });
             // On success, redirect to dashboard
+            await debugDelay();
             router.push('/dashboard');
         } catch (err: any) {
             console.error(err);
@@ -81,9 +83,11 @@ export default function SetupPassword() {
         setIsLoggingOut(true);
         try {
             await authApi.logout();
+            await debugDelay();
             router.push('/');
         } catch (error) {
             console.error("Logout failed", error);
+            await debugDelay();
             router.push('/');
         }
     };
@@ -215,10 +219,8 @@ export default function SetupPassword() {
             </section>
 
             {isLoggingOut && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070b24]">
-                    <Card active padding="p-5" borderRadius="rounded-xl">
-                        <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
-                    </Card>
+                <div className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none">
+                    <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
                 </div>
             )}
 

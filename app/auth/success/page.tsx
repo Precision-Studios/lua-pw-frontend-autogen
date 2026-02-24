@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { authApi, userApi } from '@/lib/api';
 import LoadingAtom from '@/components/common/LoadingAtom';
-import Card from '@/components/common/Card';
+import { debugDelay } from '@/lib/utils';
 import '../../Home.css';
 
 export default function AuthSuccessPage() {
@@ -27,6 +27,7 @@ export default function AuthSuccessPage() {
                 // 3. Routing Logic
                 setStatus('Redirecting...');
                 setSubStatus('Syncing your dashboard');
+                await debugDelay();
                 if (!user.active) {
                     router.push('/account-suspended');
                 } else if (!user.setupComplete) {
@@ -62,10 +63,8 @@ export default function AuthSuccessPage() {
     }, [router]);
 
     return (
-        <main className="main-container flex items-center justify-center bg-[#070b24]">
-            <Card active padding="p-5" borderRadius="rounded-xl">
-                <LoadingAtom title={status} subtitle={subStatus} />
-            </Card>
+        <main className="main-container flex items-center justify-center">
+            <LoadingAtom title={status} subtitle={subStatus} />
         </main>
     );
 }

@@ -5,7 +5,7 @@ import { authApi } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LoadingAtom from '../common/LoadingAtom';
-import Card from '../common/Card';
+import { debugDelay } from '@/lib/utils';
 
 const TopNav = () => {
     const router = useRouter();
@@ -15,9 +15,11 @@ const TopNav = () => {
         setIsLoggingOut(true);
         try {
             await authApi.logout();
+            await debugDelay();
             router.push('/');
         } catch (error) {
             console.error("Logout failed", error);
+            await debugDelay();
             router.push('/');
         }
     };
@@ -25,10 +27,8 @@ const TopNav = () => {
     return (
         <>
             {isLoggingOut && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--dash-modal-overlay)]">
-                    <Card active padding="p-5" borderRadius="rounded-xl">
-                        <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
-                    </Card>
+                <div className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none">
+                    <LoadingAtom title="Signing Out" subtitle="Cleaning up session" />
                 </div>
             )}
             <nav className="w-full py-6 px-4 md:px-8 flex items-center justify-end z-40">

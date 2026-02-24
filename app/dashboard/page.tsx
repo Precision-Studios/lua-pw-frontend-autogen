@@ -9,6 +9,7 @@ import { useUser } from '@/lib/UserContext';
 
 import LoadingAtom from '@/components/common/LoadingAtom';
 import Card from '@/components/common/Card';
+import { debugDelay } from '@/lib/utils';
 
 export default function DashboardPage() {
     const [urls, setUrls] = useState<any[]>([]);
@@ -24,6 +25,7 @@ export default function DashboardPage() {
             } catch (error) {
                 console.error("Failed to load dashboard data", error);
             } finally {
+                await debugDelay();
                 setLoading(false);
             }
         };
@@ -68,9 +70,7 @@ export default function DashboardPage() {
 
                 {loading || userLoading ? (
                     <div className="flex flex-col items-center justify-center py-20">
-                        <Card active padding="p-5" borderRadius="rounded-xl">
-                            <LoadingAtom />
-                        </Card>
+                        <LoadingAtom />
                     </div>
                 ) : (
                     <div className="flex flex-col gap-12">

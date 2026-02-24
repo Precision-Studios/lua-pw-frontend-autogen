@@ -6,7 +6,7 @@ import AuthForm from '@/components/auth/AuthForm';
 import LogoSection from '@/components/layout/LogoSection';
 import { authApi, userApi } from '@/lib/api';
 import LoadingAtom from '@/components/common/LoadingAtom';
-import Card from '@/components/common/Card';
+import { debugDelay } from '@/lib/utils';
 import './Home.css';
 
 export default function Home() {
@@ -22,6 +22,7 @@ export default function Home() {
         // If refresh works, get user details for routing logic
         const response = await userApi.details();
         const user = response.data;
+        await debugDelay();
 
         if (!user.active) {
           router.push('/account-suspended');
@@ -32,6 +33,7 @@ export default function Home() {
         }
       } catch {
         // If refresh fails, show the login page
+        await debugDelay();
         setLoading(false);
       }
     };
@@ -42,9 +44,7 @@ export default function Home() {
   if (loading) {
     return (
       <main className="main-container flex items-center justify-center p-12">
-        <Card active blur="none" padding="p-5" borderRadius="rounded-xl" className="home-flat-card">
-          <LoadingAtom />
-        </Card>
+        <LoadingAtom />
       </main>
     );
   }

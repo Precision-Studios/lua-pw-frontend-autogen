@@ -6,6 +6,7 @@ import CreateUrlForm from '@/components/dashboard/CreateUrlForm';
 import UrlTable from '@/components/dashboard/UrlTable';
 import LoadingAtom from '@/components/common/LoadingAtom';
 import { motion } from 'framer-motion';
+import { debugDelay } from '@/lib/utils';
 
 export default function LinksPage() {
     const [urls, setUrls] = useState<any[]>([]);
@@ -25,6 +26,7 @@ export default function LinksPage() {
         } catch (error) {
             console.error("Failed to load links", error);
         } finally {
+            await debugDelay();
             setLoading(false);
         }
     }, [pageSize]);
@@ -93,9 +95,7 @@ export default function LinksPage() {
                     >
                         {loading && urls.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-40">
-                                <div className="p-8 bg-[var(--dash-sidebar-bg)] border border-[var(--dash-border-light)] rounded-3xl">
-                                    <LoadingAtom />
-                                </div>
+                                <LoadingAtom />
                             </div>
                         ) : (
                             <div className={loading ? "opacity-50 pointer-events-none transition-opacity duration-500" : "transition-opacity duration-500"}>
