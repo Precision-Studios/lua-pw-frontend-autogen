@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import Card from '@/components/common/Card';
 import './LogoSection.css';
 
 const INITIAL_URL = 'http://site.com/path';
@@ -140,7 +139,7 @@ export default function LogoSection() {
                     </p>
                 </div>
 
-                <Card active hoverable shadow={false} blur="none" padding="p-6" borderRadius="rounded-3xl" className="stats-card-main flat-stats-card">
+                <div className="stats-card-main stats-strip" role="presentation">
                     <div className="stats-container-inner">
                         <div className="stat-item">
                             <div className="stat-value">100k+</div>
@@ -155,7 +154,7 @@ export default function LogoSection() {
                             <div className="stat-label">Observed Uptime</div>
                         </div>
                     </div>
-                </Card>
+                </div>
             </div>
         </div>
     );
