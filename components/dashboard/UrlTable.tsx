@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react';
-import QrCodeModal from './QrCodeModal';
 import UrlCard from './UrlCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -29,7 +28,6 @@ const UrlTable: React.FC<UrlTableProps> = ({
     totalPages = 0,
     onPageChange
 }) => {
-    const [selectedUrl, setSelectedUrl] = useState<UrlData | null>(null);
     const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
 
     const getFullUrl = (shortUrl: string, isQr: boolean = false) => {
@@ -161,23 +159,11 @@ const UrlTable: React.FC<UrlTableProps> = ({
                             key={url.shortUrl}
                             url={url}
                             onCopy={handleCopy}
-                            onQrClick={setSelectedUrl}
                             copiedUrl={copiedUrl}
                         />
                     ))}
                 </AnimatePresence>
             </div>
-
-
-
-            {selectedUrl && (
-                <QrCodeModal
-                    isOpen={!!selectedUrl}
-                    onClose={() => setSelectedUrl(null)}
-                    shortUrl={getFullUrl(selectedUrl.shortUrl, true)}
-                    isQRActivated={selectedUrl.isQRActivated}
-                />
-            )}
         </div>
     );
 };

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Copy, QrCode, ExternalLink, Check, Calendar, Globe, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -15,11 +16,10 @@ interface UrlData {
 interface UrlCardProps {
     url: UrlData;
     onCopy: (shortUrl: string) => void;
-    onQrClick: (url: UrlData) => void;
     copiedUrl: string | null;
 }
 
-const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, onQrClick, copiedUrl }) => {
+const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, copiedUrl }) => {
     const getFullUrl = (shortUrl: string) => {
         let fullUrl = shortUrl;
         if (!fullUrl.startsWith('http')) {
@@ -120,13 +120,13 @@ const UrlCard: React.FC<UrlCardProps> = ({ url, onCopy, onQrClick, copiedUrl }) 
                                     </>
                                 )}
                             </button>
-                            <button
-                                onClick={() => onQrClick(url)}
+                            <Link
+                                href={`/dashboard/qr-codes?url=${encodeURIComponent(url.longUrl)}`}
                                 className="w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--dash-bg-subtle)] border border-[var(--dash-border-light)] text-[var(--dash-text-main)] hover:border-[var(--dash-border-hover)] hover:bg-[var(--dash-sidebar-item-hover-bg)] transition-all"
                                 title="Create QR Code"
                             >
                                 <QrCode size={16} />
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
