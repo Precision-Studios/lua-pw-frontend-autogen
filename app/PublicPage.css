@@ -1,0 +1,143 @@
+:root {
+    --public-bg: #F0EEE6;
+    --public-surface: #E3DACC;
+    --public-text: #101010;
+    --public-text-muted: rgba(16, 16, 16, 0.68);
+    --public-border: rgba(16, 16, 16, 0.14);
+    --public-border-strong: rgba(16, 16, 16, 0.24);
+}
+
+.public-page {
+    min-height: 100vh;
+    background: var(--public-bg);
+    color: var(--public-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    position: relative;
+}
+
+.public-card {
+    width: 100%;
+    max-width: 32rem;
+    background: var(--public-surface);
+    border: 1px solid var(--public-border);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+.public-icon-wrap {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 9999px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 16, 16, 0.06);
+    border: 1px solid var(--public-border);
+}
+
+.public-title {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    color: var(--public-text);
+}
+
+.public-subtitle {
+    margin-top: 0.75rem;
+    font-size: 1.05rem;
+    color: var(--public-text-muted);
+    line-height: 1.65;
+}
+
+.public-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.public-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid transparent;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.public-btn-primary {
+    background: var(--public-text);
+    color: var(--public-bg);
+}
+
+.public-btn-primary:hover {
+    background: #2a2a2a;
+}
+
+.public-btn-secondary {
+    background: transparent;
+    border-color: var(--public-border);
+    color: var(--public-text);
+}
+
+.public-btn-secondary:hover {
+    border-color: var(--public-border-strong);
+    background: rgba(16, 16, 16, 0.03);
+}
+
+.public-tag {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid var(--public-border);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--public-text-muted);
+}
+
+.public-attribution {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-size: 0.65rem;
+    color: var(--public-text-muted);
+    border: 1px solid var(--public-border);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    letter-spacing: 0.03em;
+}
+
+.public-attribution a {
+    color: var(--public-text);
+}
+
+@media (max-width: 768px) {
+    .public-card {
+        padding: 1.5rem;
+    }
+
+    .public-attribution {
+        position: static;
+        margin-top: 1rem;
+    }
+
+    .public-page {
+        flex-direction: column;
+    }
+}

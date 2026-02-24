@@ -2,41 +2,38 @@
 
 import Link from 'next/link';
 import { ShieldAlert } from 'lucide-react';
+import '../PublicPage.css';
 
 export default function AccountSuspended() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-lg max-w-md w-full animate-in fade-in zoom-in duration-300 relative z-10">
-                <div className="flex justify-center mb-6">
-                    <div className="p-4 rounded-full bg-red-500/20 text-red-400">
-                        <ShieldAlert className="w-12 h-12" />
-                    </div>
+        <main className="public-page">
+            <div className="public-card">
+                <div className="public-icon-wrap">
+                    <ShieldAlert className="w-10 h-10 text-[var(--public-text)]" />
                 </div>
 
-                <h1 className="text-2xl font-bold mb-3 text-white">Account Suspended</h1>
+                <h1 className="public-title">Account Suspended</h1>
 
-                <p className="text-gray-400 mb-8 leading-relaxed">
-                    Your account has been deactivated due to a violation of our terms or by administrative action.
-                    You cannot access the dashboard or generate new links.
+                <p className="public-subtitle">
+                    Your account is currently inactive due to an administrative action. Dashboard features and new link creation are unavailable.
                 </p>
 
-                <Link
-                    href="mailto:support@lua.pw"
-                    className="inline-flex items-center justify-center w-full px-6 py-3 text-sm font-medium text-black transition-colors bg-white rounded-xl hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/20"
-                >
-                    Contact Support
-                </Link>
-
-                <div className="mt-6 pt-6 border-t border-white/10">
-                    <Link href="/" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">
+                <div className="public-actions">
+                    <Link
+                        href="mailto:support@lua.pw"
+                        className="public-btn public-btn-primary"
+                    >
+                        Contact Support
+                    </Link>
+                    <Link href="/" className="public-btn public-btn-secondary">
                         Back to Home
                     </Link>
                 </div>
             </div>
 
-            <div className="mt-8 text-[10px] text-gray-500 uppercase tracking-widest opacity-50 z-0">
-                Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Precision Studios</a>
+            <div className="public-attribution">
+                Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a>
             </div>
-        </div>
+        </main>
     );
 }

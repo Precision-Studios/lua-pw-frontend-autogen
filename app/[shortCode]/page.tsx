@@ -1,5 +1,6 @@
 import RedirectClient from '@/components/RedirectClient';
 import Link from 'next/link';
+import '../PublicPage.css';
 
 interface RedirectPageProps {
     params: { shortCode: string };
@@ -27,11 +28,19 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
     if (reservedPaths.includes(shortCode)) {
         console.log(`[RedirectPage] Skipping reserved path: ${shortCode}`);
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-[#0a0a0a] text-white p-4">
-                <h1 className="text-4xl font-bold text-red-500">404</h1>
-                <p className="text-xl text-gray-400">Page not found</p>
-                <Link href="/" className="mt-4 px-6 py-2 bg-blue-600 rounded-lg">Go Home</Link>
-            </div>
+            <main className="public-page">
+                <div className="public-card">
+                    <span className="public-tag">404</span>
+                    <h1 className="public-title mt-6">Page Not Found</h1>
+                    <p className="public-subtitle">The route you requested is not a short-link endpoint.</p>
+                    <div className="public-actions">
+                        <Link href="/" className="public-btn public-btn-primary">Go Home</Link>
+                    </div>
+                </div>
+                <div className="public-attribution">
+                    Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a>
+                </div>
+            </main>
         );
     }
 
@@ -81,21 +90,24 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
 
     if (error) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-[#0a0a0a] text-white p-4">
-                <div className="max-w-md w-full text-center space-y-6 relative z-10">
-                    <h1 className="text-4xl font-bold text-red-500">Oops!</h1>
-                    <p className="text-xl text-gray-400">{error}</p>
-                    <Link
-                        href="/"
-                        className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors"
-                    >
-                        Go to Homepage
-                    </Link>
+            <main className="public-page">
+                <div className="public-card">
+                    <span className="public-tag">Link Error</span>
+                    <h1 className="public-title mt-6">Oops</h1>
+                    <p className="public-subtitle">{error}</p>
+                    <div className="public-actions">
+                        <Link
+                            href="/"
+                            className="public-btn public-btn-primary"
+                        >
+                            Go to Homepage
+                        </Link>
+                    </div>
                 </div>
-                <div className="absolute bottom-8 text-[10px] text-gray-500 uppercase tracking-widest opacity-50 z-0">
-                    Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Precision Studios</a>
+                <div className="public-attribution">
+                    Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a>
                 </div>
-            </div>
+            </main>
         );
     }
 
