@@ -1,5 +1,3 @@
-import { redirect } from 'next/navigation';
-import { urlApi } from '@/lib/api';
 import RedirectClient from '@/components/RedirectClient';
 import Link from 'next/link';
 
@@ -18,8 +16,9 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
     // Defaulting to false (instant redirect) as per requirement
     const shouldShowRedirectPage = false;
 
-    let longUrl: string | null = null;
+    let safeRedirectUrl: string | null = null;
     let error: string | null = null;
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
     console.log(`[RedirectPage] Resolving shortCode: "${shortCode}"`);
 
@@ -37,24 +36,47 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
     }
 
     try {
-        const response = await urlApi.getLongUrl({
-            shortCode,
-            fromQr: isQr,
-            recordAnalytics: true,
+        if (!apiBaseUrl) {
+            throw new Error('NEXT_PUBLIC_API_BASE_URL is not configured.');
+        }
+
+        const endpoint = new URL('/api/v1/urls/get_long_url', apiBaseUrl);
+        endpoint.searchParams.set('shortCode', shortCode);
+        endpoint.searchParams.set('fromQr', String(isQr));
+        endpoint.searchParams.set('recordAnalytics', 'true');
+
+        const response = await fetch(endpoint.toString(), {
+            cache: 'no-store',
+            credentials: 'include',
         });
 
-        if (response.data && response.data.longUrl) {
-            longUrl = response.data.longUrl;
+        if (!response.ok) {
+            if (response.status === 404) {
+                error = 'The link you are looking for does not exist.';
+            } else {
+                error = 'Something went wrong while resolving the link.';
+            }
         } else {
-            error = 'Invalid long URL received from server.';
+            const data = (await response.json()) as { longUrl?: string };
+
+            if (data?.longUrl) {
+            try {
+                const parsedUrl = new URL(data.longUrl);
+                if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
+                    error = 'This link uses an unsupported protocol.';
+                } else {
+                    safeRedirectUrl = parsedUrl.toString();
+                }
+            } catch {
+                error = 'Invalid long URL received from server.';
+            }
+            } else {
+                error = 'Invalid long URL received from server.';
+            }
         }
     } catch (err: any) {
         console.error(`[RedirectPage] Error resolving "${shortCode}":`, err.message);
-        if (err.response?.status === 404) {
-            error = 'The link you are looking for does not exist.';
-        } else {
-            error = 'Something went wrong while resolving the link.';
-        }
+        error = 'Something went wrong while resolving the link.';
     }
 
     if (error) {
@@ -77,13 +99,12 @@ export default async function RedirectPage({ params, searchParams }: RedirectPag
         );
     }
 
-    if (longUrl) {
+    if (safeRedirectUrl) {
         if (shouldShowRedirectPage) {
-            return <RedirectClient longUrl={longUrl} />;
+            return <RedirectClient longUrl={safeRedirectUrl} />;
         }
 
-        // Instant Server-Side Redirect
-        redirect(longUrl);
+        return <RedirectClient longUrl={safeRedirectUrl} />;
     }
 
     return null;

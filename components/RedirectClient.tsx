@@ -10,7 +10,7 @@ interface RedirectClientProps {
 export default function RedirectClient({ longUrl }: RedirectClientProps) {
     useEffect(() => {
         if (longUrl) {
-            window.location.href = longUrl;
+            window.location.replace(longUrl);
         }
     }, [longUrl]);
 
