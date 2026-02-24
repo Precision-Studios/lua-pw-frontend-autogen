@@ -48,8 +48,8 @@ export default function Home() {
 
   if (loading) {
     return (
-      <main className="main-container flex items-center justify-center p-12 bg-[#070b24]">
-        <Card active padding="p-5" borderRadius="rounded-xl">
+      <main className="main-container flex items-center justify-center p-12">
+        <Card active blur="none" padding="p-5" borderRadius="rounded-xl" className="home-flat-card">
           <LoadingAtom />
         </Card>
       </main>
@@ -65,9 +65,7 @@ export default function Home() {
 
       {/* Mobile Header (Visible on mobile only) */}
       <div className="mobile-header">
-        <h1 className="mobile-title">
-          LUA<span>.PW</span>
-        </h1>
+        <h1 className="mobile-title">Lua.pw</h1>
       </div>
 
       {/* Right Section - Auth */}
@@ -75,11 +73,9 @@ export default function Home() {
         <AuthForm />
       </section>
 
-      {/* Project & Photo Attribution */}
+      {/* Project Attribution */}
       <div className="attribution-container">
         <span>Made with ❤️ by <a href="https://precisionstudios.tech/" target="_blank" rel="noopener noreferrer">Precision Studios</a></span>
-        <span className="opacity-30">|</span>
-        <span>Photo by <a href="https://unsplash.com/@peter_mc_greats?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Pietro De Grandi</a> on <a href="https://unsplash.com/photos/three-brown-wooden-boat-on-blue-lake-water-taken-at-daytime-T7K4aEPoGGk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
       </div>
 
       {/* Preload and decode dashboard background after landing page finishes */}

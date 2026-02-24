@@ -1,9 +1,8 @@
 :root {
-    --brand-1: #1e2caf;
-    --background: var(--brand-1);
-    --foreground: #ffffff;
-    --foreground-muted: rgba(255, 255, 255, 0.6);
-    --foreground-subtle: rgba(255, 255, 255, 0.1);
+    --background: #F0EEE6;
+    --foreground: #101010;
+    --foreground-muted: rgba(16, 16, 16, 0.7);
+    --foreground-subtle: rgba(16, 16, 16, 0.15);
 }
 
 .main-container {
@@ -11,11 +10,7 @@
     min-height: 100vh;
     flex-direction: column;
     position: relative;
-    background-image: url('/pietro-de-grandi-T7K4aEPoGGk-unsplash.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: var(--background);
 }
 
 
@@ -46,7 +41,7 @@
 
 .mobile-header {
     width: 100%;
-    padding: 2rem;
+    padding: 2rem 1.5rem 1.5rem;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid var(--foreground-subtle);
@@ -59,16 +54,11 @@
 }
 
 .mobile-title {
-    font-size: 2.25rem;
-    /* text-4xl */
-    font-weight: 900;
-    letter-spacing: -0.05em;
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
     color: var(--foreground);
-    text-transform: uppercase;
-}
-
-.mobile-title span {
-    opacity: 0.7;
+    font-family: 'Just Another Hand', cursive;
 }
 
 .auth-section {
@@ -87,14 +77,13 @@
     bottom: 1.5rem;
     left: 1.5rem;
     font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(16, 16, 16, 0.7);
     z-index: 0;
     transition: all 0.3s ease;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(12px);
+    background: transparent;
     padding: 6px 16px;
     border-radius: 99px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--foreground-subtle);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -105,14 +94,20 @@
 }
 
 .attribution-container a {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--foreground);
     text-decoration: none;
     transition: color 0.2s;
 }
 
 .attribution-container a:hover {
-    color: #ffffff;
+    color: var(--foreground);
     text-decoration: underline;
+}
+
+.home-flat-card {
+    background: #E3DACC;
+    border-color: var(--foreground-subtle);
+    box-shadow: none;
 }
 
 @media (max-width: 1023px) {

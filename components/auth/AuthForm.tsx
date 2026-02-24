@@ -42,7 +42,7 @@ export default function AuthForm() {
 
     return (
         <div className="auth-container animate-in" style={{ padding: 0 }}>
-            <Card className="w-full max-w-xl" padding="p-10" active borderRadius="rounded-2xl">
+            <Card className="w-full max-w-xl auth-flat-card" padding="p-10" active blur="none" shadow={false} borderRadius="rounded-2xl">
                 <div>
                     <div className="auth-header space-y-3">
                         <h2 className="auth-title">
@@ -58,7 +58,7 @@ export default function AuthForm() {
                     {isLogin ? (
                         <form onSubmit={handleSubmit} className="auth-form">
                             {error && (
-                                <div className="error-message flex items-center gap-2 p-3 rounded-lg bg-red-500/10 text-red-500 text-sm mb-4">
+                                <div className="error-message flex items-center gap-2 p-3 rounded-lg text-sm mb-4">
                                     <AlertCircle className="w-4 h-4" />
                                     {error}
                                 </div>
