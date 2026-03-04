@@ -18,16 +18,20 @@
 
     --dash-bg-main: #F0EEE6;
     --dash-bg-subtle: #E3DACC;
+    --dash-card-bg: #FFFFFF;
+    --dash-sage: #6B8F71;
 
     --dash-text-main: #101010;
     --dash-text-muted: rgba(16, 16, 16, 0.65);
+    --dash-text-heading: #2D241A;
+    --dash-text-soft-label: rgba(108, 99, 85, 0.74);
     --dash-text-dark: #101010;
 
     --dash-border-light: rgba(16, 16, 16, 0.14);
     --dash-border-hover: rgba(16, 16, 16, 0.24);
 
     /* Sidebar Specifics */
-    --dash-sidebar-bg: #E3DACC;
+    --dash-sidebar-bg: #DCD0BF;
     --dash-sidebar-border: var(--dash-border-light);
     --dash-sidebar-item-active-bg: #101010;
     --dash-sidebar-item-active-text: #F0EEE6;

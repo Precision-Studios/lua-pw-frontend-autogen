@@ -3,6 +3,8 @@
     --foreground: #101010;
     --foreground-muted: rgba(16, 16, 16, 0.7);
     --foreground-subtle: rgba(16, 16, 16, 0.15);
+    --fabric-base: #F0EEE6;
+    --fabric-shadow: rgba(16, 16, 16, 0.08);
 }
 
 .main-container {
@@ -10,9 +12,66 @@
     min-height: 100vh;
     flex-direction: column;
     position: relative;
-    background: var(--background);
+    overflow: hidden;
+    background-color: var(--fabric-base);
+    background-image:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 45%),
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 45%),
+        linear-gradient(135deg, rgba(240, 236, 226, 0.95), rgba(221, 214, 205, 0.95) 60%, rgba(209, 200, 191, 0.9));
 }
 
+.main-container::before {
+    content: '';
+    position: absolute;
+    inset: -15% -10%;
+    background: radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.4), transparent 55%),
+        radial-gradient(circle at 70% 5%, rgba(255, 255, 255, 0.35), transparent 60%);
+    mix-blend-mode: screen;
+    opacity: 0.55;
+    filter: blur(35px);
+    pointer-events: none;
+    animation: waveFlow 20s ease-in-out infinite alternate;
+}
+
+.main-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(
+            70deg,
+            rgba(255, 255, 255, 0.18) 0,
+            rgba(255, 255, 255, 0.18) 1px,
+            rgba(255, 255, 255, 0) 3px,
+            rgba(255, 255, 255, 0) 8px
+        ),
+        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250' viewBox='0 0 250 250'%3e%3cpath fill='%23ffffff' fill-opacity='0.05' d='M0 0h250v250H0z'/%3e%3cpath fill='%23ffffff' fill-opacity='0.08' d='M0 10h250v2H0zm0 25h250v3H0z'/%3e%3c/svg%3e");
+    opacity: 0.5;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    animation: waveStripes 36s linear infinite;
+}
+
+@keyframes waveFlow {
+    0% {
+        transform: translate3d(-30px, 20px, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(50px, -40px, 0) scale(1.05);
+    }
+    100% {
+        transform: translate3d(-25px, 35px, 0) scale(1.02);
+    }
+}
+
+@keyframes waveStripes {
+    0% {
+        background-position: 0 0, 0 0;
+    }
+    100% {
+        background-position: -120px 0, 0 -120px;
+    }
+}
 
 @media (min-width: 1024px) {
     .main-container {

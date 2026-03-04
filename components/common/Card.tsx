@@ -35,7 +35,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
         const cardClass = cn(
             // Base styling: Glassmorphic background
-            "bg-[var(--dash-sidebar-bg)] border border-[var(--dash-sidebar-border)] transition-all duration-300 ease-in-out relative overflow-hidden",
+            "bg-[var(--dash-card-bg)] border border-[var(--dash-sidebar-border)] transition-all duration-300 ease-in-out relative overflow-hidden",
             blurClasses[blur],
             shadow && "shadow-none",
             padding,
@@ -45,7 +45,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
             hoverable && "group hover:bg-[var(--dash-sidebar-item-hover-bg)] hover:border-[var(--dash-border-hover)] cursor-pointer",
 
             // Pinned 'Active' state (Static hover look)
-            active && "bg-[var(--dash-sidebar-bg)] border-[var(--dash-border-hover)]",
+            active && "bg-[var(--dash-card-bg)] border-[var(--dash-border-hover)]",
 
             className
         );

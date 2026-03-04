@@ -31,7 +31,7 @@ const SidebarItem = ({ href, icon, label, isCollapsed, isActive }: SidebarItemPr
                     ? 'bg-[var(--dash-sidebar-item-active-bg)] text-[var(--dash-sidebar-item-active-text)]'
                     : 'text-[var(--dash-text-muted)] hover:text-[var(--dash-text-main)] hover:bg-[var(--dash-sidebar-item-hover-bg)]'}`}
         >
-            <div className={`flex items-center justify-center transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
+            <div className={`flex items-center justify-center transition-transform duration-300 ${isActive ? 'scale-110 text-[var(--dash-sage)]' : 'group-hover:scale-110'}`}>
                 {icon}
             </div>
             {!isCollapsed && (

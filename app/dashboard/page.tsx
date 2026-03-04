@@ -59,7 +59,7 @@ export default function DashboardPage() {
             <main className="w-full max-w-7xl mx-auto px-4 py-8 md:py-16 flex flex-col gap-12">
                 {/* Header Section */}
                 <div className="flex flex-col gap-2">
-                    <h1 className="text-5xl md:text-8xl font-black text-[var(--dash-text-main)] uppercase tracking-tighter leading-none">
+                    <h1 className="text-5xl md:text-8xl font-black text-[var(--dash-text-heading)] uppercase tracking-tighter leading-none">
                         Dash<span>board</span>
                     </h1>
                     <p className="text-xl text-[var(--dash-text-muted)] max-w-2xl font-light">
@@ -89,7 +89,7 @@ export default function DashboardPage() {
                                         </div>
                                     </div>
                                     <div className="text-4xl font-black text-[var(--dash-text-main)] mb-1">{stat.value}</div>
-                                    <div className="text-[var(--dash-text-muted)] uppercase tracking-widest text-xs font-bold">{stat.label}</div>
+                                    <div className="text-[var(--dash-text-soft-label)] uppercase tracking-widest text-xs font-bold">{stat.label}</div>
                                 </Card>
                             ))}
                         </div>
