@@ -6,7 +6,7 @@ import { authApi, userApi } from '@/lib/api';
 import LogoSection from '@/components/layout/LogoSection';
 import LoadingAtom from '@/components/common/LoadingAtom';
 import Card from '@/components/common/Card';
-import { Lock, ArrowRight, ShieldCheck, LogOut, Check, X } from 'lucide-react';
+import { Lock, ArrowRight, ShieldCheck, LogOut, Check, X, Eye, EyeOff } from 'lucide-react';
 import { debugDelay } from '@/lib/utils';
 import './SetupPassword.css';
 
@@ -14,6 +14,8 @@ export default function SetupPassword() {
     const router = useRouter();
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -44,6 +46,8 @@ export default function SetupPassword() {
         { id: 'number', label: 'At least one number', isValid: /[0-9]/.test(password) },
         { id: 'special', label: 'At least one special character', isValid: /[^A-Za-z0-9]/.test(password) },
     ];
+
+    const allValid = rules.every(r => r.isValid);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -108,7 +112,14 @@ export default function SetupPassword() {
 
             {/* Right Section - Form */}
             <section className="setup-form-section">
-                <Card className="w-full max-w-md" padding="p-10">
+                <Card
+                    className="w-full max-w-md auth-flat-card"
+                    padding="p-10"
+                    active
+                    blur="none"
+                    shadow={false}
+                    borderRadius="rounded-2xl"
+                >
                     <div className="setup-header">
                         <h1 className="setup-title">Secure Your Account</h1>
                         <p className="setup-subtitle">
@@ -119,31 +130,39 @@ export default function SetupPassword() {
                     <form onSubmit={handleSubmit} className="setup-form">
                         <div className="setup-input-group">
                             <label htmlFor="new-password" title="Set a new password" className="setup-input-label">New Password</label>
-                            <div className="setup-input-wrapper">
+                            <div className={`setup-input-wrapper ${password ? (allValid ? 'valid' : 'invalid') : ''}`}>
                                 <Lock aria-hidden="true" className="setup-input-icon" />
                                 <input
                                     id="new-password"
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     placeholder="Minimum 12 characters"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="setup-input"
+                                    className={`setup-input ${password ? (allValid ? 'valid' : 'invalid') : ''}`}
                                     required
                                     minLength={12}
                                     aria-required="true"
                                     aria-invalid={error?.includes('match') || error?.includes('12') ? 'true' : 'false'}
                                     aria-describedby={error ? "setup-error" : undefined}
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="setup-toggle-visibility"
+                                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                >
+                                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                </button>
                             </div>
                         </div>
 
                         <div className="setup-input-group">
                             <label htmlFor="confirm-password" title="Confirm your new password" className="setup-input-label">Confirm Password</label>
-                            <div className="setup-input-wrapper">
+                            <div className={`setup-input-wrapper ${confirmPassword ? (confirmPassword === password ? 'valid' : 'invalid') : ''}`}>
                                 <ShieldCheck aria-hidden="true" className="setup-input-icon" />
                                 <input
                                     id="confirm-password"
-                                    type="password"
+                                    type={showConfirm ? 'text' : 'password'}
                                     placeholder="Re-enter your password"
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
@@ -153,6 +172,14 @@ export default function SetupPassword() {
                                     aria-invalid={error?.includes('match') ? 'true' : 'false'}
                                     aria-describedby={error ? "setup-error" : undefined}
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowConfirm(!showConfirm)}
+                                    className="setup-toggle-visibility"
+                                    aria-label={showConfirm ? 'Hide password' : 'Show password'}
+                                >
+                                    {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}
+                                </button>
                             </div>
                         </div>
 
