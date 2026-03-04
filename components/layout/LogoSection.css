@@ -60,7 +60,8 @@
 }
 
 .logo-mark-pulse {
-    animation: logoMarkPulse 0.25s ease-out;
+    /* make pulse more gentle and long enough to feel intentional */
+    animation: logoMarkPulse 0.5s ease-in-out;
 }
 
 .hero-text-container {
@@ -115,9 +116,15 @@
         text-shadow: none;
     }
 
+    50% {
+        /* small bulge with a soft glow */
+        transform: scale(1.02);
+        text-shadow: 0 0 6px rgba(16, 16, 16, 0.3);
+    }
+
     100% {
-        transform: scale(1.05);
-        text-shadow: 0 0 10px rgba(16, 16, 16, 0.45), 0 0 18px rgba(16, 16, 16, 0.25);
+        transform: scale(1);
+        text-shadow: none;
     }
 }
 
@@ -132,7 +139,6 @@
     border-bottom: 1px solid var(--foreground-subtle);
     padding: 1rem 0;
 }
-
 .stats-container-inner {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

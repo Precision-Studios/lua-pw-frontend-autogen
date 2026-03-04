@@ -106,14 +106,17 @@ export default function LogoSection() {
                     }
                     setAnimatedUrl(finalUrl);
                     console.log('[LogoSection] cycle:end', { finalUrl });
+
+                    // trigger a subtle pulse/highlight after the morph finishes
                     setIsPulseActive(true);
 
+                    // keep the pulse visible slightly longer so it doesn't look like a flash
                     pulseTimeout = window.setTimeout(() => {
                         setIsPulseActive(false);
-                        repeatTimeout = window.setTimeout(runCycle, 500);
+                        repeatTimeout = window.setTimeout(runCycle, 800);
                     }, 250);
                 }
-            }, 42);
+            }, 25);
         };
 
         runCycle();
